@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { View, Text, Image, TouchableOpacity, Pressable } from "react-native";
 import { FontAwesome, AntDesign } from "@expo/vector-icons";
 import { Link } from "expo-router";
+import { ActivityIndicator, MD2Colors } from "react-native-paper";
 
 const OnboardingScreen = () => {
   const [isPressed, setIsPressed] = useState(false);
@@ -39,18 +40,21 @@ const OnboardingScreen = () => {
           </Link>
         </View>
 
-        <TouchableOpacity className="bg-black border border-white rounded-sm flex-row items-center justify-center w-full flex-1 my-1 gap-4">
-          <Image
-            source={require("../assets/google.png")}
-            className="w-8 h-8"
-            resizeMode="cover"
-          />
-          <Text
-            className="text-white uppercase"
-            style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 30 }}>
-            Log in with Google
-          </Text>
-        </TouchableOpacity>
+        <Link href="/creator-store" asChild>
+          <TouchableOpacity className="bg-black border border-white rounded-sm flex-row items-center justify-center w-full flex-1 my-1 gap-4">
+            <Image
+              source={require("../assets/google.png")}
+              className="w-8 h-8"
+              resizeMode="cover"
+            />
+            <Text
+              className="text-white uppercase"
+              style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 30 }}>
+              Log in with Google
+            </Text>
+          </TouchableOpacity>
+        </Link>
+
         <TouchableOpacity className="bg-black border border-white rounded-sm flex-row items-center justify-center w-full flex-1 my-1 gap-4">
           <Image
             source={require("../assets/facebook.png")}

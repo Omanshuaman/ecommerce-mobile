@@ -12,7 +12,7 @@ import { useState } from "react";
 import { Link, useRouter } from "expo-router";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 export default function OtpPhoneScreen() {
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [otp, setOtp] = useState("");
   const [isPressed, setIsPressed] = useState(false);
 
   const router = useRouter();
@@ -30,40 +30,32 @@ export default function OtpPhoneScreen() {
           <Text
             className="text-white mb-2"
             style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 50 }}>
-            WHAT IS YOUR PHONE NUMBER?
+            VERIFY YOUR PHONE NUMBER
           </Text>
           <Text className="mb-32 " style={{ fontSize: 16, color: "white" }}>
-            We will not share with anyone and won’t be on your profile.
+            Enter the OTP sent to +91 9422345432 Change number
           </Text>
 
           <View className="border border-yellow-400 rounded-sm flex-row items-center px-4 py-1 mb-4">
-            <Text
-              className="text-white"
-              style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 35 }}>
-              +91
-            </Text>
             <TextInput
-              placeholder="000 000 0000"
+              placeholder="0000"
               placeholderTextColor="#888"
-              keyboardType="phone-pad"
-              maxLength={10}
+              keyboardType="default"
+              maxLength={4}
               autoFocus={true}
-              className="flex-1 text-white"
+              className="flex-1 text-white text-center"
               style={{
-                fontFamily: phoneNumber
-                  ? "PPFormulaCondensed-Bold"
-                  : "PPFormulaCondensed-Bold",
+                fontFamily: "PPFormulaCondensed-Bold",
                 fontSize: 35,
+                letterSpacing: 10,
               }}
-              value={phoneNumber}
-              onChangeText={setPhoneNumber}
+              value={otp}
+              onChangeText={setOtp}
             />
-
-            <Ionicons name="call-outline" size={28} color="white" />
           </View>
           <View className="h-[66px]">
             <View className="relative w-full flex-1 my-1 bg-[#E5FF03] bg-opacity-30 rounded-sm">
-              <Link href="/sign-up/otp" asChild>
+              <Link href="/sign-up/name" asChild>
                 <TouchableOpacity
                   className={`bg-[#E5FF03] rounded-sm absolute -top-1 -left-1 w-full h-[98%] justify-center items-center ${
                     isPressed

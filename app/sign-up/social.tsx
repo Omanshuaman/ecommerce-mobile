@@ -12,7 +12,7 @@ import { useState } from "react";
 import { Link, useRouter } from "expo-router";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 export default function OtpPhoneScreen() {
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [profileLink, setProfileLink] = useState("");
   const [isPressed, setIsPressed] = useState(false);
 
   const router = useRouter();
@@ -28,42 +28,58 @@ export default function OtpPhoneScreen() {
         behavior={Platform.OS === "ios" ? "padding" : "height"}>
         <View className="gap-2">
           <Text
-            className="text-white mb-2"
+            className="text-white mb-2 uppercase"
             style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 50 }}>
-            WHAT IS YOUR PHONE NUMBER?
+            your social media links
           </Text>
-          <Text className="mb-32 " style={{ fontSize: 16, color: "white" }}>
-            We will not share with anyone and won’t be on your profile.
+          <Text className="mb-4 " style={{ fontSize: 16, color: "white" }}>
+            This will help us identify your profile
           </Text>
 
           <View className="border border-yellow-400 rounded-sm flex-row items-center px-4 py-1 mb-4">
-            <Text
-              className="text-white"
-              style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 35 }}>
-              +91
-            </Text>
             <TextInput
-              placeholder="000 000 0000"
+              placeholder="Enter Profile Link"
               placeholderTextColor="#888"
-              keyboardType="phone-pad"
-              maxLength={10}
+              keyboardType="url"
+              autoCapitalize="none"
+              autoCorrect={false}
+              maxLength={100}
               autoFocus={true}
               className="flex-1 text-white"
               style={{
-                fontFamily: phoneNumber
-                  ? "PPFormulaCondensed-Bold"
-                  : "PPFormulaCondensed-Bold",
-                fontSize: 35,
+                fontFamily: "PPFormulaCondensed-Bold",
+                fontSize: 22,
               }}
-              value={phoneNumber}
-              onChangeText={setPhoneNumber}
+              value={profileLink}
+              onChangeText={setProfileLink}
             />
-
-            <Ionicons name="call-outline" size={28} color="white" />
           </View>
-          <View className="h-[66px]">
+          <View className="h-[60px]">
+            <View className="relative w-full flex-1 my-1 bg-gray-400 bg-opacity-30 rounded-sm">
+              <Link href="/sign-up/name" asChild>
+                <TouchableOpacity
+                  className={`bg-black rounded-sm absolute -top-1 -left-1 w-full h-[98%] justify-center items-center border border-solid border-white ${
+                    isPressed
+                      ? "bg-[#E5FF03] translate-x-0.5 -translate-y-0.5"
+                      : "bg-[#E5FF03] -translate-x-0.5 -translate-y-0.5"
+                  }`}
+                  onPressIn={() => setIsPressed(true)}
+                  onPressOut={() => setIsPressed(false)}>
+                  <Text
+                    className="text-center text-white uppercase"
+                    style={{
+                      fontFamily: "PPFormulaCondensed-Bold",
+                      fontSize: 35,
+                    }}>
+                    Add another link
+                  </Text>
+                </TouchableOpacity>
+              </Link>
+            </View>
+          </View>
+          <View className="h-[60px]">
             <View className="relative w-full flex-1 my-1 bg-[#E5FF03] bg-opacity-30 rounded-sm">
-              <Link href="/sign-up/otp" asChild>
+              <Link href="/sign-up/name" asChild>
                 <TouchableOpacity
                   className={`bg-[#E5FF03] rounded-sm absolute -top-1 -left-1 w-full h-[98%] justify-center items-center ${
                     isPressed
@@ -76,9 +92,9 @@ export default function OtpPhoneScreen() {
                     className="text-center text-black uppercase"
                     style={{
                       fontFamily: "PPFormulaCondensed-Bold",
-                      fontSize: 40,
+                      fontSize: 35,
                     }}>
-                    Get OTP
+                    SEND FOR VERIFICATION
                   </Text>
                 </TouchableOpacity>
               </Link>
