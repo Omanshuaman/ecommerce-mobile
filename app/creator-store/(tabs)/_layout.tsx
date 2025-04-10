@@ -44,7 +44,7 @@ const TabsLayout = () => {
           title: "Home",
           headerShown: false,
 
-          tabBarIcon: ({ focused }) => (
+          tabBarIcon: ({ focused }: { focused: boolean }) => (
             <TabIcon icon={icons.warehouse} focused={focused} title="Home" />
           ),
         }}
@@ -54,7 +54,7 @@ const TabsLayout = () => {
         options={{
           title: "Add",
           headerShown: false,
-          tabBarIcon: ({ focused }) => (
+          tabBarIcon: ({ focused }: { focused: boolean }) => (
             <TabIcon icon={icons.PlusCircle} focused={focused} title="Home" />
           ),
         }}
@@ -64,7 +64,7 @@ const TabsLayout = () => {
         options={{
           title: "Packages",
           headerShown: false,
-          tabBarIcon: ({ focused }) => (
+          tabBarIcon: ({ focused }: { focused: boolean }) => (
             <TabIcon
               icon={icons.packageIcon}
               focused={focused}
@@ -78,7 +78,7 @@ const TabsLayout = () => {
         options={{
           title: "Profile",
           headerShown: false,
-          tabBarIcon: ({ focused }) => (
+          tabBarIcon: ({ focused }: { focused: boolean }) => (
             <TabIcon icon={icons.person} focused={focused} title="Profile" />
           ),
         }}

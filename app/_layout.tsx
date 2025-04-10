@@ -28,7 +28,14 @@ export default function RootLayout() {
 
   return (
     <GluestackUIProvider mode="light">
-      <Slot />
+      {/* <Slot /> */}
+      <Stack>
+        <Stack.Screen
+          name="product/[id]"
+          options={{ title: "Product Details" }}
+        />
+        <Stack.Screen name="index" options={{ title: "Creator Store" }} />
+      </Stack>
     </GluestackUIProvider>
   );
 }
