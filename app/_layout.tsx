@@ -14,6 +14,15 @@ export default function RootLayout() {
     "PPFormulaCondensed-Bold": require("../assets/fonts/PPFormulaCondensed-Bold.ttf"),
     "PPFormulaCondensed-Black": require("../assets/fonts/PPFormulaCondensed-Black.ttf"),
     "Helvetica-Neue": require("../assets/fonts/HelveticaNeue.ttf"),
+    "HelveticaNeue-Bold": require("../assets/fonts/HelveticaNeuBold.ttf"),
+    "HelveticaNeue-BlackCond": require("../assets/fonts/HelveticaNeue BlackCond.ttf"),
+    "HelveticaNeue-Light": require("../assets/fonts/HelveticaNeue Light.ttf"),
+    "HelveticaNeue-Medium": require("../assets/fonts/HelveticaNeue Medium.ttf"),
+    "HelveticaNeue-Thin": require("../assets/fonts/HelveticaNeue Thin.ttf"),
+    "HelveticaNeue-Bd": require("../assets/fonts/HelveticaNeueBd.ttf"),
+    "HelveticaNeue-Hv": require("../assets/fonts/HelveticaNeueHv.ttf"),
+    "HelveticaNeue-It": require("../assets/fonts/HelveticaNeueIt.ttf"),
+    "HelveticaNeue-Med": require("../assets/fonts/HelveticaNeueMed.ttf"),
   });
 
   useEffect(() => {
