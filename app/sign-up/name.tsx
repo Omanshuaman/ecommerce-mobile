@@ -41,13 +41,13 @@ export default function OtpPhoneScreen() {
               placeholder="Full Name"
               placeholderTextColor="#888"
               keyboardType="default"
-              maxLength={50} // You can increase/decrease as needed
+              maxLength={50}
               autoFocus={true}
               className="flex-1 text-white"
               style={{
                 fontFamily: "PPFormulaCondensed-Bold",
-                fontSize: 35, // slightly smaller for longer text
-                letterSpacing: 1, // minimal spacing for natural look
+                fontSize: 35,
+                letterSpacing: 1,
               }}
               value={fullName}
               onChangeText={setFullName}
