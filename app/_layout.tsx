@@ -4,8 +4,10 @@ import "@/global.css";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 SplashScreen.preventAutoHideAsync();
+const queryClient = new QueryClient();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
@@ -32,15 +34,17 @@ export default function RootLayout() {
   }
 
   return (
-    <GluestackUIProvider mode="light">
-      <Slot />
-      {/* <Stack>
+    <QueryClientProvider client={queryClient}>
+      <GluestackUIProvider mode="light">
+        <Slot />
+        {/* <Stack>
         <Stack.Screen
           name="product/[id]"
           options={{ title: "Product Details" }}
         />
         <Stack.Screen name="index" options={{ title: "Creator Store" }} />
       </Stack> */}
-    </GluestackUIProvider>
+      </GluestackUIProvider>
+    </QueryClientProvider>
   );
 }

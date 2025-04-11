@@ -70,7 +70,7 @@ const AddProduct = () => {
       </View>
       <ScrollView className="px-4 py-2">
         {/* Upload Photo & Reel */}
-        <View className="flex-row justify-between space-x-2 mb-4">
+        <View className="flex-row justify-between gap-1 mb-4">
           {image ? (
             <TouchableOpacity className="flex-1 aspect-square border border-white relative rounded-md">
               <Image

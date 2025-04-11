@@ -12,14 +12,14 @@ export default function ProductListItem({ product }: { product: any }) {
         <Card className="p-5 rounded-lg flex-1">
           <Image
             source={{
-              uri: product.image,
+              uri: product.images[0],
             }}
             className="mb-6 h-[240px] w-full rounded-md"
-            alt={`${product.name} image`}
+            alt={`${product.title} image`}
             resizeMode="contain"
           />
           <Text className="text-sm font-normal mb-2 text-typography-700">
-            {product.name}
+            {product.title}
           </Text>
           <Heading size="md" className="mb-4">
             ${product.price}
