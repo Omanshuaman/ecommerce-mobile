@@ -50,7 +50,7 @@ const TabsLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="add-product"
+        name="addproduct"
         options={{
           title: "Add",
           headerShown: false,

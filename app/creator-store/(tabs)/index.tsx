@@ -32,6 +32,7 @@ import {
   SelectDragIndicatorWrapper,
   SelectItem,
 } from "@/components/ui/select";
+import { Link } from "expo-router";
 const FirstRoute = () => (
   <View className="flex-1 bg-[#161616]">
     <View className="flex-1 justify-center items-center">
@@ -52,6 +53,11 @@ const routes = [
 ];
 const Warehouse = () => {
   const [showActionsheet, setShowActionsheet] = React.useState(false);
+  const [selectedOption, setSelectedOption] = React.useState([
+    "Tap to add first product",
+    "/add-product",
+    1,
+  ]);
   const handleClose = () => setShowActionsheet(false);
   const layout = useWindowDimensions();
 
@@ -85,6 +91,12 @@ const Warehouse = () => {
       </View>
     );
   };
+
+  const handleOptionSelect = (option: string, pages: string, num: any) => {
+    setSelectedOption([option, pages, num]);
+    setShowActionsheet(false);
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-[#161616]">
       {/* Top section for 'Warehouse' text */}
@@ -137,21 +149,28 @@ const Warehouse = () => {
       />
       <View className="p-4 mb-16">
         <Button
-          onPress={() => setShowActionsheet(true)}
-          className="h-16 bg-[#E5FF03] flex-row justify-between items-center rounded-sm">
-          <Text
-            className="uppercase text-black"
-            style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 22 }}>
-            Tap to add first product
-          </Text>
-          <View className="flex-row items-center gap-1">
+          onPress={() => console.log("Perform action for:", selectedOption)}
+          className="h-16 bg-[#E5FF03] flex-row justify-between items-center rounded-sm w-full">
+          <Link href={`/creator-store/${selectedOption[1]}`}>
             <Text
               className="uppercase text-black"
-              style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 24 }}>
-              1/4
+              style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 22 }}>
+              {selectedOption[0]}
             </Text>
-            <Entypo name="chevron-down" size={24} color="black" />
-          </View>
+          </Link>
+          <TouchableOpacity onPress={() => setShowActionsheet(true)}>
+            <View className="flex-row items-center gap-1">
+              <Text
+                className="uppercase text-black"
+                style={{
+                  fontFamily: "PPFormulaCondensed-Bold",
+                  fontSize: 24,
+                }}>
+                {selectedOption[2]}/4
+              </Text>
+              <Entypo name="chevron-down" size={24} color="black" />
+            </View>
+          </TouchableOpacity>
         </Button>
       </View>
 
@@ -162,7 +181,9 @@ const Warehouse = () => {
             <ActionsheetDragIndicator />
           </ActionsheetDragIndicatorWrapper>
           <ActionsheetItem
-            onPress={handleClose}
+            onPress={() =>
+              handleOptionSelect("Add first product", "/add-product", 1)
+            }
             className="flex-row justify-between items-center border-[0.5px] border-b-white/40 h-20">
             <Text
               className="text-white"
@@ -172,9 +193,10 @@ const Warehouse = () => {
             <Feather name="box" size={26} color="white" />
           </ActionsheetItem>
 
-          {/* Remaining Steps */}
           <ActionsheetItem
-            onPress={handleClose}
+            onPress={() =>
+              handleOptionSelect("Setup Payments", "/setup-payments", 2)
+            }
             className="flex-row justify-between items-center border-[0.5px] border-b-white/40 h-20">
             <Text
               className="text-white"
@@ -185,7 +207,13 @@ const Warehouse = () => {
           </ActionsheetItem>
 
           <ActionsheetItem
-            onPress={handleClose}
+            onPress={() =>
+              handleOptionSelect(
+                "Setup pickup address",
+                "/setup-pickup-address",
+                3
+              )
+            }
             className="flex-row justify-between items-center border-[0.5px] border-b-white/40 h-20">
             <Text
               className="text-white"
@@ -196,7 +224,9 @@ const Warehouse = () => {
           </ActionsheetItem>
 
           <ActionsheetItem
-            onPress={handleClose}
+            onPress={() =>
+              handleOptionSelect("Make store live", "/make-store-live", 4)
+            }
             className="flex-row justify-between items-center h-20">
             <Text
               className="text-white"
