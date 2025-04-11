@@ -1,22 +1,9 @@
-import { Stack } from "expo-router";
+import { router, Stack, useRouter, Slot } from "expo-router";
+import { TouchableOpacity } from "react-native";
+import { Button, Text } from "react-native-paper";
 
 export default function RootLayout() {
-  return (
-    <Stack>
-      <Stack.Screen
-        name="index"
-        options={{
-          title: "Add Product",
-          headerStyle: {
-            backgroundColor: "black",
-          },
-          headerTitleStyle: {
-            fontFamily: "HelveticaNeue-Medium",
-          },
-          headerTintColor: "white",
-          headerTitleAlign: "center",
-        }}
-      />
-    </Stack>
-  );
+  const router = useRouter();
+
+  return <Slot></Slot>;
 }
