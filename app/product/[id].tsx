@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import products from "@/assets/products.json";
 import { Stack, useLocalSearchParams } from "expo-router";
 
@@ -9,32 +9,46 @@ import { Text } from "@/components/ui/text";
 import { Heading } from "@/components/ui/heading";
 import { Box } from "@/components/ui/box";
 import { Button, ButtonText } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
+import { fetchProductById } from "@/api/products";
+import { useCart } from "@/store/cartStore";
 export default function ProductDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const product = products.find((product) => product.id === Number(id));
-  if (!product) {
-    return (
-      <View className="flex-1 items-center justify-center">
-        <Text className="text-2xl font-bold">Product not found</Text>
-      </View>
-    );
+  const addProduct = useCart((state: any) => state.addProduct);
+  const addToCart = () => {
+    addProduct(product);
+  };
+  const {
+    data: product,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["products", id],
+    queryFn: () => fetchProductById(Number(id)),
+  });
+
+  if (isLoading) {
+    return <ActivityIndicator />;
   }
 
+  if (error) {
+    return <Text>Product not found!</Text>;
+  }
   return (
     <Box className="flex-1 items-center p-3">
-      <Stack.Screen options={{ title: product.name }} />
+      <Stack.Screen options={{ title: product.title }} />
 
       <Card className="p-5 rounded-lg max-w-[960px] w-full flex-1">
         <Image
           source={{
-            uri: product.image,
+            uri: product.images[0],
           }}
           className="mb-6 h-[240px] w-full rounded-md"
-          alt={`${product.name} image`}
+          alt={`${product.title} image`}
           resizeMode="contain"
         />
         <Text className="text-sm font-normal mb-2 text-typography-700">
-          {product.name}
+          {product.title}
         </Text>
         <VStack className="mb-6">
           <Heading size="md" className="mb-4">
@@ -43,7 +57,9 @@ export default function ProductDetailsScreen() {
           <Text size="sm">{product.description}</Text>
         </VStack>
         <Box className="flex-col sm:flex-row">
-          <Button className="px-4 py-2 mr-0 mb-3 sm:mr-3 sm:mb-0 sm:flex-1">
+          <Button
+            className="px-4 py-2 mr-0 mb-3 sm:mr-3 sm:mb-0 sm:flex-1"
+            onPress={addToCart}>
             <ButtonText size="sm">Add to cart</ButtonText>
           </Button>
           <Button

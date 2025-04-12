@@ -1,10 +1,14 @@
-import { Slot, Stack } from "expo-router";
+import { Link, Slot, Stack } from "expo-router";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import "@/global.css";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Pressable } from "react-native";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import { Text } from "@/components/ui/text";
+import { useCart } from "@/store/cartStore";
 
 SplashScreen.preventAutoHideAsync();
 const queryClient = new QueryClient();
@@ -22,6 +26,7 @@ export default function RootLayout() {
     "HelveticaNeue-Medium": require("../assets/fonts/HelveticaNeue Medium.ttf"),
     "HelveticaNeue-Thin": require("../assets/fonts/HelveticaNeue Thin.ttf"),
   });
+  const cartItemsNum = useCart((state: any) => state.items.length);
 
   useEffect(() => {
     if (loaded || error) {
@@ -36,14 +41,25 @@ export default function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
       <GluestackUIProvider mode="light">
-        <Slot />
-        {/* <Stack>
-        <Stack.Screen
-          name="product/[id]"
-          options={{ title: "Product Details" }}
-        />
-        <Stack.Screen name="index" options={{ title: "Creator Store" }} />
-      </Stack> */}
+        {/* <Slot /> */}
+        <Stack
+          screenOptions={{
+            headerRight: () =>
+              cartItemsNum > 0 && (
+                <Link href={"/cart"} asChild>
+                  <Pressable className="flex-row gap-2">
+                    <AntDesign name="shoppingcart" size={24} color="black" />
+                    <Text>{cartItemsNum}</Text>
+                  </Pressable>
+                </Link>
+              ),
+          }}>
+          <Stack.Screen
+            name="product/[id]"
+            options={{ title: "Product Details" }}
+          />
+          <Stack.Screen name="index" options={{ title: "Creator Store" }} />
+        </Stack>
       </GluestackUIProvider>
     </QueryClientProvider>
   );

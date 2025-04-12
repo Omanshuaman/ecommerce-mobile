@@ -19,18 +19,19 @@ export default function HomeScreen() {
     queryFn: listProducts,
   });
 
-  if (isLoading) {
-    return <ActivityIndicator />;
-  }
-
-  if (error) {
-    return <Text>Error fetching products</Text>;
-  }
   const numColumns = useBreakpointValue({
     default: 2,
     sm: 3,
     xl: 4,
   });
+
+  if (isLoading) {
+    return <ActivityIndicator />;
+  }
+
+  if (isError) {
+    return <Text>Error fetching products</Text>;
+  }
 
   return (
     <FlatList

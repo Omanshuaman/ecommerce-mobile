@@ -1,13 +1,21 @@
-import { StyleSheet, Text, View } from "react-native";
+import { VStack } from "@/components/ui/vstack";
+import { useCart } from "@/store/cartStore";
+import { FlatList, StyleSheet, Text, View } from "react-native";
 
 export default function CartScreen() {
+  const items = useCart((state) => state.items);
+  const resetCart = useCart((state) => state.resetCart);
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Cart </Text>
-        <Text style={styles.subtitle}>This is the first page of your app.</Text>
-      </View>
-    </View>
+    <FlatList
+      data={items}
+      contentContainerClassName="gap-2 max-w-[960px] w-full mx-auto p-2"
+      renderItem={({ item }) => (
+        <VStack space="sm">
+          <Text>{item.product.name}</Text>
+          <Text>$ {item.product.price}</Text>
+        </VStack>
+      )}
+    />
   );
 }
 
