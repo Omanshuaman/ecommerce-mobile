@@ -12,6 +12,7 @@ import { Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { useRouter } from "expo-router";
+import ModalComponent from "./components/Modal";
 
 const AddProduct = () => {
   const [image, setImage] = useState<string | null>(null);
@@ -54,21 +55,7 @@ const AddProduct = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-[#161616]">
-      <View className="bg-black py-4 px-4 flex-row items-center justify-between">
-        <TouchableOpacity onPress={() => router.back()}>
-          <Ionicons name="chevron-back" size={16} color="white" />
-        </TouchableOpacity>
-
-        <Text
-          className="text-white font-[HelveticaNeue-Medium] text-center text-xl"
-          style={{ color: "white", fontFamily: "HelveticaNeue-Bold" }}>
-          Add Product
-        </Text>
-
-        {/* Invisible View to center the title properly */}
-        <View />
-      </View>
-      <ScrollView className="px-4 py-2">
+      <ScrollView className="px-4 py-2" nestedScrollEnabled={true}>
         {/* Upload Photo & Reel */}
         <View className="flex-row justify-between gap-1 mb-4">
           {image ? (
@@ -151,7 +138,7 @@ const AddProduct = () => {
           className="border border-dashed border-white py-3 rounded-md mb-4 items-center">
           <Text className="text-white">Add another photo</Text>
         </TouchableOpacity>
-
+        <ModalComponent />
         {/* Dropdowns and Inputs */}
         {[
           "Brand",
