@@ -9,6 +9,9 @@ import { Pressable, TouchableOpacity } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Text } from "@/components/ui/text";
 import { useCart } from "@/store/cartStore";
+import { User } from "lucide-react-native";
+import { Icon } from "@/components/ui/icon";
+import { useAuth } from "@/store/authStore";
 
 SplashScreen.preventAutoHideAsync();
 const queryClient = new QueryClient();
@@ -27,6 +30,7 @@ export default function RootLayout() {
     "HelveticaNeue-Thin": require("../assets/fonts/HelveticaNeue Thin.ttf"),
   });
   const cartItemsNum = useCart((state: any) => state.items.length);
+  const isLoggedIn = useAuth((s) => !!s.token);
 
   useEffect(() => {
     if (loaded || error) {
@@ -57,10 +61,26 @@ export default function RootLayout() {
               ),
           }}>
           <Stack.Screen
+            name="index"
+            options={{
+              title: "Shop",
+              headerLeft: () =>
+                !isLoggedIn && (
+                  <TouchableOpacity
+                    className="flex-row gap-2"
+                    onPressIn={() => {
+                      router.push("/login");
+                    }}>
+                    <Icon as={User} />
+                  </TouchableOpacity>
+                ),
+            }}
+          />
+          <Stack.Screen
             name="product/[id]"
             options={{ title: "Product Details" }}
           />
-          <Stack.Screen name="index" options={{ title: "Creator Store" }} />
+          {/* <Stack.Screen name="index" options={{ title: "Creator Store" }} /> */}
         </Stack>
       </GluestackUIProvider>
     </QueryClientProvider>
