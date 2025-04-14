@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Button,
+  Alert,
 } from "react-native";
 import { Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -14,7 +15,28 @@ import * as ImagePicker from "expo-image-picker";
 import { useRouter } from "expo-router";
 import BrandModal from "./components/BrandModal";
 import CategoryModal from "./components/CategoryModal";
-
+import ProductConditionModal from "./components/ProductConditionModal";
+import PrimaryMaterialModal from "./components/PrimaryMaterialModal";
+import PrimaryColorModal from "./components/PrimaryColorModal";
+import OccasionModal from "./components/OccasionModal";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionHeader,
+  AccordionTrigger,
+  AccordionTitleText,
+  AccordionContentText,
+  AccordionIcon,
+  AccordionContent,
+} from "@/components/ui/accordion";
+import {
+  ChevronUpIcon,
+  ChevronDownIcon,
+  AddIcon,
+  ExternalLinkIcon,
+  RemoveIcon,
+} from "@/components/ui/icon";
+import { Divider } from "react-native-paper";
 const AddProduct = () => {
   const [image, setImage] = useState<string | null>(null);
   const [video, setVideo] = useState<string | null>(null);
@@ -26,8 +48,29 @@ const AddProduct = () => {
   const [discountedPrice, setDiscountedPrice] = useState<string | null>("");
   const [pieces, setPieces] = useState<string | null>("");
   const [description, setDescription] = useState<string | null>("");
+  const [productConditionmodal, setProductConditionModal] = useState(false);
+  const [selectedProductCondition, setSelectedProductCondition] = useState<
+    string[]
+  >([]);
+
+  const [conditionDescription, setConditionDescription] = useState("");
+
   const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [categorymodal, setCategoryModal] = useState(false);
+
+  const [primaryMaterialModal, setPrimaryMaterialModal] = useState(false);
+  const [selectedPrimaryMaterial, setSelectedPrimaryMaterial] = useState<
+    string | null
+  >("");
+
+  const [primaryColorModal, setPrimaryColorModal] = useState(false);
+  const [selectedPrimaryColor, setSelectedPrimaryColor] = useState<
+    string | null
+  >("");
+
+  const [occasionModal, setOccasionModal] = useState(false);
+  const [selectedOccasion, setSelectedOccasion] = useState<string | null>("");
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -59,6 +102,46 @@ const AddProduct = () => {
     if (!result.canceled) {
       setAdditionalImages((prev) => [...prev, result.assets[0].uri]);
     }
+  };
+
+  const validateForm = () => {
+    if (!image) {
+      Alert.alert("Validation Error", "Please upload a photo.");
+      return false;
+    }
+    if (!video) {
+      Alert.alert("Validation Error", "Please upload a reel.");
+      return false;
+    }
+    if (!selectedBrand) {
+      Alert.alert("Validation Error", "Please select a brand.");
+      return false;
+    }
+    if (selectedCategory.length === 0) {
+      Alert.alert("Validation Error", "Please select at least one category.");
+      return false;
+    }
+    if (!originalPrice || isNaN(Number(originalPrice))) {
+      Alert.alert("Validation Error", "Please enter a valid original price.");
+      return false;
+    }
+    if (!discountedPrice || isNaN(Number(discountedPrice))) {
+      Alert.alert("Validation Error", "Please enter a valid discounted price.");
+      return false;
+    }
+    if (!pieces || isNaN(Number(pieces))) {
+      Alert.alert("Validation Error", "Please enter a valid number of pieces.");
+      return false;
+    }
+    if (!description) {
+      Alert.alert("Validation Error", "Please provide a design description.");
+      return false;
+    }
+    if (!selectedProductCondition.length) {
+      Alert.alert("Validation Error", "Please select a product condition.");
+      return false;
+    }
+    return true;
   };
 
   return (
@@ -153,7 +236,7 @@ const AddProduct = () => {
           <Text className="text-white">Brand</Text>
           <View className="flex-row items-center gap-2">
             <Text className="text-typography-500 text-sm">{selectedBrand}</Text>
-            <Ionicons name="chevron-forward" size={20} color="white" />
+            <Ionicons name="chevron-forward" size={18} color="white" />
           </View>
         </TouchableOpacity>
         <BrandModal
@@ -163,14 +246,14 @@ const AddProduct = () => {
           setSelectedBrand={setSelectedBrand}
         />
         <TouchableOpacity
-          className="flex-row justify-between items-center py-2"
+          className="flex-row justify-between items-center py-3"
           onPress={() => setCategoryModal(true)}>
           <Text className="text-white">Category</Text>
           <View className="flex-row items-center gap-2">
             <Text className="text-typography-500 text-sm">
               {selectedCategory.length}
             </Text>
-            <Ionicons name="chevron-forward" size={20} color="white" />
+            <Ionicons name="chevron-forward" size={18} color="white" />
           </View>
         </TouchableOpacity>
         <CategoryModal
@@ -179,13 +262,14 @@ const AddProduct = () => {
           setCategoryModal={setCategoryModal}
           setSelectedCategory={setSelectedCategory}
         />
+
         <View className="flex-row justify-between items-center py-1">
           <Text className="text-white">Original Price</Text>
           <View className="flex-row items-center gap-2">
             <Text className="text-white">₹</Text>
             <TextInput
               keyboardType="numeric"
-              className="bg-gray-800 text-white w-16 text-center rounded-sm border border-white"
+              className=" text-white w-16 text-center rounded-sm border border-white"
               placeholder="0000"
               placeholderTextColor="#999"
               style={{
@@ -205,7 +289,7 @@ const AddProduct = () => {
             <Text className="text-white">₹</Text>
             <TextInput
               keyboardType="numeric"
-              className="bg-gray-800 text-white w-16 text-center rounded-sm border border-white"
+              className=" text-white w-16 text-center rounded-sm border border-white"
               placeholder="0000"
               placeholderTextColor="#999"
               style={{
@@ -224,7 +308,7 @@ const AddProduct = () => {
           <View className="flex-row items-center gap-2">
             <TextInput
               keyboardType="numeric"
-              className="bg-gray-800 text-white w-16 text-center rounded-sm border border-white"
+              className=" text-white w-16 text-center rounded-sm border border-white"
               placeholder="01"
               maxLength={2}
               placeholderTextColor="#999"
@@ -239,29 +323,148 @@ const AddProduct = () => {
             />
           </View>
         </View>
-
-        <View className="py-1">
-          <Text className="text-white mb-1">Design Description</Text>
-          <TextInput
-            multiline
-            className="bg-gray-800 text-white px-3 py-3 rounded h-fit border border-white"
-            placeholder="DESCRIBE THE DESIGN"
-            placeholderTextColor="#999"
-            placeholderClassName=""
-            style={{
-              fontFamily: "PPFormulaCondensed-Regular",
-              fontSize: 18,
-            }}
-            value={description ?? ""}
-            onChangeText={(text) => {
-              setDescription(text);
-            }}
-          />
+        <TouchableOpacity
+          className="flex-row justify-between items-center py-4"
+          onPress={() => setProductConditionModal(true)}>
+          <Text className="text-white">ProductCondition</Text>
+          <View className="flex-row items-center gap-2">
+            <Text className="text-typography-500 text-sm">
+              {selectedProductCondition}
+            </Text>
+            <Ionicons name="chevron-forward" size={18} color="white" />
+          </View>
+        </TouchableOpacity>
+        <ProductConditionModal
+          productConditionModal={productConditionmodal}
+          setProductConditionModal={setProductConditionModal}
+          selectedProductCondition={selectedProductCondition}
+          setSelectedProductCondition={setSelectedProductCondition}
+          conditionDescription={conditionDescription}
+          setConditionDescription={setConditionDescription}
+        />
+        <Divider />
+        <View className="mb-10">
+          <Accordion
+            size="md"
+            variant="filled"
+            type="single"
+            isCollapsible={true}
+            isDisabled={false}
+            className="w-[100%]">
+            <AccordionItem value="a">
+              <AccordionHeader className="bg-[#161616]">
+                <AccordionTrigger>
+                  {({ isExpanded }) => {
+                    return (
+                      <>
+                        <AccordionTitleText className="text-white text-lg">
+                          Add Additional Details
+                        </AccordionTitleText>
+                        {isExpanded ? (
+                          <AccordionIcon
+                            as={RemoveIcon}
+                            className="ml-3"
+                            color="white"
+                            size="xl"
+                          />
+                        ) : (
+                          <AccordionIcon
+                            as={AddIcon}
+                            className="ml-3"
+                            color="white"
+                            size="xl"
+                          />
+                        )}
+                      </>
+                    );
+                  }}
+                </AccordionTrigger>
+              </AccordionHeader>
+              <AccordionContent className="bg-[#161616]">
+                <View className="gap-2 py-1">
+                  <Text className="text-white mb-1">Design Description</Text>
+                  <TextInput
+                    multiline
+                    className=" text-white px-3 py-3 rounded h-fit border border-white"
+                    placeholder="DESCRIBE THE DESIGN"
+                    placeholderTextColor="#999"
+                    placeholderClassName=""
+                    style={{
+                      fontFamily: "PPFormulaCondensed-Regular",
+                      fontSize: 18,
+                    }}
+                    value={description ?? ""}
+                    onChangeText={(text) => {
+                      setDescription(text);
+                    }}
+                  />
+                </View>
+                <TouchableOpacity
+                  className="flex-row justify-between items-center py-3"
+                  onPress={() => setPrimaryMaterialModal(true)}>
+                  <Text className="text-white">Primary Material</Text>
+                  <View className="flex-row items-center gap-2">
+                    <Text className="text-typography-500 text-sm">
+                      {selectedPrimaryMaterial}
+                    </Text>
+                    <Ionicons name="chevron-forward" size={18} color="white" />
+                  </View>
+                </TouchableOpacity>
+                <PrimaryMaterialModal
+                  primaryMaterialModal={primaryMaterialModal}
+                  setPrimaryMaterialModal={setPrimaryMaterialModal}
+                  selectedPrimaryMaterial={selectedPrimaryMaterial}
+                  setSelectedPrimaryMaterial={setSelectedPrimaryMaterial}
+                />
+                <TouchableOpacity
+                  className="flex-row justify-between items-center py-3"
+                  onPress={() => setPrimaryColorModal(true)}>
+                  <Text className="text-white">Primary Color</Text>
+                  <View className="flex-row items-center gap-2">
+                    <Text className="text-typography-500 text-sm">
+                      {selectedPrimaryColor}
+                    </Text>
+                    <Ionicons name="chevron-forward" size={18} color="white" />
+                  </View>
+                </TouchableOpacity>
+                <PrimaryColorModal
+                  primaryColorModal={primaryColorModal}
+                  setPrimaryColorModal={setPrimaryColorModal}
+                  selectedPrimaryColor={selectedPrimaryColor}
+                  setSelectedPrimaryColor={setSelectedPrimaryColor}
+                />
+                <TouchableOpacity
+                  className="flex-row justify-between items-center py-3"
+                  onPress={() => setOccasionModal(true)}>
+                  <Text className="text-white">Occasion</Text>
+                  <View className="flex-row items-center gap-2">
+                    <Text className="text-typography-500 text-sm">
+                      {selectedOccasion}
+                    </Text>
+                    <Ionicons name="chevron-forward" size={18} color="white" />
+                  </View>
+                </TouchableOpacity>
+                <OccasionModal
+                  occasionModal={occasionModal}
+                  setOccasionModal={setOccasionModal}
+                  selectedOccasion={selectedOccasion}
+                  setSelectedOccasion={setSelectedOccasion}
+                />
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </View>
       </ScrollView>
 
       {/* Publish Button */}
-      <TouchableOpacity className="bg-yellow-400 py-4 items-center">
+      <TouchableOpacity
+        className="bg-yellow-400 py-4 items-center"
+        onPress={() => {
+          if (validateForm()) {
+            // Proceed with publishing logic
+            Alert.alert("Success", "Product published successfully!");
+          }
+        }}>
         <Text className="text-black font-bold text-lg">PUBLISH</Text>
       </TouchableOpacity>
     </SafeAreaView>
