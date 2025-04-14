@@ -22,7 +22,11 @@ const AddProduct = () => {
   const router = useRouter();
   const [selectedBrand, setSelectedBrand] = useState<string | null>("");
   const [brandmodal, setBrandModal] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState<string | null>("");
+  const [originalPrice, setOriginalPrice] = useState<string | null>("");
+  const [discountedPrice, setDiscountedPrice] = useState<string | null>("");
+  const [pieces, setPieces] = useState<string | null>("");
+  const [description, setDescription] = useState<string | null>("");
+  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [categorymodal, setCategoryModal] = useState(false);
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -159,12 +163,12 @@ const AddProduct = () => {
           setSelectedBrand={setSelectedBrand}
         />
         <TouchableOpacity
-          className="flex-row justify-between items-center py-3"
+          className="flex-row justify-between items-center py-2"
           onPress={() => setCategoryModal(true)}>
           <Text className="text-white">Category</Text>
           <View className="flex-row items-center gap-2">
             <Text className="text-typography-500 text-sm">
-              {selectedCategory}
+              {selectedCategory.length}
             </Text>
             <Ionicons name="chevron-forward" size={20} color="white" />
           </View>
@@ -175,62 +179,83 @@ const AddProduct = () => {
           setCategoryModal={setCategoryModal}
           setSelectedCategory={setSelectedCategory}
         />
-        {[
-          "Category",
-          "Product Condition",
-          "Occasion",
-          "Primary material",
-          "Primary color",
-        ].map((label) => (
-          <TouchableOpacity
-            key={label}
-            className="flex-row justify-between items-center border-b border-white py-3">
-            <Text className="text-white">{label}</Text>
-            <Ionicons name="chevron-forward" size={20} color="white" />
-          </TouchableOpacity>
-        ))}
-
-        {/* Price Inputs */}
-        <View className="flex-row justify-between items-center py-3">
-          <View className="flex-1 mr-2">
-            <Text className="text-white mb-1">Original Price</Text>
+        <View className="flex-row justify-between items-center py-1">
+          <Text className="text-white">Original Price</Text>
+          <View className="flex-row items-center gap-2">
+            <Text className="text-white">₹</Text>
             <TextInput
               keyboardType="numeric"
-              className="bg-gray-800 text-white px-3 py-2 rounded"
-              placeholder="₹ 0000"
+              className="bg-gray-800 text-white w-16 text-center rounded-sm border border-white"
+              placeholder="0000"
               placeholderTextColor="#999"
+              style={{
+                fontFamily: "PPFormulaCondensed-Regular",
+                fontSize: 15,
+              }}
+              value={originalPrice ?? ""}
+              onChangeText={(text) => {
+                setOriginalPrice(text);
+              }}
             />
           </View>
-          <View className="flex-1">
-            <Text className="text-white mb-1">Discounted Price</Text>
+        </View>
+        <View className="flex-row justify-between items-center py-1">
+          <Text className="text-white">Discounted Price</Text>
+          <View className="flex-row items-center gap-2">
+            <Text className="text-white">₹</Text>
             <TextInput
               keyboardType="numeric"
-              className="bg-gray-800 text-white px-3 py-2 rounded"
-              placeholder="₹ 0000"
+              className="bg-gray-800 text-white w-16 text-center rounded-sm border border-white"
+              placeholder="0000"
               placeholderTextColor="#999"
+              style={{
+                fontFamily: "PPFormulaCondensed-Regular",
+                fontSize: 15,
+              }}
+              value={discountedPrice ?? ""}
+              onChangeText={(text) => {
+                setDiscountedPrice(text);
+              }}
+            />
+          </View>
+        </View>
+        <View className="flex-row justify-between items-center py-1">
+          <Text className="text-white">No. of Pieces</Text>
+          <View className="flex-row items-center gap-2">
+            <TextInput
+              keyboardType="numeric"
+              className="bg-gray-800 text-white w-16 text-center rounded-sm border border-white"
+              placeholder="01"
+              maxLength={2}
+              placeholderTextColor="#999"
+              style={{
+                fontFamily: "PPFormulaCondensed-Regular",
+                fontSize: 15,
+              }}
+              value={pieces ?? ""}
+              onChangeText={(text) => {
+                setPieces(text);
+              }}
             />
           </View>
         </View>
 
-        {/* Number of Pieces */}
-        <View className="py-3">
-          <Text className="text-white mb-1">Number of pieces</Text>
-          <TextInput
-            keyboardType="numeric"
-            className="bg-gray-800 text-white px-3 py-2 rounded"
-            placeholder="01"
-            placeholderTextColor="#999"
-          />
-        </View>
-
-        {/* Additional Details */}
-        <View className="border-t border-white py-3">
-          <Text className="text-white mb-1">Add Additional Details</Text>
+        <View className="py-1">
+          <Text className="text-white mb-1">Design Description</Text>
           <TextInput
             multiline
-            className="bg-gray-800 text-white px-3 py-3 rounded h-24"
+            className="bg-gray-800 text-white px-3 py-3 rounded h-fit border border-white"
             placeholder="DESCRIBE THE DESIGN"
             placeholderTextColor="#999"
+            placeholderClassName=""
+            style={{
+              fontFamily: "PPFormulaCondensed-Regular",
+              fontSize: 18,
+            }}
+            value={description ?? ""}
+            onChangeText={(text) => {
+              setDescription(text);
+            }}
           />
         </View>
       </ScrollView>

@@ -42,8 +42,8 @@ const Categorys = [
   "A Bathing Ape (BAPE)",
 ];
 interface CategoryModalProps {
-  selectedCategory: string | null;
-  setSelectedCategory: (Category: string) => void;
+  selectedCategory: string[];
+  setSelectedCategory: (categories: string[]) => void;
   categoryModal: boolean;
   setCategoryModal: (modalState: boolean) => void;
 }
@@ -64,6 +64,15 @@ const CategoryModal = ({
       )
     );
   };
+
+  const toggleCategorySelection = (category: string) => {
+    if (selectedCategory.includes(category)) {
+      setSelectedCategory(selectedCategory.filter((item) => item !== category));
+    } else {
+      setSelectedCategory([...selectedCategory, category]);
+    }
+  };
+
   return (
     <SafeAreaView>
       <Center className="h-fit">
@@ -105,12 +114,12 @@ const CategoryModal = ({
                 {data.map((Category) => (
                   <Button
                     key={Category}
-                    onPress={() => setSelectedCategory(Category)}
+                    onPress={() => toggleCategorySelection(Category)}
                     className="flex-row justify-between items-center bg-transparent">
                     <ButtonText className="text-white text-base">
                       {Category}
                     </ButtonText>
-                    {selectedCategory === Category && (
+                    {selectedCategory.includes(Category) && (
                       <Ionicons name="checkmark" size={20} color="white" />
                     )}
                   </Button>
