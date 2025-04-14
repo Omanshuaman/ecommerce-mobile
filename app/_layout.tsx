@@ -1,11 +1,11 @@
-import { Link, Slot, Stack } from "expo-router";
+import { Link, router, Slot, Stack } from "expo-router";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import "@/global.css";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Pressable } from "react-native";
+import { Pressable, TouchableOpacity } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Text } from "@/components/ui/text";
 import { useCart } from "@/store/cartStore";
@@ -41,17 +41,19 @@ export default function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
       <GluestackUIProvider mode="light">
-        <Slot />
-        {/* <Stack
+        {/* <Slot /> */}
+        <Stack
           screenOptions={{
             headerRight: () =>
               cartItemsNum > 0 && (
-                <Link href={"/cart"} asChild>
-                  <Pressable className="flex-row gap-2">
-                    <AntDesign name="shoppingcart" size={24} color="black" />
-                    <Text>{cartItemsNum}</Text>
-                  </Pressable>
-                </Link>
+                <TouchableOpacity
+                  className="flex-row gap-2"
+                  onPressIn={() => {
+                    router.push("/cart");
+                  }}>
+                  <AntDesign name="shoppingcart" size={24} color="black" />
+                  <Text>{cartItemsNum}</Text>
+                </TouchableOpacity>
               ),
           }}>
           <Stack.Screen
@@ -59,7 +61,7 @@ export default function RootLayout() {
             options={{ title: "Product Details" }}
           />
           <Stack.Screen name="index" options={{ title: "Creator Store" }} />
-        </Stack> */}
+        </Stack>
       </GluestackUIProvider>
     </QueryClientProvider>
   );
