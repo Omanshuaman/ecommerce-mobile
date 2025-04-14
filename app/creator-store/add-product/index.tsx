@@ -6,12 +6,12 @@ import {
   ScrollView,
   TouchableOpacity,
   SafeAreaView,
-  Button,
   Alert,
 } from "react-native";
 import { Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import * as FileSystem from "expo-file-system";
 import { useRouter } from "expo-router";
 import BrandModal from "./components/BrandModal";
 import CategoryModal from "./components/CategoryModal";
@@ -37,6 +37,7 @@ import {
   RemoveIcon,
 } from "@/components/ui/icon";
 import { Divider } from "react-native-paper";
+
 const AddProduct = () => {
   const [image, setImage] = useState<string | null>(null);
   const [video, setVideo] = useState<string | null>(null);
@@ -142,6 +143,15 @@ const AddProduct = () => {
       return false;
     }
     return true;
+  };
+
+  const saveProductToFile = async (product: object) => {
+    try {
+      Alert.alert("Success", `${JSON.stringify(product)}`);
+    } catch (error) {
+      Alert.alert("Error", "Failed to save product.");
+      console.error(error);
+    }
   };
 
   return (
@@ -458,14 +468,35 @@ const AddProduct = () => {
 
       {/* Publish Button */}
       <TouchableOpacity
-        className="bg-yellow-400 py-4 items-center"
+        className="bg-yellow-400 py-2 m-2 rounded-sm shadow-lg shadow-slate-50 items-center"
         onPress={() => {
           if (validateForm()) {
-            // Proceed with publishing logic
-            Alert.alert("Success", "Product published successfully!");
+            const product = {
+              image,
+              video,
+              additionalImages,
+              selectedBrand,
+              selectedCategory,
+              originalPrice,
+              discountedPrice,
+              pieces,
+              description,
+              selectedProductCondition,
+              selectedPrimaryMaterial,
+              selectedPrimaryColor,
+              selectedOccasion,
+            };
+            saveProductToFile(product);
           }
         }}>
-        <Text className="text-black font-bold text-lg">PUBLISH</Text>
+        <Text
+          className="text-black"
+          style={{
+            fontFamily: "PPFormulaCondensed-Bold",
+            fontSize: 34,
+          }}>
+          PUBLISH
+        </Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
