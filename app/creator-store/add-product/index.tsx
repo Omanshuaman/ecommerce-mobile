@@ -12,14 +12,18 @@ import { Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { useRouter } from "expo-router";
-import ModalComponent from "./components/Modal";
+import BrandModal from "./components/BrandModal";
+import CategoryModal from "./components/CategoryModal";
 
 const AddProduct = () => {
   const [image, setImage] = useState<string | null>(null);
   const [video, setVideo] = useState<string | null>(null);
   const [additionalImages, setAdditionalImages] = useState<string[]>([]);
   const router = useRouter();
-
+  const [selectedBrand, setSelectedBrand] = useState<string | null>("");
+  const [brandmodal, setBrandModal] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState<string | null>("");
+  const [categorymodal, setCategoryModal] = useState(false);
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
@@ -138,10 +142,40 @@ const AddProduct = () => {
           className="border border-dashed border-white py-3 rounded-md mb-4 items-center">
           <Text className="text-white">Add another photo</Text>
         </TouchableOpacity>
-        <ModalComponent />
-        {/* Dropdowns and Inputs */}
+
+        <TouchableOpacity
+          className="flex-row justify-between items-center py-3"
+          onPress={() => setBrandModal(true)}>
+          <Text className="text-white">Brand</Text>
+          <View className="flex-row items-center gap-2">
+            <Text className="text-typography-500 text-sm">{selectedBrand}</Text>
+            <Ionicons name="chevron-forward" size={20} color="white" />
+          </View>
+        </TouchableOpacity>
+        <BrandModal
+          brandModal={brandmodal}
+          selectedBrand={selectedBrand}
+          setBrandModal={setBrandModal}
+          setSelectedBrand={setSelectedBrand}
+        />
+        <TouchableOpacity
+          className="flex-row justify-between items-center py-3"
+          onPress={() => setCategoryModal(true)}>
+          <Text className="text-white">Category</Text>
+          <View className="flex-row items-center gap-2">
+            <Text className="text-typography-500 text-sm">
+              {selectedCategory}
+            </Text>
+            <Ionicons name="chevron-forward" size={20} color="white" />
+          </View>
+        </TouchableOpacity>
+        <CategoryModal
+          categoryModal={categorymodal}
+          selectedCategory={selectedCategory}
+          setCategoryModal={setCategoryModal}
+          setSelectedCategory={setSelectedCategory}
+        />
         {[
-          "Brand",
           "Category",
           "Product Condition",
           "Occasion",
