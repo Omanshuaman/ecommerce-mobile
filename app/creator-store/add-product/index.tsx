@@ -37,6 +37,7 @@ import {
   RemoveIcon,
 } from "@/components/ui/icon";
 import { Divider } from "react-native-paper";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const AddProduct = () => {
   const [image, setImage] = useState<string | null>(null);
@@ -147,6 +148,12 @@ const AddProduct = () => {
 
   const saveProductToFile = async (product: object) => {
     try {
+      const existingData = await AsyncStorage.getItem("myData");
+      const parsedData = existingData ? JSON.parse(existingData) : [];
+
+      const updatedData = [...parsedData, ...product];
+
+      await AsyncStorage.setItem("myData", JSON.stringify(updatedData));
       Alert.alert("Success", `${JSON.stringify(product)}`);
     } catch (error) {
       Alert.alert("Error", "Failed to save product.");

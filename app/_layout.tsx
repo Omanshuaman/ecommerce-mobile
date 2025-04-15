@@ -45,8 +45,8 @@ export default function RootLayout() {
   return (
     <QueryClientProvider client={queryClient}>
       <GluestackUIProvider mode="light">
-        {/* <Slot /> */}
-        <Stack
+        <Slot />
+        {/* <Stack
           screenOptions={{
             headerRight: () =>
               cartItemsNum > 0 && (
@@ -80,8 +80,8 @@ export default function RootLayout() {
             name="product/[id]"
             options={{ title: "Product Details" }}
           />
-          {/* <Stack.Screen name="index" options={{ title: "Creator Store" }} /> */}
-        </Stack>
+        <Stack.Screen name="index" options={{ title: "Creator Store" }} /> 
+        </Stack> */}
       </GluestackUIProvider>
     </QueryClientProvider>
   );
