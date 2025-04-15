@@ -151,7 +151,7 @@ const AddProduct = () => {
       const existingData = await AsyncStorage.getItem("myData");
       const parsedData = existingData ? JSON.parse(existingData) : [];
 
-      const updatedData = [...parsedData, ...product];
+      const updatedData = [...parsedData, product];
 
       await AsyncStorage.setItem("myData", JSON.stringify(updatedData));
       Alert.alert("Success", `${JSON.stringify(product)}`);

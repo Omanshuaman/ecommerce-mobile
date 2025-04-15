@@ -55,18 +55,20 @@ const OnboardingScreen = () => {
           </TouchableOpacity>
         </Link>
 
-        <TouchableOpacity className="bg-black border border-white rounded-sm flex-row items-center justify-center w-full flex-1 my-1 gap-4">
-          <Image
-            source={require("../assets/facebook.png")}
-            className="w-8 h-8"
-            resizeMode="cover"
-          />
-          <Text
-            className="text-white uppercase"
-            style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 30 }}>
-            Log in with Facebook
-          </Text>
-        </TouchableOpacity>
+        <Link href="/creator-store/setup-pickup-address" asChild>
+          <TouchableOpacity className="bg-black border border-white rounded-sm flex-row items-center justify-center w-full flex-1 my-1 gap-4">
+            <Image
+              source={require("../assets/facebook.png")}
+              className="w-8 h-8"
+              resizeMode="cover"
+            />
+            <Text
+              className="text-white uppercase"
+              style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 30 }}>
+              Log in with Facebook
+            </Text>
+          </TouchableOpacity>
+        </Link>
       </View>
     </View>
   );
