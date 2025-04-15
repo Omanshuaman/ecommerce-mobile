@@ -6,6 +6,8 @@ import {
   Animated,
   SafeAreaView,
   Image,
+  Dimensions,
+  FlatList,
 } from "react-native";
 import {
   Actionsheet,
@@ -18,7 +20,7 @@ import {
 } from "@/components/ui/actionsheet";
 import { Button, ButtonText } from "@/components/ui/button";
 import { TabView, SceneMap } from "react-native-tab-view";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Entypo, MaterialIcons, Ionicons, Feather } from "@expo/vector-icons";
 import {
   Select,
@@ -32,14 +34,69 @@ import {
   SelectDragIndicatorWrapper,
   SelectItem,
 } from "@/components/ui/select";
+import { FontAwesome } from "@expo/vector-icons";
 import { Link } from "expo-router";
-const FirstRoute = () => (
-  <View className="flex-1 bg-[#161616]">
-    <View className="flex-1 justify-center items-center">
-      <Text className="text-white text-lg">Your Feed is Empty</Text>
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import ProductCard from "../../../components/ProductCard";
+import { useBreakpointValue } from "@/components/ui/utils/use-break-point-value";
+
+const FirstRoute = () => {
+  interface Product {
+    image: string;
+    selectedBrand: string;
+    selectedCategory: string[];
+    discountedPrice: number;
+    originalPrice: number;
+    pieces: number;
+    description: string;
+    selectedProductCondition: string[];
+    selectedPrimaryMaterial: string;
+    selectedPrimaryColor: string;
+    selectedOccasion: string;
+  }
+
+  const [products, setProducts] = useState<Product[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const value = await AsyncStorage.getItem("myData");
+        console.log("object");
+        if (value !== null) {
+          console.log("value", value);
+          setProducts(JSON.parse(value));
+          return JSON.parse(value);
+        }
+      } catch (e) {
+        console.log("Loading error", e);
+      }
+    };
+    fetchData();
+  }, []);
+  const numColumns = useBreakpointValue({
+    default: 2,
+    sm: 3,
+    xl: 4,
+  }) as number;
+
+  return (
+    <View className="flex-1 bg-[#1c1c1e]">
+      {products.length > 0 ? (
+        <FlatList
+          data={products}
+          numColumns={numColumns}
+          contentContainerClassName="gap-2 max-w-[960px] mx-auto w-full"
+          columnWrapperClassName="gap-2"
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => <ProductCard product={item} />}
+        />
+      ) : (
+        <View className="flex-1 justify-center items-center">
+          <Text className="text-white text-lg">Your Product is Empty</Text>
+        </View>
+      )}
     </View>
-  </View>
-);
+  );
+};
 
 const SecondRoute = () => <View className="flex-1 bg-purple-700" />;
 
@@ -135,8 +192,8 @@ const Warehouse = () => {
             <SelectDragIndicatorWrapper>
               <SelectDragIndicator />
             </SelectDragIndicatorWrapper>
-            <SelectItem label="UX Research" value="ux" />
-            <SelectItem label="Web Development" value="web" />
+            <SelectItem label="Active" value="active" />
+            <SelectItem label="Unactive" value="unactive" />
           </SelectContent>
         </SelectPortal>
       </Select>
