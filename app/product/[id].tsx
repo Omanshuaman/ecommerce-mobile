@@ -5,30 +5,49 @@ import {
   View,
   Image as RNImage,
   TouchableOpacity,
+  Image,
+  Text,
+  SafeAreaView,
 } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import { Plus } from "lucide-react-native"; // or use Ionicons if preferred
+import {
+  Accordion,
+  AccordionItem,
+  AccordionHeader,
+  AccordionTrigger,
+  AccordionTitleText,
+  AccordionContentText,
+  AccordionIcon,
+  AccordionContent,
+} from "@/components/ui/accordion";
+import {
+  ChevronUpIcon,
+  ChevronDownIcon,
+  RemoveIcon,
+  AddIcon,
+} from "@/components/ui/icon";
 import { Box } from "@/components/ui/box";
-import { Text } from "@/components/ui/text";
 import { Heading } from "@/components/ui/heading";
 import { VStack } from "@/components/ui/vstack";
 import { Button, ButtonText } from "@/components/ui/button";
 import { useCart } from "@/store/cartStore";
+import { Divider } from "react-native-paper";
 
 export default function ProductDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const addProduct = useCart((state: any) => state.addProduct);
   const [filteredProduct, setFilteredProduct] = useState<any | null>(null);
-
+  console.log(id);
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const value = await AsyncStorage.getItem("myData");
         if (value !== null) {
           const products = JSON.parse(value);
-          const product = products.find((p: any) => p.originalPrice);
-          console.log(product);
+          const product = products.find((p: any) => p.originalPrice === id); // replace with p.image === id if using image as identifier
+          console.log("dvd", product);
           setFilteredProduct(product);
         }
       } catch (e) {
@@ -48,92 +67,239 @@ export default function ProductDetailsScreen() {
   }
 
   return (
-    <ScrollView className="flex-1 bg-black px-4 py-6">
-      <View className="relative">
-        <RNImage
-          source={{ uri: filteredProduct.image }}
-          className="w-full mb-4 h-full"
-          resizeMode="cover"
-        />
+    <SafeAreaView className="flex-1 bg-[#161616]">
+      <ScrollView className="px-4 py-6">
+        <View className="relative">
+          <Image
+            source={{ uri: filteredProduct.image }}
+            className="w-full mb-4 h-96"
+            resizeMode="cover"
+          />
 
-        {/* Absolute Tags */}
-        <View className="absolute bottom-1 left-1 flex-row items-center space-x-1 px-2 py-1 rounded-md gap-1">
-          <Text className="text-xs bg-yellow-400 text-black font-bold px-2 py-0.5 rounded">
-            OBSESSED
-          </Text>
-          <Text className="text-xs bg-white text-black font-semibold px-2 py-0.5 rounded">
-            Like new
-          </Text>
+          {/* Absolute Tags */}
+          <View className="absolute bottom-6 left-2 flex-row items-center space-x-1 gap-1  ">
+            <Text
+              className="bg-yellow-400 text-black text-2xl px-2 pt-0.5 border border-gray-800 shadow-lg shadow-gray-950"
+              style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 20 }}>
+              OBSESSED
+            </Text>
+            <Text className="text-xl bg-white text-black font-normal px-2 py-0.5 border border-gray-800 rounded-sm">
+              Like new
+            </Text>
+          </View>
         </View>
-      </View>
 
-      {/* Title */}
-      <Heading size="xl" className="text-white uppercase font-extrabold mb-1">
-        {filteredProduct.selectedBrand}
-      </Heading>
-
-      {/* Price Row */}
-      <Box className="flex-row items-center space-x-3">
-        <Text className="text-xl text-white font-bold">
-          ₹{filteredProduct.discountedPrice}
+        {/* Title */}
+        <Text
+          className="text-white uppercase"
+          style={{
+            fontFamily: "PPFormulaCondensed-Bold",
+            fontSize: 40,
+          }}>
+          {filteredProduct.selectedBrand}
         </Text>
-        <Text className="text-base text-gray-400 line-through">
-          ₹{filteredProduct.originalPrice}
+
+        {/* Price Row */}
+        <Box className="flex-row items-center gap-2">
+          <Text className="text-xl text-white font-bold">
+            ₹{filteredProduct.discountedPrice}
+          </Text>
+          <Text className="text-lg text-gray-400 line-through">
+            ₹{filteredProduct.originalPrice}
+          </Text>
+        </Box>
+
+        {/* Description */}
+        <Text className="text-white text-base mt-2">
+          {filteredProduct.description}
         </Text>
-      </Box>
 
-      {/* Description */}
-      <Text className="text-white text-sm mt-2">
-        {filteredProduct.description}
-      </Text>
+        {/* Seller Info */}
+        <Box className="flex-row justify-between items-center mt-3 mb-4">
+          <View className="flex-row justify-between items-center gap-2">
+            <Image
+              source={{
+                uri: "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?semt=ais_hybrid&w=740",
+              }}
+              className="size-8 rounded-full"
+            />
+            <Text
+              className="text-white text-base"
+              style={{ fontFamily: "HelveticaNeue-Medium" }}>
+              Samuil Sadovsky
+            </Text>
+          </View>
 
-      {/* Seller Info */}
-      <Box className="flex-row justify-between items-center mt-3 mb-4">
-        <Text className="text-white font-medium text-sm">
-          👤 Samuil Sadovsky
-        </Text>
-        <Text className="text-white font-medium text-sm">
-          {filteredProduct.pieces} Pieces left
-        </Text>
-      </Box>
+          <Text className="text-white font-medium text-base">
+            {filteredProduct.pieces} Pieces left
+          </Text>
+        </Box>
 
-      {/* Accordion Sections */}
-      <Box className="border-t border-gray-700 mt-2 pt-2">
-        <TouchableOpacity>
-          <Text className="text-white font-semibold text-base mb-2">
-            Available Colors ▢
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text className="text-white text-base border-t border-gray-700 py-3">
-            Size: Medium
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text className="text-white text-base border-t border-gray-700 py-3">
-            Details +
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text className="text-white text-base border-t border-b border-gray-700 py-3">
-            Offers +
-          </Text>
-        </TouchableOpacity>
-      </Box>
+        <View className="border border-white rounded-sm mt-1 mb-16">
+          {/* Available Colors */}
+          <View
+            className="flex-row justify-between items-center px-4 py-5"
+            style={{
+              borderBottomColor: "white",
+              borderBottomWidth: 1,
+              borderStyle: "dashed",
+            }}>
+            <Text
+              className="text-white font-semibold text-lg"
+              style={{ fontFamily: "HelveticaNeue-Medium" }}>
+              Available Colors
+            </Text>
+            <View
+              className="w-6 h-6 rounded-sm"
+              style={{
+                backgroundColor:
+                  filteredProduct.selectedPrimaryColor.toLowerCase(),
+              }}
+            />
+          </View>
 
+          {/* Size */}
+          <View
+            className="flex-row justify-between items-center px-4 py-5"
+            style={{
+              borderBottomColor: "white",
+              borderBottomWidth: 1,
+              borderStyle: "dashed",
+            }}>
+            <Text
+              className="text-white font-semibold text-lg"
+              style={{ fontFamily: "HelveticaNeue-Medium" }}>
+              Size
+            </Text>
+            <Text
+              className="text-white font-semibold text-lg"
+              style={{ fontFamily: "HelveticaNeue-Medium" }}>
+              Medium
+            </Text>
+          </View>
+          <Accordion
+            size="md"
+            variant="filled"
+            type="single"
+            isCollapsible={true}
+            isDisabled={false}
+            className="w-[100%]">
+            <AccordionItem value="a">
+              <AccordionHeader
+                className="bg-[#161616] py-2"
+                style={{
+                  borderBottomColor: "white",
+                  borderBottomWidth: 1,
+                  borderStyle: "dashed",
+                }}>
+                <AccordionTrigger>
+                  {({ isExpanded }) => {
+                    return (
+                      <>
+                        <Text
+                          className="text-white font-semibold text-lg"
+                          style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                          Details
+                        </Text>
+                        {isExpanded ? (
+                          <AccordionIcon
+                            as={RemoveIcon}
+                            className="ml-3"
+                            color="white"
+                            size="xl"
+                          />
+                        ) : (
+                          <AccordionIcon
+                            as={AddIcon}
+                            className="ml-3"
+                            color="white"
+                            size="xl"
+                          />
+                        )}
+                      </>
+                    );
+                  }}
+                </AccordionTrigger>
+              </AccordionHeader>
+              <AccordionContent className="bg-[#161616]">
+                <AccordionContentText className="text-white">
+                  To place an order, simply select the products you want,
+                  proceed to checkout, provide shipping and payment information,
+                  and finalize your purchase.
+                </AccordionContentText>
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="b">
+              <AccordionHeader
+                className="bg-[#161616] py-2"
+                style={{
+                  borderBottomColor: "white",
+                  borderBottomWidth: 1,
+                  borderStyle: "dashed",
+                }}>
+                <AccordionTrigger>
+                  {({ isExpanded }) => {
+                    return (
+                      <>
+                        <Text
+                          className="text-white font-semibold text-lg"
+                          style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                          Offers
+                        </Text>
+                        {isExpanded ? (
+                          <AccordionIcon
+                            as={RemoveIcon}
+                            className="ml-3"
+                            color="white"
+                            size="xl"
+                          />
+                        ) : (
+                          <AccordionIcon
+                            as={AddIcon}
+                            className="ml-3"
+                            color="white"
+                            size="xl"
+                          />
+                        )}
+                      </>
+                    );
+                  }}
+                </AccordionTrigger>
+              </AccordionHeader>
+              <AccordionContent className="bg-[#161616]">
+                <AccordionContentText className="text-white">
+                  To place an order, simply select the products you want,
+                  proceed to checkout, provide shipping and payment information,
+                  and finalize your purchase.
+                </AccordionContentText>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </View>
+      </ScrollView>
       {/* Action Buttons */}
-      <Box className="flex-row space-x-4 mt-8">
-        <Button
-          className="flex-1 border border-white bg-transparent"
-          variant="outline">
-          <ButtonText className="text-white font-semibold">
+      <Box className="flex-row gap-2 p-2">
+        <TouchableOpacity className="flex-1 border border-white bg-transparent justify-center items-center py-1 rounded-sm  ">
+          <Text
+            className="text-white"
+            style={{
+              fontFamily: "PPFormulaCondensed-Bold",
+              fontSize: 36,
+            }}>
             UNPUBLISH
-          </ButtonText>
-        </Button>
-        <Button className="flex-1 bg-yellow-400">
-          <ButtonText className="text-black font-bold">EDIT PRODUCT</ButtonText>
-        </Button>
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity className="flex-1 bg-yellow-400 justify-center items-center py-1 rounded-sm shadow-lg shadow-white ">
+          <Text
+            className="text-black"
+            style={{
+              fontFamily: "PPFormulaCondensed-Bold",
+              fontSize: 36,
+            }}>
+            EDIT PRODUCT
+          </Text>
+        </TouchableOpacity>
       </Box>
-    </ScrollView>
+    </SafeAreaView>
   );
 }
