@@ -62,7 +62,6 @@ const FirstRoute = () => {
         const value = await AsyncStorage.getItem("myData");
         console.log("object");
         if (value !== null) {
-          console.log("value", value);
           setProducts(JSON.parse(value));
           return JSON.parse(value);
         }
@@ -125,7 +124,7 @@ const Warehouse = () => {
     );
 
     return (
-      <View className="flex-row justify-center items-center bg-[#161616] p-1 rounded-full mx-4 my-2">
+      <View className="flex-row justify-center items-center bg-[#161616] p-1 rounded-full my-2">
         {props.navigationState.routes.map((route: any, i: number) => {
           const isActive = index === i;
 
@@ -153,9 +152,13 @@ const Warehouse = () => {
     setSelectedOption([option, pages, num]);
     setShowActionsheet(false);
   };
-
+  const stats = [
+    { label: "Total Views", count: 200 },
+    { label: "Total Sold", count: 200 },
+    { label: "Wishlisted", count: 200 },
+  ];
   return (
-    <SafeAreaView className="flex-1 bg-[#161616]">
+    <SafeAreaView className="flex-1 bg-[#161616] px-3">
       {/* Top section for 'Warehouse' text */}
       <View className="flex-row justify-between items-center px-4 py-4">
         {/* Left: Profile Info */}
@@ -179,7 +182,7 @@ const Warehouse = () => {
         </TouchableOpacity>
       </View>
 
-      <Select className="px-4 mb-2">
+      <Select className="py-2">
         <SelectTrigger
           size="lg"
           className="border border-[#161616] bg-[#4646464D] px-2 text-white flex-row items-center justify-between">
@@ -197,6 +200,28 @@ const Warehouse = () => {
           </SelectContent>
         </SelectPortal>
       </Select>
+      <View className="flex-row bg-black py-5 rounded-md">
+        {stats.map((item, index) => (
+          <View
+            key={index}
+            className="flex-1 items-center justify-center"
+            style={
+              index !== stats.length - 1
+                ? {
+                    borderRightColor: "gray",
+                    borderRightWidth: 1,
+                    borderStyle: "dashed",
+                  }
+                : {}
+            }>
+            <View className="flex-row items-center justify-center w-full gap-4">
+              <Text className="text-white font-bold text-xl">{item.count}</Text>
+              <Feather name="arrow-down-left" size={16} color="white" />
+            </View>
+            <Text className="text-sm text-gray-400 mt-1">{item.label}</Text>
+          </View>
+        ))}
+      </View>
       <TabView
         renderTabBar={renderTabBar}
         navigationState={{ index, routes }}
@@ -204,14 +229,14 @@ const Warehouse = () => {
         onIndexChange={setIndex}
         initialLayout={{ width: layout.width }}
       />
-      <View className="p-4 mb-16">
+      <View className=" mb-20 ">
         <Button
           onPress={() => console.log("Perform action for:", selectedOption)}
           className="h-16 bg-[#E5FF03] flex-row justify-between items-center rounded-sm w-full">
           <Link href={`/creator-store/${selectedOption[1]}`}>
             <Text
               className="uppercase text-black"
-              style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 22 }}>
+              style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 24 }}>
               {selectedOption[0]}
             </Text>
           </Link>

@@ -55,7 +55,7 @@ export default function OtpPhoneScreen() {
           </View>
           <View className="h-[66px]">
             <View className="relative w-full flex-1 my-1 bg-[#E5FF03] bg-opacity-30 rounded-sm">
-              <Link href="/sign-up/name" asChild>
+              <Link href="/sign-up/social" asChild>
                 <TouchableOpacity
                   className={`bg-[#E5FF03] rounded-sm absolute -top-1 -left-1 w-full h-[98%] justify-center items-center ${
                     isPressed
