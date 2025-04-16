@@ -28,6 +28,7 @@ export default function ProductDetailsScreen() {
         if (value !== null) {
           const products = JSON.parse(value);
           const product = products.find((p: any) => p.originalPrice);
+          console.log(product);
           setFilteredProduct(product);
         }
       } catch (e) {
@@ -48,23 +49,23 @@ export default function ProductDetailsScreen() {
 
   return (
     <ScrollView className="flex-1 bg-black px-4 py-6">
-      {/* Product Image */}
-      <RNImage
-        source={{ uri: filteredProduct.image }}
-        style={{ height: 280, borderRadius: 12 }}
-        className="w-full mb-4"
-        resizeMode="cover"
-      />
+      <View className="relative">
+        <RNImage
+          source={{ uri: filteredProduct.image }}
+          className="w-full mb-4 h-full"
+          resizeMode="cover"
+        />
 
-      {/* Tags */}
-      <Box className="flex-row space-x-2 mb-2">
-        <Text className="text-xs bg-yellow-400 text-black font-bold px-2 py-0.5 rounded">
-          OBSESSED
-        </Text>
-        <Text className="text-xs bg-white text-black font-semibold px-2 py-0.5 rounded">
-          Like new
-        </Text>
-      </Box>
+        {/* Absolute Tags */}
+        <View className="absolute bottom-1 left-1 flex-row items-center space-x-1 px-2 py-1 rounded-md gap-1">
+          <Text className="text-xs bg-yellow-400 text-black font-bold px-2 py-0.5 rounded">
+            OBSESSED
+          </Text>
+          <Text className="text-xs bg-white text-black font-semibold px-2 py-0.5 rounded">
+            Like new
+          </Text>
+        </View>
+      </View>
 
       {/* Title */}
       <Heading size="xl" className="text-white uppercase font-extrabold mb-1">
