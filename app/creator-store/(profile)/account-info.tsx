@@ -6,6 +6,7 @@ import {
   Platform,
   Alert,
   BackHandler,
+  TextInput,
 } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import {
@@ -16,7 +17,7 @@ import {
 import { Input, InputField } from "@/components/ui/input";
 import { VStack } from "@/components/ui/vstack";
 import React, { useEffect } from "react";
-import { useRouter } from "expo-router";
+import { Link, useRouter } from "expo-router";
 
 const AccountInfo = () => {
   const [fullName, setFullName] = React.useState("");
@@ -61,6 +62,7 @@ const AccountInfo = () => {
 
   const handleAddSocialMedia = () => {
     // Handle social media linking
+    router.push("/creator-store/social-media");
   };
 
   return (
@@ -80,12 +82,18 @@ const AccountInfo = () => {
                 </FormControlLabelText>
               </FormControlLabel>
               <Input className="bg-black h-fit border border-white" size="xl">
-                <InputField
-                  type="text"
+                <TextInput
                   placeholder="FULL NAME"
+                  keyboardType="default"
+                  placeholderTextColor="#888"
                   className="text-white py-4 px-3"
+                  ref={(ref) =>
+                    ref &&
+                    ref.setNativeProps({
+                      style: { fontFamily: "PPFormulaCondensed-Bold" },
+                    })
+                  }
                   style={{
-                    fontFamily: "PPFormulaCondensed-Bold",
                     fontSize: 24,
                   }}
                   value={fullName}
@@ -111,12 +119,18 @@ const AccountInfo = () => {
                 </FormControlLabelText>
               </FormControlLabel>
               <Input className="bg-black h-fit border border-white" size="xl">
-                <InputField
-                  type="text"
+                <TextInput
+                  keyboardType="default"
                   placeholder="EMAIL"
+                  placeholderTextColor="#888"
                   className="text-white py-4 px-3"
+                  ref={(ref) =>
+                    ref &&
+                    ref.setNativeProps({
+                      style: { fontFamily: "PPFormulaCondensed-Bold" },
+                    })
+                  }
                   style={{
-                    fontFamily: "PPFormulaCondensed-Bold",
                     fontSize: 24,
                   }}
                   value={email}
@@ -142,12 +156,18 @@ const AccountInfo = () => {
                 </FormControlLabelText>
               </FormControlLabel>
               <Input className="bg-black h-fit border border-white" size="xl">
-                <InputField
-                  type="text"
+                <TextInput
+                  keyboardType="numeric"
                   placeholder="PHONE NUMBER"
+                  placeholderTextColor="#888"
                   className="text-white py-4 px-3"
+                  ref={(ref) =>
+                    ref &&
+                    ref.setNativeProps({
+                      style: { fontFamily: "PPFormulaCondensed-Bold" },
+                    })
+                  }
                   style={{
-                    fontFamily: "PPFormulaCondensed-Bold",
                     fontSize: 24,
                   }}
                   value={phone}
@@ -165,18 +185,18 @@ const AccountInfo = () => {
           </VStack>
           <VStack className="w-full rounded-md">
             {/* Add Social Media */}
-            <TouchableOpacity
-              className="bg-black mt-6 py-2 border border-white items-center shadow-lg shadow-slate-50 rounded-sm"
-              onPress={handleAddSocialMedia}>
-              <Text
-                className="text-white"
-                style={{
-                  fontFamily: "PPFormulaCondensed-Bold",
-                  fontSize: 36,
-                }}>
-                ADD SOCIAL MEDIA
-              </Text>
-            </TouchableOpacity>
+            <Link href="/creator-store/social-media" asChild>
+              <TouchableOpacity className="bg-black mt-6 py-2 border border-white items-center shadow-lg shadow-slate-50 rounded-sm">
+                <Text
+                  className="text-white"
+                  style={{
+                    fontFamily: "PPFormulaCondensed-Bold",
+                    fontSize: 36,
+                  }}>
+                  ADD SOCIAL MEDIA
+                </Text>
+              </TouchableOpacity>
+            </Link>
 
             {/* Update Button */}
             <TouchableOpacity

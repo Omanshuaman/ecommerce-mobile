@@ -49,10 +49,13 @@ export default function OtpPhoneScreen() {
               maxLength={10}
               autoFocus={true}
               className="flex-1 text-white"
+              ref={(ref) =>
+                ref &&
+                ref.setNativeProps({
+                  style: { fontFamily: "PPFormulaCondensed-Bold" },
+                })
+              }
               style={{
-                fontFamily: phoneNumber
-                  ? "PPFormulaCondensed-Bold"
-                  : "PPFormulaCondensed-Bold",
                 fontSize: 35,
               }}
               value={phoneNumber}

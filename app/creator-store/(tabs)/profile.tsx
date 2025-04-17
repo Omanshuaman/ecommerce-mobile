@@ -19,7 +19,7 @@ export default function Profile() {
     {
       icon: <Ionicons name="extension-puzzle-outline" size={24} />,
       text: "Connected Social Media",
-      href: "/settings/social",
+      href: "/creator-store/social-media",
     },
     {
       icon: <Feather name="credit-card" size={24} />,

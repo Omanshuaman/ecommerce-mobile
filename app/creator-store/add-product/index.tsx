@@ -288,9 +288,14 @@ const AddProduct = () => {
               keyboardType="numeric"
               className=" text-white w-16 text-center rounded-sm border border-white"
               placeholder="0000"
-              placeholderTextColor="#999"
+              placeholderTextColor="#888"
+              ref={(ref) =>
+                ref &&
+                ref.setNativeProps({
+                  style: { fontFamily: "PPFormulaCondensed-Bold" },
+                })
+              }
               style={{
-                fontFamily: "PPFormulaCondensed-Regular",
                 fontSize: 15,
               }}
               value={originalPrice ?? ""}
@@ -308,9 +313,14 @@ const AddProduct = () => {
               keyboardType="numeric"
               className=" text-white w-16 text-center rounded-sm border border-white"
               placeholder="0000"
-              placeholderTextColor="#999"
+              placeholderTextColor="#888"
+              ref={(ref) =>
+                ref &&
+                ref.setNativeProps({
+                  style: { fontFamily: "PPFormulaCondensed-Bold" },
+                })
+              }
               style={{
-                fontFamily: "PPFormulaCondensed-Regular",
                 fontSize: 15,
               }}
               value={discountedPrice ?? ""}
@@ -328,9 +338,14 @@ const AddProduct = () => {
               className=" text-white w-16 text-center rounded-sm border border-white"
               placeholder="01"
               maxLength={2}
-              placeholderTextColor="#999"
+              placeholderTextColor="#888"
+              ref={(ref) =>
+                ref &&
+                ref.setNativeProps({
+                  style: { fontFamily: "PPFormulaCondensed-Regular" },
+                })
+              }
               style={{
-                fontFamily: "PPFormulaCondensed-Regular",
                 fontSize: 15,
               }}
               value={pieces ?? ""}
@@ -404,10 +419,15 @@ const AddProduct = () => {
                     multiline
                     className=" text-white px-3 py-3 rounded h-fit border border-white"
                     placeholder="DESCRIBE THE DESIGN"
-                    placeholderTextColor="#999"
+                    placeholderTextColor="#888"
                     placeholderClassName=""
+                    ref={(ref) =>
+                      ref &&
+                      ref.setNativeProps({
+                        style: { fontFamily: "PPFormulaCondensed-Regular" },
+                      })
+                    }
                     style={{
-                      fontFamily: "PPFormulaCondensed-Regular",
                       fontSize: 18,
                     }}
                     value={description ?? ""}

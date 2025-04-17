@@ -30,6 +30,50 @@ export default function RootLayout() {
           ),
         }}
       />
+      <Stack.Screen
+        name="social-media"
+        options={{
+          title: "Account Info",
+          headerShown: true,
+          headerTitleAlign: "center",
+          headerTintColor: "white",
+          headerTitleStyle: {
+            fontFamily: "HelveticaNeue-Bold",
+            fontSize: 18,
+          },
+          headerStyle: {
+            backgroundColor: "#161616",
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPressIn={() => router.replace("/creator-store/account-info")}>
+              <Ionicons name="chevron-back" size={16} color="white" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="payment-details"
+        options={{
+          title: "Payment Details",
+          headerShown: true,
+          headerTitleAlign: "center",
+          headerTintColor: "white",
+          headerTitleStyle: {
+            fontFamily: "HelveticaNeue-Bold",
+            fontSize: 18,
+          },
+          headerStyle: {
+            backgroundColor: "#161616",
+          },
+          headerLeft: () => (
+            <TouchableOpacity
+              onPressIn={() => router.replace("/creator-store/account-info")}>
+              <Ionicons name="chevron-back" size={16} color="white" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
     </Stack>
   );
 }

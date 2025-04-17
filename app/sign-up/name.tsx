@@ -44,8 +44,13 @@ export default function OtpPhoneScreen() {
               maxLength={50}
               autoFocus={true}
               className="flex-1 text-white"
+              ref={(ref) =>
+                ref &&
+                ref.setNativeProps({
+                  style: { fontFamily: "PPFormulaCondensed-Bold" },
+                })
+              }
               style={{
-                fontFamily: "PPFormulaCondensed-Bold",
                 fontSize: 35,
                 letterSpacing: 1,
               }}

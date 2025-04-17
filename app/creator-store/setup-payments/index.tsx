@@ -82,12 +82,18 @@ const SetupPayments = () => {
                 </FormControlLabelText>
               </FormControlLabel>
               <Input className="bg-black h-fit" size="xl">
-                <InputField
-                  type="text"
+                <TextInput
+                  keyboardType="numeric"
+                  placeholderTextColor="#888"
                   placeholder="ENTER YOUR ACCOUNT NUMBER"
                   className="text-white py-5 px-3"
+                  ref={(ref) =>
+                    ref &&
+                    ref.setNativeProps({
+                      style: { fontFamily: "PPFormulaCondensed-Bold" },
+                    })
+                  }
                   style={{
-                    fontFamily: "PPFormulaCondensed-Bold",
                     fontSize: 20,
                   }}
                   value={accountNumber}
@@ -115,12 +121,18 @@ const SetupPayments = () => {
                 </FormControlLabelText>
               </FormControlLabel>
               <Input className="bg-black h-fit" size="xl">
-                <InputField
-                  type="text"
+                <TextInput
+                  keyboardType="numeric"
                   placeholder="ENTER YOUR IFSC NUMBER"
+                  placeholderTextColor="#888"
                   className="text-white py-5 px-3"
+                  ref={(ref) =>
+                    ref &&
+                    ref.setNativeProps({
+                      style: { fontFamily: "PPFormulaCondensed-Bold" },
+                    })
+                  }
                   style={{
-                    fontFamily: "PPFormulaCondensed-Bold",
                     fontSize: 20,
                   }}
                   value={IFSCNumber}
@@ -148,12 +160,18 @@ const SetupPayments = () => {
                 </FormControlLabelText>
               </FormControlLabel>
               <Input className="bg-black h-fit" size="xl">
-                <InputField
-                  type="text"
+                <TextInput
+                  keyboardType="numeric"
                   placeholder="ENTER YOUR GST NUMBER"
+                  placeholderTextColor="#888"
                   className="text-white py-5 px-3"
+                  ref={(ref) =>
+                    ref &&
+                    ref.setNativeProps({
+                      style: { fontFamily: "PPFormulaCondensed-Bold" },
+                    })
+                  }
                   style={{
-                    fontFamily: "PPFormulaCondensed-Bold",
                     fontSize: 20,
                   }}
                   value={GSTNumber}

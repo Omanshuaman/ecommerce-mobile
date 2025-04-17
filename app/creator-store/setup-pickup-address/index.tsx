@@ -5,6 +5,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  TextInput,
 } from "react-native";
 import { useState } from "react";
 import { useRouter } from "expo-router";
@@ -84,11 +85,18 @@ const SetupAddress = () => {
                 </FormControlLabelText>
               </FormControlLabel>
               <Input className="bg-black h-fit" size="xl">
-                <InputField
+                <TextInput
+                  keyboardType="default"
                   placeholder="HOUSE NUMBER & STREET NAME"
+                  placeholderTextColor="#888"
                   className="text-white py-5 px-3"
+                  ref={(ref) =>
+                    ref &&
+                    ref.setNativeProps({
+                      style: { fontFamily: "PPFormulaCondensed-Bold" },
+                    })
+                  }
                   style={{
-                    fontFamily: "PPFormulaCondensed-Bold",
                     fontSize: 20,
                   }}
                   value={address1}
@@ -112,11 +120,18 @@ const SetupAddress = () => {
                 </FormControlLabelText>
               </FormControlLabel>
               <Input className="bg-black h-fit" size="xl">
-                <InputField
+                <TextInput
+                  keyboardType="default"
                   placeholder="APARTMENT OR BUILDING"
+                  placeholderTextColor="#888"
                   className="text-white py-5 px-3"
+                  ref={(ref) =>
+                    ref &&
+                    ref.setNativeProps({
+                      style: { fontFamily: "PPFormulaCondensed-Bold" },
+                    })
+                  }
                   style={{
-                    fontFamily: "PPFormulaCondensed-Bold",
                     fontSize: 20,
                   }}
                   value={address2}
@@ -140,11 +155,18 @@ const SetupAddress = () => {
                 </FormControlLabelText>
               </FormControlLabel>
               <Input className="bg-black h-fit" size="xl">
-                <InputField
+                <TextInput
+                  keyboardType="default"
                   placeholder="CITY OR TOWN NAME"
+                  placeholderTextColor="#888"
                   className="text-white py-5 px-3"
+                  ref={(ref) =>
+                    ref &&
+                    ref.setNativeProps({
+                      style: { fontFamily: "PPFormulaCondensed-Bold" },
+                    })
+                  }
                   style={{
-                    fontFamily: "PPFormulaCondensed-Bold",
                     fontSize: 20,
                   }}
                   value={city}
@@ -166,11 +188,18 @@ const SetupAddress = () => {
                 </FormControlLabelText>
               </FormControlLabel>
               <Input className="bg-black h-fit" size="xl">
-                <InputField
+                <TextInput
+                  keyboardType="default"
                   placeholder="STATE OR REGION"
                   className="text-white py-5 px-3"
+                  placeholderTextColor="#888"
+                  ref={(ref) =>
+                    ref &&
+                    ref.setNativeProps({
+                      style: { fontFamily: "PPFormulaCondensed-Bold" },
+                    })
+                  }
                   style={{
-                    fontFamily: "PPFormulaCondensed-Bold",
                     fontSize: 20,
                   }}
                   value={state}
@@ -194,12 +223,18 @@ const SetupAddress = () => {
                 </FormControlLabelText>
               </FormControlLabel>
               <Input className="bg-black h-fit" size="xl">
-                <InputField
+                <TextInput
                   keyboardType="numeric"
                   placeholder="6 DIGIT PIN CODE"
                   className="text-white py-5 px-3"
+                  placeholderTextColor="#888"
+                  ref={(ref) =>
+                    ref &&
+                    ref.setNativeProps({
+                      style: { fontFamily: "PPFormulaCondensed-Bold" },
+                    })
+                  }
                   style={{
-                    fontFamily: "PPFormulaCondensed-Bold",
                     fontSize: 20,
                   }}
                   value={pinCode}
