@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "ecommerce-mobile",
-    "slug": "ecommerce-mobile",
+    "slug": "obsessedowls",
     "scheme": "neurom-ecommerce",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -26,6 +26,18 @@
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "plugins": ["expo-router", "expo-font"]
+    "plugins": [
+      "expo-router",
+      "expo-font"
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "bfbd9a2c-3ee9-4103-af42-f4b5cbad986e"
+      }
+    },
+    "owner": "omanshu"
   }
 }

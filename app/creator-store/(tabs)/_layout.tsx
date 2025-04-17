@@ -1,6 +1,6 @@
 import { View, Text, Image } from "react-native";
 import React from "react";
-import { Tabs } from "expo-router";
+import { Tabs, usePathname, useRouter } from "expo-router";
 
 import icons from "@/constants/icons";
 
@@ -21,12 +21,14 @@ const TabIcon = ({
       source={icon}
       tintColor={focused ? "white" : "gray"}
       resizeMode="contain"
-      className="size-9"
+      className={focused ? "size-9" : "size-8"}
     />
   </View>
 );
 
 const TabsLayout = () => {
+  const pathname = usePathname();
+  console.log(pathname);
   return (
     <Tabs
       screenOptions={{

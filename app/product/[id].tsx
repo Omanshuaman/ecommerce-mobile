@@ -119,7 +119,7 @@ export default function ProductDetailsScreen() {
           <View className="flex-row justify-between items-center gap-2">
             <Image
               source={{
-                uri: "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?semt=ais_hybrid&w=740",
+                uri: "https://randomuser.me/api/portraits/women/1.jpg",
               }}
               className="size-8 rounded-full"
             />

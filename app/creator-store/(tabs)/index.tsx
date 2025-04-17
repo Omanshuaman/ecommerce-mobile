@@ -165,7 +165,7 @@ const Warehouse = () => {
         <View className="flex-row items-center gap-3">
           <Image
             source={{
-              uri: "https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg?semt=ais_hybrid&w=740",
+              uri: "https://randomuser.me/api/portraits/women/1.jpg",
             }}
             className="w-9 h-9 rounded-full"
           />
@@ -200,11 +200,11 @@ const Warehouse = () => {
           </SelectContent>
         </SelectPortal>
       </Select>
-      <View className="flex-row bg-black py-5 rounded-md">
+      <View className="flex-row bg-black  rounded-md">
         {stats.map((item, index) => (
           <View
             key={index}
-            className="flex-1 items-center justify-center"
+            className="flex-1 items-center justify-center gap-2 py-3"
             style={
               index !== stats.length - 1
                 ? {
