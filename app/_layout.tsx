@@ -46,42 +46,6 @@ export default function RootLayout() {
     <QueryClientProvider client={queryClient}>
       <GluestackUIProvider mode="light">
         <Slot />
-        {/* <Stack
-          screenOptions={{
-            headerRight: () =>
-              cartItemsNum > 0 && (
-                <TouchableOpacity
-                  className="flex-row gap-2"
-                  onPressIn={() => {
-                    router.push("/cart");
-                  }}>
-                  <AntDesign name="shoppingcart" size={24} color="black" />
-                  <Text>{cartItemsNum}</Text>
-                </TouchableOpacity>
-              ),
-          }}>
-          <Stack.Screen
-            name="index"
-            options={{
-              title: "Shop",
-              headerLeft: () =>
-                !isLoggedIn && (
-                  <TouchableOpacity
-                    className="flex-row gap-2"
-                    onPressIn={() => {
-                      router.push("/login");
-                    }}>
-                    <Icon as={User} />
-                  </TouchableOpacity>
-                ),
-            }}
-          />
-          <Stack.Screen
-            name="product/[id]"
-            options={{ title: "Product Details" }}
-          />
-        <Stack.Screen name="index" options={{ title: "Creator Store" }} /> 
-        </Stack> */}
       </GluestackUIProvider>
     </QueryClientProvider>
   );

@@ -62,9 +62,9 @@ const TabsLayout = () => {
         }}
       />
       <Tabs.Screen
-        name="package-product"
+        name="orders"
         options={{
-          title: "Packages",
+          title: "Order",
           headerShown: false,
           tabBarIcon: ({ focused }: { focused: boolean }) => (
             <TabIcon
