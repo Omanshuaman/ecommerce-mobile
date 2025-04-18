@@ -2,13 +2,7 @@ import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import React from "react";
 import { Button, ButtonText } from "@/components/ui/button";
 import { Menu, MenuItem, MenuItemLabel } from "@/components/ui/menu";
-import {
-  Icon,
-  AddIcon,
-  GlobeIcon,
-  PlayIcon,
-  SettingsIcon,
-} from "@/components/ui/icon";
+import { MaterialIcons } from "@expo/vector-icons";
 import { router } from "expo-router";
 const PaymentDetails = () => {
   const savedCards = [
@@ -25,7 +19,7 @@ const PaymentDetails = () => {
   ];
 
   return (
-    <View className="flex-1 bg-black px-4 pt-6 pb-4">
+    <View className="flex-1 bg-[#161616] px-4 pt-6 pb-4">
       <ScrollView className="flex-grow" showsVerticalScrollIndicator={false}>
         {/* Saved UPI */}
         <Text
@@ -50,13 +44,33 @@ const PaymentDetails = () => {
                 </Button>
               );
             }}>
-            <MenuItem key="Add account" textValue="Add account">
-              <Icon as={AddIcon} size="sm" className="mr-2" />
-              <MenuItemLabel size="sm">Edit</MenuItemLabel>
+            <MenuItem
+              key="Add account"
+              textValue="Add account"
+              className="bg-[#161616] gap-2 ">
+              <MaterialIcons
+                name="edit"
+                size={18}
+                color="yellow"
+                className="mr-2"
+              />
+              <MenuItemLabel size="sm" className="text-white">
+                Edit
+              </MenuItemLabel>
             </MenuItem>
-            <MenuItem key="Community" textValue="Community">
-              <Icon as={GlobeIcon} size="sm" className="mr-2" />
-              <MenuItemLabel size="sm">Delete</MenuItemLabel>
+            <MenuItem
+              key="Community"
+              textValue="Community"
+              className="bg-[#161616] gap-2">
+              <MaterialIcons
+                name="delete"
+                size={18}
+                color="red"
+                className="mr-2"
+              />
+              <MenuItemLabel size="sm" className="text-white">
+                Delete
+              </MenuItemLabel>
             </MenuItem>
           </Menu>
         </View>
@@ -87,13 +101,33 @@ const PaymentDetails = () => {
                     </Button>
                   );
                 }}>
-                <MenuItem key="Add account" textValue="Add account">
-                  <Icon as={AddIcon} size="sm" className="mr-2" />
-                  <MenuItemLabel size="sm">Edit</MenuItemLabel>
+                <MenuItem
+                  key="Add account"
+                  textValue="Add account"
+                  className="bg-[#161616] gap-2">
+                  <MaterialIcons
+                    name="edit"
+                    size={18}
+                    color="yellow"
+                    className="mr-2"
+                  />
+                  <MenuItemLabel size="sm" className="text-white">
+                    Edit
+                  </MenuItemLabel>
                 </MenuItem>
-                <MenuItem key="Community" textValue="Community">
-                  <Icon as={GlobeIcon} size="sm" className="mr-2" />
-                  <MenuItemLabel size="sm">Delete</MenuItemLabel>
+                <MenuItem
+                  key="Community"
+                  textValue="Community"
+                  className="bg-[#161616] gap-2">
+                  <MaterialIcons
+                    name="delete"
+                    size={18}
+                    color="red"
+                    className="mr-2"
+                  />
+                  <MenuItemLabel size="sm" className="text-white">
+                    Delete
+                  </MenuItemLabel>
                 </MenuItem>
               </Menu>
             </View>
@@ -108,9 +142,9 @@ const PaymentDetails = () => {
 
       {/* Add New Payment Button */}
       <TouchableOpacity
-        className="bg-yellow-400 py-2 items-center mt-4"
+        className="bg-yellow-400 py-2 items-center mt-4 mx-2"
         onPress={() => {
-          router.push("/creator-store/menu");
+          router.push("/creator-store/add-payments");
         }}>
         <Text
           className="text-black"

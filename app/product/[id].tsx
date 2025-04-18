@@ -39,7 +39,6 @@ export default function ProductDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const addProduct = useCart((state: any) => state.addProduct);
   const [filteredProduct, setFilteredProduct] = useState<any | null>(null);
-  console.log(id);
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -47,7 +46,6 @@ export default function ProductDetailsScreen() {
         if (value !== null) {
           const products = JSON.parse(value);
           const product = products.find((p: any) => p.originalPrice === id); // replace with p.image === id if using image as identifier
-          console.log("dvd", product);
           setFilteredProduct(product);
         }
       } catch (e) {

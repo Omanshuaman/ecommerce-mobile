@@ -28,7 +28,6 @@ const TabIcon = ({
 
 const TabsLayout = () => {
   const pathname = usePathname();
-  console.log(pathname);
   return (
     <Tabs
       screenOptions={{

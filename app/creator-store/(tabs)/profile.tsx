@@ -24,12 +24,12 @@ export default function Profile() {
     {
       icon: <Feather name="credit-card" size={24} />,
       text: "Payment Details",
-      href: "/settings/payment",
+      href: "/creator-store/payment-details",
     },
     {
       icon: <Entypo name="location-pin" size={24} />,
       text: "Your Delivery Address",
-      href: "/settings/address",
+      href: "/creator-store/address",
     },
     {
       icon: <Feather name="bell" size={24} />,

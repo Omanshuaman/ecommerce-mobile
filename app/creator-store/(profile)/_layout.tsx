@@ -25,7 +25,7 @@ export default function RootLayout() {
           headerLeft: () => (
             <TouchableOpacity
               onPressIn={() => router.replace("/creator-store/profile")}>
-              <Ionicons name="chevron-back" size={16} color="white" />
+              <Ionicons name="chevron-back" size={18} color="white" />
             </TouchableOpacity>
           ),
         }}
@@ -47,7 +47,7 @@ export default function RootLayout() {
           headerLeft: () => (
             <TouchableOpacity
               onPressIn={() => router.replace("/creator-store/account-info")}>
-              <Ionicons name="chevron-back" size={16} color="white" />
+              <Ionicons name="chevron-back" size={18} color="white" />
             </TouchableOpacity>
           ),
         }}
@@ -67,9 +67,72 @@ export default function RootLayout() {
             backgroundColor: "#161616",
           },
           headerLeft: () => (
+            <TouchableOpacity onPressIn={() => router.back()}>
+              <Ionicons name="chevron-back" size={18} color="white" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="add-payments"
+        options={{
+          title: "Add new payment method",
+          headerShown: true,
+          headerTitleAlign: "center",
+          headerTintColor: "white",
+          headerTitleStyle: {
+            fontFamily: "HelveticaNeue-Bold",
+            fontSize: 18,
+          },
+          headerStyle: {
+            backgroundColor: "#161616",
+          },
+          headerLeft: () => (
+            <TouchableOpacity onPressIn={() => router.back()}>
+              <Ionicons name="chevron-back" size={18} color="white" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="address"
+        options={{
+          title: "Address",
+          headerShown: true,
+          headerTitleAlign: "center",
+          headerTintColor: "white",
+          headerTitleStyle: {
+            fontFamily: "HelveticaNeue-Bold",
+            fontSize: 18,
+          },
+          headerStyle: {
+            backgroundColor: "#161616",
+          },
+          headerLeft: () => (
             <TouchableOpacity
-              onPressIn={() => router.replace("/creator-store/account-info")}>
-              <Ionicons name="chevron-back" size={16} color="white" />
+              onPressIn={() => router.replace("/creator-store/profile")}>
+              <Ionicons name="chevron-back" size={18} color="white" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="add-address"
+        options={{
+          title: "Add New Address",
+          headerShown: true,
+          headerTitleAlign: "center",
+          headerTintColor: "white",
+          headerTitleStyle: {
+            fontFamily: "HelveticaNeue-Bold",
+            fontSize: 18,
+          },
+          headerStyle: {
+            backgroundColor: "#161616",
+          },
+          headerLeft: () => (
+            <TouchableOpacity onPressIn={() => router.back()}>
+              <Ionicons name="chevron-back" size={18} color="white" />
             </TouchableOpacity>
           ),
         }}
