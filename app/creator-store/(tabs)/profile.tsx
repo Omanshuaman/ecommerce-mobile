@@ -1,4 +1,4 @@
-import { View, Text, Pressable, Image } from "react-native";
+import { View, Text, Pressable, Image, TouchableOpacity } from "react-native";
 import { Link } from "expo-router";
 import {
   FontAwesome,
@@ -8,7 +8,18 @@ import {
   AntDesign,
   Ionicons,
 } from "@expo/vector-icons";
-
+import {
+  Select,
+  SelectTrigger,
+  SelectInput,
+  SelectIcon,
+  SelectPortal,
+  SelectBackdrop,
+  SelectContent,
+  SelectDragIndicator,
+  SelectDragIndicatorWrapper,
+  SelectItem,
+} from "@/components/ui/select";
 export default function Profile() {
   const menuItems = [
     {
@@ -35,11 +46,6 @@ export default function Profile() {
       icon: <Feather name="bell" size={24} />,
       text: "Notifications",
       href: "/settings/notifications",
-    },
-    {
-      icon: <MaterialIcons name="logout" size={24} />,
-      text: "Log out",
-      href: "/logout",
     },
   ];
 
@@ -68,12 +74,59 @@ export default function Profile() {
                 {item.text}
               </Text>
             </View>
-            {index === menuItems.length - 1 ? null : (
-              <MaterialIcons name="navigate-next" size={18} color="white" />
-            )}
+            <MaterialIcons name="navigate-next" size={18} color="white" />
           </Pressable>
         </Link>
       ))}
+      <Select className="py-4">
+        <SelectTrigger
+          size="lg"
+          className="flex-row items-center justify-between border border-[#161616] text-white">
+          <View className="flex-row items-center gap-4">
+            <MaterialIcons name="logout" size={24} color="white" />
+            <Text
+              className="text-white"
+              style={{ fontSize: 15, fontFamily: "HelveticaNeue-Medium" }}>
+              Logout
+            </Text>
+          </View>
+        </SelectTrigger>
+        <SelectPortal>
+          <SelectBackdrop />
+          <SelectContent className="bg-black border border-dashed p-4">
+            <SelectDragIndicatorWrapper>
+              <SelectDragIndicator />
+            </SelectDragIndicatorWrapper>
+            <Text
+              className="text-white text-center py-6 text-lg font-semibold"
+              style={{ fontSize: 14, fontFamily: "HelveticaNeue-Medium" }}>
+              Are you sure you want to log out?
+            </Text>
+            <TouchableOpacity className="bg-black py-2 border border-white items-center shadow-lg shadow-slate-50 rounded-sm w-full">
+              <Text
+                className="text-white"
+                style={{
+                  fontFamily: "PPFormulaCondensed-Bold",
+                  fontSize: 36,
+                }}>
+                LOGOUT
+              </Text>
+            </TouchableOpacity>
+
+            {/* Update Button */}
+            <TouchableOpacity className="bg-yellow-400 py-1 mt-3 items-center shadow-lg shadow-slate-50 rounded-sm w-full">
+              <Text
+                className="text-black"
+                style={{
+                  fontFamily: "PPFormulaCondensed-Bold",
+                  fontSize: 36,
+                }}>
+                CANCEL
+              </Text>
+            </TouchableOpacity>
+          </SelectContent>
+        </SelectPortal>
+      </Select>
     </View>
   );
 }

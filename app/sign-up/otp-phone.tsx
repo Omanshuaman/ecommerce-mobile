@@ -64,28 +64,26 @@ export default function OtpPhoneScreen() {
 
             <Ionicons name="call-outline" size={28} color="white" />
           </View>
-          <View className="h-[66px]">
-            <View className="relative w-full flex-1 my-1 bg-[#E5FF03] bg-opacity-30 rounded-sm">
-              <Link href="/sign-up/otp" asChild>
-                <TouchableOpacity
-                  className={`bg-[#E5FF03] rounded-sm absolute -top-1 -left-1 w-full h-[98%] justify-center items-center ${
-                    isPressed
-                      ? "bg-[#E5FF03] translate-x-0.5 -translate-y-0.5"
-                      : "bg-[#E5FF03] -translate-x-0.5 -translate-y-0.5"
-                  }`}
-                  onPressIn={() => setIsPressed(true)}
-                  onPressOut={() => setIsPressed(false)}>
-                  <Text
-                    className="text-center text-black uppercase"
-                    style={{
-                      fontFamily: "PPFormulaCondensed-Bold",
-                      fontSize: 40,
-                    }}>
-                    Get OTP
-                  </Text>
-                </TouchableOpacity>
-              </Link>
-            </View>
+          <View className="">
+            <Link href="/sign-up/otp" asChild>
+              <TouchableOpacity
+                className={`bg-[#E5FF03] rounded-sm w-full py-2 justify-center items-center shadow-lg shadow-slate-50 ${
+                  isPressed
+                    ? "bg-[#E5FF03] translate-x-0.5 -translate-y-0.5"
+                    : "bg-[#E5FF03] -translate-x-0.5 -translate-y-0.5"
+                }`}
+                onPressIn={() => setIsPressed(true)}
+                onPressOut={() => setIsPressed(false)}>
+                <Text
+                  className="text-center text-black uppercase"
+                  style={{
+                    fontFamily: "PPFormulaCondensed-Bold",
+                    fontSize: 40,
+                  }}>
+                  Get OTP
+                </Text>
+              </TouchableOpacity>
+            </Link>
           </View>
         </View>
       </KeyboardAvoidingView>

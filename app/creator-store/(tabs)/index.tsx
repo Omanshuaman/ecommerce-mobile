@@ -8,6 +8,7 @@ import {
   Image,
   Dimensions,
   FlatList,
+  BackHandler,
 } from "react-native";
 import {
   Actionsheet,
@@ -35,7 +36,7 @@ import {
   SelectItem,
 } from "@/components/ui/select";
 import { FontAwesome } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import { Link, useNavigation, usePathname } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ProductCard from "../../../components/ProductCard";
 import { useBreakpointValue } from "@/components/ui/utils/use-break-point-value";
@@ -116,7 +117,28 @@ const Warehouse = () => {
   ]);
   const handleClose = () => setShowActionsheet(false);
   const layout = useWindowDimensions();
+  // useEffect(() => {
+  //   const backAction = () => {
+  //     BackHandler.exitApp();
+  //     return true;
+  //   };
 
+  //   const backHandler = BackHandler.addEventListener(
+  //     "hardwareBackPress",
+  //     backAction
+  //   );
+
+  //   return () => backHandler.remove();
+  // }, []);
+  const navigation = useNavigation();
+  const focused = navigation.isFocused();
+  const path = usePathname();
+
+  useEffect(() => {
+    console.log(
+      `Current page is focused: ${focused}, current page name: ${path}`
+    );
+  }, [focused]);
   const [index, setIndex] = useState(0);
   const renderTabBar = (props: any) => {
     const inputRange = props.navigationState.routes.map(

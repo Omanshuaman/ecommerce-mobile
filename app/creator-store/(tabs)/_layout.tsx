@@ -30,6 +30,7 @@ const TabsLayout = () => {
   const pathname = usePathname();
   return (
     <Tabs
+      backBehavior="history"
       screenOptions={{
         tabBarShowLabel: false,
         tabBarStyle: {
