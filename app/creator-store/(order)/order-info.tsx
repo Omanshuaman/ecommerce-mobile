@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 
 export default function OrderCard() {
   const [isPacked, setIsPacked] = useState(false);
+  const [isDeliveySlip, setIsDeliverySlip] = useState(false);
 
   return (
     <View className="p-4 bg-[#161616] h-full flex-1">
@@ -24,7 +25,7 @@ export default function OrderCard() {
             </View>
           </View>
           <View className="border-t border-dashed border-white mb-2" />
-          <View className="flex-row items-center px-4 py-2">
+          <View className="flex-row items-center px-4 py-1">
             <Image
               source={{
                 uri: "https://randomuser.me/api/portraits/men/6.jpg",
@@ -59,12 +60,12 @@ export default function OrderCard() {
           <TouchableOpacity
             onPress={() => setIsPacked(true)}
             disabled={isPacked}
-            className="border border-white rounded-md py-2 my-3 mx-4"
+            className="border border-white rounded-sm py-2 my-3 mx-4"
             style={{
               borderColor: isPacked ? "green" : "white",
             }}>
             <Text
-              className="text-center p-1"
+              className="text-center"
               style={{
                 fontFamily: "PPFormulaCondensed-Bold",
                 fontSize: 28,
@@ -77,25 +78,31 @@ export default function OrderCard() {
 
         <TouchableOpacity
           disabled={!isPacked}
-          className="border border-white rounded-sm py-2 my-3"
+          onPress={() => setIsDeliverySlip(true)}
+          className={`border border-white rounded-sm py-2 my-3 ${
+            !isPacked ? "opacity-25" : ""
+          }`}
           style={{
-            borderColor: isPacked ? "green" : "white",
+            borderColor: isDeliveySlip ? "green" : "white",
           }}>
           <Text
             style={{
-              color: isPacked ? "#A3FAC7" : "white",
+              color: isDeliveySlip ? "#A3FAC7" : "white",
               fontFamily: "PPFormulaCondensed-Bold",
               fontSize: 28,
             }}
             className="text-center p-1 uppercase">
-            {isPacked ? "Delivery slip printed" : "PRINT DELIVERY SLIP"}
+            {isDeliveySlip ? "Delivery slip printed" : "PRINT DELIVERY SLIP"}
           </Text>
         </TouchableOpacity>
       </ScrollView>
 
       <TouchableOpacity
-        disabled={!isPacked}
-        className="bg-[#E5FF03] rounded-sm w-full py-3 justify-center items-center shadow-lg shadow-slate-50">
+        disabled={!isDeliveySlip}
+        className={`bg-[#E5FF03] rounded-sm w-full py-3 justify-center items-center shadow-lg shadow-slate-50 ${
+          !isDeliveySlip ? "opacity-25" : ""
+        }`}
+        style={{}}>
         <Text
           style={{
             fontFamily: "PPFormulaCondensed-Bold",
