@@ -19,9 +19,7 @@ export default function RootLayout() {
             fontFamily: "HelveticaNeue-Bold",
             fontSize: 18,
           },
-          headerStyle: {
-            backgroundColor: "#161616",
-          },
+          headerTransparent: true,
           headerLeft: () => (
             <TouchableOpacity onPressIn={() => router.back()}>
               <Ionicons name="chevron-back" size={18} color="white" />

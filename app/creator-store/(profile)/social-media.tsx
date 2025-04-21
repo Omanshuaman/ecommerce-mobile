@@ -20,7 +20,7 @@ const SocialMedia = () => {
   ];
 
   return (
-    <View className="flex-1 bg-black px-6 py-2">
+    <View className="flex-1 bg-[#161616] px-6 py-2">
       <ScrollView className="flex-grow">
         {socialPlatforms.map((platform, index) => (
           <View
