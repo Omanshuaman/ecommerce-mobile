@@ -11,7 +11,7 @@ export default function RootLayout() {
       <Stack.Screen
         name="index"
         options={{
-          title: "Setup Pickup Address",
+          title: "",
           headerShown: true,
           headerTitleAlign: "center",
           headerTintColor: "white",
@@ -19,9 +19,7 @@ export default function RootLayout() {
             fontFamily: "HelveticaNeue-Bold",
             fontSize: 18,
           },
-          headerStyle: {
-            backgroundColor: "#161616",
-          },
+          headerTransparent: true,
           headerLeft: () => (
             <TouchableOpacity onPressIn={() => router.back()}>
               <Ionicons name="chevron-back" size={16} color="white" />

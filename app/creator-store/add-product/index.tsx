@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Alert,
+  ImageBackground,
 } from "react-native";
 import { Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -139,7 +140,7 @@ const AddProduct = () => {
       Alert.alert("Validation Error", "Please provide a design description.");
       return false;
     }
-    if (!selectedProductCondition.length) {
+    if (!selectedProductCondition) {
       Alert.alert("Validation Error", "Please select a product condition.");
       return false;
     }
@@ -162,499 +163,516 @@ const AddProduct = () => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-[#161616]">
-      <ScrollView className="px-4 py-2 " nestedScrollEnabled={true}>
-        {/* Upload Photo & Reel */}
-        <View className="flex-row justify-between gap-1 mb-4">
-          {image ? (
-            <TouchableOpacity className="flex-1 aspect-square border border-white relative rounded-md">
-              <Image
-                source={{ uri: image }}
-                resizeMode="contain"
-                className="w-full aspect-square self-center rounded-md bg-black"
-              />
-              <Text
-                onPress={() => {
-                  setImage(null);
-                }}
-                className="bg-red-600 w-fit absolute top-3 right-4 rounded-md p-1 px-3 text-white font-bold text-xl"
-                style={{
-                  fontFamily: "HelveticaNeue-Medium",
-                }}>
-                X
-              </Text>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              onPress={pickImage}
-              className="flex-1 aspect-square border border-white items-center justify-center rounded-md">
-              <Ionicons name="image-outline" size={24} color="white" />
-              <Text
-                className="text-white mt-2"
-                style={{
-                  fontFamily: "HelveticaNeue-Medium",
-                }}>
-                Upload Photo
-              </Text>
-            </TouchableOpacity>
-          )}
-          {video ? (
-            <TouchableOpacity className="flex-1 aspect-square border border-white relative rounded-md">
-              <Image
-                source={{ uri: video }}
-                resizeMode="contain"
-                className="w-full aspect-square self-center rounded-md bg-black"
-              />
-              <Text
-                onPress={() => {
-                  setVideo(null);
-                }}
-                className="bg-red-600 w-fit absolute top-3 right-4 rounded-md p-1 px-3 text-white font-bold text-xl"
-                style={{
-                  fontFamily: "HelveticaNeue-Medium",
-                }}>
-                X
-              </Text>
-            </TouchableOpacity>
-          ) : (
-            <TouchableOpacity
-              onPress={pickVideo}
-              className="flex-1 aspect-square border border-white items-center justify-center rounded-md">
-              <Ionicons name="videocam-outline" size={24} color="white" />
-              <Text
-                className="text-white mt-2"
-                style={{
-                  fontFamily: "HelveticaNeue-Medium",
-                }}>
-                Upload Reel
-              </Text>
-            </TouchableOpacity>
-          )}
-        </View>
+    <ImageBackground
+      source={require("../../../assets/bg-image.jpg")}
+      style={{ flex: 1, paddingTop: 50 }} // Add padding to avoid overlap with the header
+      resizeMode="cover">
+      <SafeAreaView className="flex-1">
+        <ScrollView className="px-4 py-2 " nestedScrollEnabled={true}>
+          {/* Upload Photo & Reel */}
+          <View className="flex-row justify-between gap-1 mb-4">
+            {image ? (
+              <TouchableOpacity className="flex-1 aspect-square border border-white relative rounded-md">
+                <Image
+                  source={{ uri: image }}
+                  resizeMode="contain"
+                  className="w-full aspect-square self-center rounded-md bg-black"
+                />
+                <Text
+                  onPress={() => {
+                    setImage(null);
+                  }}
+                  className="bg-red-600 w-fit absolute top-3 right-4 rounded-md p-1 px-3 text-white font-bold text-xl"
+                  style={{
+                    fontFamily: "HelveticaNeue-Medium",
+                  }}>
+                  X
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                onPress={pickImage}
+                className="flex-1 aspect-square border border-white items-center justify-center rounded-md">
+                <Ionicons name="image-outline" size={24} color="white" />
+                <Text
+                  className="text-white mt-2"
+                  style={{
+                    fontFamily: "HelveticaNeue-Medium",
+                  }}>
+                  Upload Photo
+                </Text>
+              </TouchableOpacity>
+            )}
+            {video ? (
+              <TouchableOpacity className="flex-1 aspect-square border border-white relative rounded-md">
+                <Image
+                  source={{ uri: video }}
+                  resizeMode="contain"
+                  className="w-full aspect-square self-center rounded-md bg-black"
+                />
+                <Text
+                  onPress={() => {
+                    setVideo(null);
+                  }}
+                  className="bg-red-600 w-fit absolute top-3 right-4 rounded-md p-1 px-3 text-white font-bold text-xl"
+                  style={{
+                    fontFamily: "HelveticaNeue-Medium",
+                  }}>
+                  X
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                onPress={pickVideo}
+                className="flex-1 aspect-square border border-white items-center justify-center rounded-md">
+                <Ionicons name="videocam-outline" size={24} color="white" />
+                <Text
+                  className="text-white mt-2"
+                  style={{
+                    fontFamily: "HelveticaNeue-Medium",
+                  }}>
+                  Upload Reel
+                </Text>
+              </TouchableOpacity>
+            )}
+          </View>
 
-        {/* Display additional photos */}
-        {additionalImages.map((uri, index) => (
-          <View
-            key={index}
-            className="flex-row justify-between space-x-2 mb-4 h-50">
-            <TouchableOpacity className="flex-1 aspect-square border border-white relative rounded-md h-50">
-              <Image
-                source={{ uri }}
-                resizeMode="contain"
-                className="w-full h-50 aspect-square self-center rounded-md bg-black"
-              />
-              <Text
-                onPress={() => {
-                  setAdditionalImages((prev) =>
-                    prev.filter((image) => {
-                      return image !== uri;
-                    })
-                  );
-                }}
-                className="bg-red-600 w-fit absolute top-3 right-4 rounded-md p-1 px-3 text-white font-bold text-xl"
-                style={{
-                  fontFamily: "HelveticaNeue-Medium",
-                }}>
-                X
-              </Text>
-            </TouchableOpacity>
-          </View>
-        ))}
-
-        {/* Add Another Photo */}
-        <TouchableOpacity
-          onPress={addAnotherPhoto}
-          className="border border-dashed border-white py-3 rounded-md mb-4 items-center">
-          <Text
-            className="text-white"
-            style={{
-              fontFamily: "HelveticaNeue-Medium",
-            }}>
-            Add another photo
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          className="flex-row justify-between items-center py-3"
-          onPress={() => setBrandModal(true)}>
-          <Text
-            className="text-white"
-            style={{
-              fontFamily: "HelveticaNeue-Medium",
-            }}>
-            Brand
-          </Text>
-          <View className="flex-row items-center gap-2">
-            <Text
-              className="text-typography-500 text-sm"
-              style={{
-                fontFamily: "HelveticaNeue-Medium",
-              }}>
-              {selectedBrand}
-            </Text>
-            <Ionicons name="chevron-forward" size={18} color="white" />
-          </View>
-        </TouchableOpacity>
-        <BrandModal
-          brandModal={brandmodal}
-          selectedBrand={selectedBrand}
-          setBrandModal={setBrandModal}
-          setSelectedBrand={setSelectedBrand}
-        />
-        <TouchableOpacity
-          className="flex-row justify-between items-center py-4"
-          onPress={() => setCategoryModal(true)}>
-          <Text
-            className="text-white"
-            style={{
-              fontFamily: "HelveticaNeue-Medium",
-            }}>
-            Category
-          </Text>
-          <View className="flex-row items-center gap-2">
-            <Text
-              className="text-typography-500 text-sm"
-              style={{
-                fontFamily: "HelveticaNeue-Medium",
-              }}>
-              {selectedCategory.length}
-            </Text>
-            <Ionicons name="chevron-forward" size={18} color="white" />
-          </View>
-        </TouchableOpacity>
-        <CategoryModal
-          categoryModal={categorymodal}
-          selectedCategory={selectedCategory}
-          setCategoryModal={setCategoryModal}
-          setSelectedCategory={setSelectedCategory}
-        />
-
-        <View className="flex-row justify-between items-center py-2">
-          <Text
-            className="text-white"
-            style={{
-              fontFamily: "HelveticaNeue-Medium",
-            }}>
-            Original Price
-          </Text>
-          <View className="flex-row items-center gap-2">
-            <Text
-              className="text-white"
-              style={{
-                fontFamily: "HelveticaNeue-Medium",
-              }}>
-              ₹
-            </Text>
-            <TextInput
-              keyboardType="numeric"
-              className=" text-white w-16 text-center rounded-sm border border-white"
-              placeholder="0000"
-              placeholderTextColor="#888"
-              ref={(ref) =>
-                ref &&
-                ref.setNativeProps({
-                  style: { fontFamily: "PPFormulaCondensed-Bold" },
-                })
-              }
-              style={{
-                fontSize: 15,
-              }}
-              value={originalPrice ?? ""}
-              onChangeText={(text) => {
-                setOriginalPrice(text);
-              }}
-            />
-          </View>
-        </View>
-        <View className="flex-row justify-between items-center py-1">
-          <Text
-            className="text-white"
-            style={{
-              fontFamily: "HelveticaNeue-Medium",
-            }}>
-            Discounted Price
-          </Text>
-          <View className="flex-row items-center gap-2">
-            <Text
-              className="text-white"
-              style={{
-                fontFamily: "HelveticaNeue-Medium",
-              }}>
-              ₹
-            </Text>
-            <TextInput
-              keyboardType="numeric"
-              className=" text-white w-16 text-center rounded-sm border border-white"
-              placeholder="0000"
-              placeholderTextColor="#888"
-              ref={(ref) =>
-                ref &&
-                ref.setNativeProps({
-                  style: { fontFamily: "PPFormulaCondensed-Bold" },
-                })
-              }
-              style={{
-                fontSize: 15,
-              }}
-              value={discountedPrice ?? ""}
-              onChangeText={(text) => {
-                setDiscountedPrice(text);
-              }}
-            />
-          </View>
-        </View>
-        <View className="flex-row justify-between items-center py-1">
-          <Text
-            className="text-white"
-            style={{
-              fontFamily: "HelveticaNeue-Medium",
-            }}>
-            No. of Pieces
-          </Text>
-          <View className="flex-row items-center gap-2">
-            <TextInput
-              keyboardType="numeric"
-              className=" text-white w-16 text-center rounded-sm border border-white"
-              placeholder="01"
-              maxLength={2}
-              placeholderTextColor="#888"
-              ref={(ref) =>
-                ref &&
-                ref.setNativeProps({
-                  style: { fontFamily: "PPFormulaCondensed-Regular" },
-                })
-              }
-              style={{
-                fontSize: 15,
-              }}
-              value={pieces ?? ""}
-              onChangeText={(text) => {
-                setPieces(text);
-              }}
-            />
-          </View>
-        </View>
-        <TouchableOpacity
-          className="flex-row justify-between items-center py-5"
-          onPress={() => setProductConditionModal(true)}>
-          <Text
-            className="text-white"
-            style={{
-              fontFamily: "HelveticaNeue-Medium",
-            }}>
-            Product Condition
-          </Text>
-          <View className="flex-row items-center gap-2">
-            <Text
-              className="text-typography-500 text-sm"
-              style={{
-                fontFamily: "HelveticaNeue-Medium",
-              }}>
-              {selectedProductCondition}
-            </Text>
-            <Ionicons name="chevron-forward" size={18} color="white" />
-          </View>
-        </TouchableOpacity>
-        <ProductConditionModal
-          productConditionModal={productConditionmodal}
-          setProductConditionModal={setProductConditionModal}
-          selectedProductCondition={selectedProductCondition}
-          setSelectedProductCondition={setSelectedProductCondition}
-          conditionDescription={conditionDescription}
-          setConditionDescription={setConditionDescription}
-        />
-        <Divider />
-        <View className="mb-10">
-          <Accordion
-            size="md"
-            variant="filled"
-            type="single"
-            isCollapsible={true}
-            isDisabled={false}
-            className="w-[100%]">
-            <AccordionItem value="a">
-              <AccordionHeader className="bg-[#161616]">
-                <AccordionTrigger>
-                  {({ isExpanded }) => {
-                    return (
-                      <>
-                        <AccordionTitleText
-                          className="text-white text-lg"
-                          style={{
-                            fontFamily: "HelveticaNeue-Medium",
-                          }}>
-                          Add Additional Details
-                        </AccordionTitleText>
-                        {isExpanded ? (
-                          <AccordionIcon
-                            as={RemoveIcon}
-                            className="ml-3"
-                            color="white"
-                            size="xl"
-                          />
-                        ) : (
-                          <AccordionIcon
-                            as={AddIcon}
-                            className="ml-3"
-                            color="white"
-                            size="xl"
-                          />
-                        )}
-                      </>
+          {/* Display additional photos */}
+          {additionalImages.map((uri, index) => (
+            <View
+              key={index}
+              className="flex-row justify-between space-x-2 mb-4 h-50">
+              <TouchableOpacity className="flex-1 aspect-square border border-white relative rounded-md h-50">
+                <Image
+                  source={{ uri }}
+                  resizeMode="contain"
+                  className="w-full h-50 aspect-square self-center rounded-md bg-black"
+                />
+                <Text
+                  onPress={() => {
+                    setAdditionalImages((prev) =>
+                      prev.filter((image) => {
+                        return image !== uri;
+                      })
                     );
                   }}
-                </AccordionTrigger>
-              </AccordionHeader>
-              <AccordionContent className="bg-[#161616]">
-                <View className="gap-2 py-1">
-                  <Text
-                    className="text-white mb-1"
-                    style={{
-                      fontFamily: "HelveticaNeue-Medium",
-                    }}>
-                    Design Description
-                  </Text>
-                  <TextInput
-                    multiline
-                    className=" text-white px-3 py-3 rounded h-fit border border-white"
-                    placeholder="DESCRIBE THE DESIGN"
-                    placeholderTextColor="#888"
-                    placeholderClassName=""
-                    ref={(ref) =>
-                      ref &&
-                      ref.setNativeProps({
-                        style: { fontFamily: "PPFormulaCondensed-Regular" },
-                      })
-                    }
-                    style={{
-                      fontSize: 18,
-                    }}
-                    value={description ?? ""}
-                    onChangeText={(text) => {
-                      setDescription(text);
-                    }}
-                  />
-                </View>
-                <TouchableOpacity
-                  className="flex-row justify-between items-center py-3"
-                  onPress={() => setPrimaryMaterialModal(true)}>
-                  <Text
-                    className="text-white"
-                    style={{
-                      fontFamily: "HelveticaNeue-Medium",
-                    }}>
-                    Primary Material
-                  </Text>
-                  <View className="flex-row items-center gap-2">
-                    <Text
-                      className="text-typography-500 text-sm"
-                      style={{
-                        fontFamily: "HelveticaNeue-Medium",
-                      }}>
-                      {selectedPrimaryMaterial}
-                    </Text>
-                    <Ionicons name="chevron-forward" size={18} color="white" />
-                  </View>
-                </TouchableOpacity>
-                <PrimaryMaterialModal
-                  primaryMaterialModal={primaryMaterialModal}
-                  setPrimaryMaterialModal={setPrimaryMaterialModal}
-                  selectedPrimaryMaterial={selectedPrimaryMaterial}
-                  setSelectedPrimaryMaterial={setSelectedPrimaryMaterial}
-                />
-                <TouchableOpacity
-                  className="flex-row justify-between items-center py-3"
-                  onPress={() => setPrimaryColorModal(true)}>
-                  <Text
-                    className="text-white"
-                    style={{
-                      fontFamily: "HelveticaNeue-Medium",
-                    }}>
-                    Primary Color
-                  </Text>
-                  <View className="flex-row items-center gap-2">
-                    <Text
-                      className="text-typography-500 text-sm"
-                      style={{
-                        fontFamily: "HelveticaNeue-Medium",
-                      }}>
-                      {selectedPrimaryColor}
-                    </Text>
-                    <Ionicons name="chevron-forward" size={18} color="white" />
-                  </View>
-                </TouchableOpacity>
-                <PrimaryColorModal
-                  primaryColorModal={primaryColorModal}
-                  setPrimaryColorModal={setPrimaryColorModal}
-                  selectedPrimaryColor={selectedPrimaryColor}
-                  setSelectedPrimaryColor={setSelectedPrimaryColor}
-                />
-                <TouchableOpacity
-                  className="flex-row justify-between items-center py-3"
-                  onPress={() => setOccasionModal(true)}>
-                  <Text
-                    className="text-white"
-                    style={{
-                      fontFamily: "HelveticaNeue-Medium",
-                    }}>
-                    Occasion
-                  </Text>
-                  <View className="flex-row items-center gap-2">
-                    <Text
-                      className="text-typography-500 text-sm"
-                      style={{
-                        fontFamily: "HelveticaNeue-Medium",
-                      }}>
-                      {selectedOccasion}
-                    </Text>
-                    <Ionicons name="chevron-forward" size={18} color="white" />
-                  </View>
-                </TouchableOpacity>
-                <OccasionModal
-                  occasionModal={occasionModal}
-                  setOccasionModal={setOccasionModal}
-                  selectedOccasion={selectedOccasion}
-                  setSelectedOccasion={setSelectedOccasion}
-                />
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </View>
-      </ScrollView>
+                  className="bg-red-600 w-fit absolute top-3 right-4 rounded-md p-1 px-3 text-white font-bold text-xl"
+                  style={{
+                    fontFamily: "HelveticaNeue-Medium",
+                  }}>
+                  X
+                </Text>
+              </TouchableOpacity>
+            </View>
+          ))}
 
-      {/* Publish Button */}
-      <TouchableOpacity
-        className="bg-yellow-400 py-2 m-2 rounded-sm shadow-lg shadow-slate-50 items-center"
-        onPress={() => {
-          if (validateForm()) {
-            const product = {
-              image,
-              video,
-              additionalImages,
-              selectedBrand,
-              selectedCategory,
-              originalPrice,
-              discountedPrice,
-              pieces,
-              description,
-              selectedProductCondition,
-              selectedPrimaryMaterial,
-              selectedPrimaryColor,
-              selectedOccasion,
-            };
-            saveProductToFile(product);
-          }
-        }}>
-        <Text
-          className="text-black"
-          style={{
-            fontFamily: "PPFormulaCondensed-Bold",
-            fontSize: 34,
+          {/* Add Another Photo */}
+          <TouchableOpacity
+            onPress={addAnotherPhoto}
+            className="border border-dashed border-white py-3 rounded-md mb-4 items-center">
+            <Text
+              className="text-white"
+              style={{
+                fontFamily: "HelveticaNeue-Medium",
+              }}>
+              Add another photo
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            className="flex-row justify-between items-center py-3"
+            onPress={() => setBrandModal(true)}>
+            <Text
+              className="text-white"
+              style={{
+                fontFamily: "HelveticaNeue-Medium",
+              }}>
+              Brand
+            </Text>
+            <View className="flex-row items-center gap-2">
+              <Text
+                className="text-typography-500 text-sm"
+                style={{
+                  fontFamily: "HelveticaNeue-Medium",
+                }}>
+                {selectedBrand}
+              </Text>
+              <Ionicons name="chevron-forward" size={18} color="white" />
+            </View>
+          </TouchableOpacity>
+          <BrandModal
+            brandModal={brandmodal}
+            selectedBrand={selectedBrand}
+            setBrandModal={setBrandModal}
+            setSelectedBrand={setSelectedBrand}
+          />
+          <TouchableOpacity
+            className="flex-row justify-between items-center py-4"
+            onPress={() => setCategoryModal(true)}>
+            <Text
+              className="text-white"
+              style={{
+                fontFamily: "HelveticaNeue-Medium",
+              }}>
+              Category
+            </Text>
+            <View className="flex-row items-center gap-2">
+              <Text
+                className="text-typography-500 text-sm"
+                style={{
+                  fontFamily: "HelveticaNeue-Medium",
+                }}>
+                {selectedCategory.length}
+              </Text>
+              <Ionicons name="chevron-forward" size={18} color="white" />
+            </View>
+          </TouchableOpacity>
+          <CategoryModal
+            categoryModal={categorymodal}
+            selectedCategory={selectedCategory}
+            setCategoryModal={setCategoryModal}
+            setSelectedCategory={setSelectedCategory}
+          />
+
+          <View className="flex-row justify-between items-center py-2">
+            <Text
+              className="text-white"
+              style={{
+                fontFamily: "HelveticaNeue-Medium",
+              }}>
+              Original Price
+            </Text>
+            <View className="flex-row items-center gap-2">
+              <Text
+                className="text-white"
+                style={{
+                  fontFamily: "HelveticaNeue-Medium",
+                }}>
+                ₹
+              </Text>
+              <TextInput
+                keyboardType="numeric"
+                className=" text-white w-16 text-center rounded-sm border border-white"
+                placeholder="0000"
+                placeholderTextColor="#888"
+                ref={(ref) =>
+                  ref &&
+                  ref.setNativeProps({
+                    style: { fontFamily: "PPFormulaCondensed-Bold" },
+                  })
+                }
+                style={{
+                  fontSize: 15,
+                }}
+                value={originalPrice ?? ""}
+                onChangeText={(text) => {
+                  setOriginalPrice(text);
+                }}
+              />
+            </View>
+          </View>
+          <View className="flex-row justify-between items-center py-1">
+            <Text
+              className="text-white"
+              style={{
+                fontFamily: "HelveticaNeue-Medium",
+              }}>
+              Discounted Price
+            </Text>
+            <View className="flex-row items-center gap-2">
+              <Text
+                className="text-white"
+                style={{
+                  fontFamily: "HelveticaNeue-Medium",
+                }}>
+                ₹
+              </Text>
+              <TextInput
+                keyboardType="numeric"
+                className=" text-white w-16 text-center rounded-sm border border-white"
+                placeholder="0000"
+                placeholderTextColor="#888"
+                ref={(ref) =>
+                  ref &&
+                  ref.setNativeProps({
+                    style: { fontFamily: "PPFormulaCondensed-Bold" },
+                  })
+                }
+                style={{
+                  fontSize: 15,
+                }}
+                value={discountedPrice ?? ""}
+                onChangeText={(text) => {
+                  setDiscountedPrice(text);
+                }}
+              />
+            </View>
+          </View>
+          <View className="flex-row justify-between items-center py-1">
+            <Text
+              className="text-white"
+              style={{
+                fontFamily: "HelveticaNeue-Medium",
+              }}>
+              No. of Pieces
+            </Text>
+            <View className="flex-row items-center gap-2">
+              <TextInput
+                keyboardType="numeric"
+                className=" text-white w-16 text-center rounded-sm border border-white"
+                placeholder="01"
+                maxLength={2}
+                placeholderTextColor="#888"
+                ref={(ref) =>
+                  ref &&
+                  ref.setNativeProps({
+                    style: { fontFamily: "PPFormulaCondensed-Regular" },
+                  })
+                }
+                style={{
+                  fontSize: 15,
+                }}
+                value={pieces ?? ""}
+                onChangeText={(text) => {
+                  setPieces(text);
+                }}
+              />
+            </View>
+          </View>
+          <TouchableOpacity
+            className="flex-row justify-between items-center py-5"
+            onPress={() => setProductConditionModal(true)}>
+            <Text
+              className="text-white"
+              style={{
+                fontFamily: "HelveticaNeue-Medium",
+              }}>
+              Product Condition
+            </Text>
+            <View className="flex-row items-center gap-2">
+              <Text
+                className="text-typography-500 text-sm"
+                style={{
+                  fontFamily: "HelveticaNeue-Medium",
+                }}>
+                {selectedProductCondition}
+              </Text>
+              <Ionicons name="chevron-forward" size={18} color="white" />
+            </View>
+          </TouchableOpacity>
+          <ProductConditionModal
+            productConditionModal={productConditionmodal}
+            setProductConditionModal={setProductConditionModal}
+            selectedProductCondition={selectedProductCondition}
+            setSelectedProductCondition={setSelectedProductCondition}
+            conditionDescription={conditionDescription}
+            setConditionDescription={setConditionDescription}
+          />
+          <Divider />
+          <View className="mb-10">
+            <Accordion
+              size="md"
+              variant="filled"
+              type="single"
+              isCollapsible={true}
+              isDisabled={false}
+              className="w-[100%]">
+              <AccordionItem value="a">
+                <AccordionHeader className="bg-[#161616]">
+                  <AccordionTrigger>
+                    {({ isExpanded }) => {
+                      return (
+                        <>
+                          <AccordionTitleText
+                            className="text-white text-lg"
+                            style={{
+                              fontFamily: "HelveticaNeue-Medium",
+                            }}>
+                            Add Additional Details
+                          </AccordionTitleText>
+                          {isExpanded ? (
+                            <AccordionIcon
+                              as={RemoveIcon}
+                              className="ml-3"
+                              color="white"
+                              size="xl"
+                            />
+                          ) : (
+                            <AccordionIcon
+                              as={AddIcon}
+                              className="ml-3"
+                              color="white"
+                              size="xl"
+                            />
+                          )}
+                        </>
+                      );
+                    }}
+                  </AccordionTrigger>
+                </AccordionHeader>
+                <AccordionContent className="bg-[#161616]">
+                  <View className="gap-2 py-1">
+                    <Text
+                      className="text-white mb-1"
+                      style={{
+                        fontFamily: "HelveticaNeue-Medium",
+                      }}>
+                      Design Description
+                    </Text>
+                    <TextInput
+                      multiline
+                      className=" text-white px-3 py-3 rounded h-fit border border-white"
+                      placeholder="DESCRIBE THE DESIGN"
+                      placeholderTextColor="#888"
+                      placeholderClassName=""
+                      ref={(ref) =>
+                        ref &&
+                        ref.setNativeProps({
+                          style: { fontFamily: "PPFormulaCondensed-Regular" },
+                        })
+                      }
+                      style={{
+                        fontSize: 18,
+                      }}
+                      value={description ?? ""}
+                      onChangeText={(text) => {
+                        setDescription(text);
+                      }}
+                    />
+                  </View>
+                  <TouchableOpacity
+                    className="flex-row justify-between items-center py-3"
+                    onPress={() => setPrimaryMaterialModal(true)}>
+                    <Text
+                      className="text-white"
+                      style={{
+                        fontFamily: "HelveticaNeue-Medium",
+                      }}>
+                      Primary Material
+                    </Text>
+                    <View className="flex-row items-center gap-2">
+                      <Text
+                        className="text-typography-500 text-sm"
+                        style={{
+                          fontFamily: "HelveticaNeue-Medium",
+                        }}>
+                        {selectedPrimaryMaterial}
+                      </Text>
+                      <Ionicons
+                        name="chevron-forward"
+                        size={18}
+                        color="white"
+                      />
+                    </View>
+                  </TouchableOpacity>
+                  <PrimaryMaterialModal
+                    primaryMaterialModal={primaryMaterialModal}
+                    setPrimaryMaterialModal={setPrimaryMaterialModal}
+                    selectedPrimaryMaterial={selectedPrimaryMaterial}
+                    setSelectedPrimaryMaterial={setSelectedPrimaryMaterial}
+                  />
+                  <TouchableOpacity
+                    className="flex-row justify-between items-center py-3"
+                    onPress={() => setPrimaryColorModal(true)}>
+                    <Text
+                      className="text-white"
+                      style={{
+                        fontFamily: "HelveticaNeue-Medium",
+                      }}>
+                      Primary Color
+                    </Text>
+                    <View className="flex-row items-center gap-2">
+                      <Text
+                        className="text-typography-500 text-sm"
+                        style={{
+                          fontFamily: "HelveticaNeue-Medium",
+                        }}>
+                        {selectedPrimaryColor}
+                      </Text>
+                      <Ionicons
+                        name="chevron-forward"
+                        size={18}
+                        color="white"
+                      />
+                    </View>
+                  </TouchableOpacity>
+                  <PrimaryColorModal
+                    primaryColorModal={primaryColorModal}
+                    setPrimaryColorModal={setPrimaryColorModal}
+                    selectedPrimaryColor={selectedPrimaryColor}
+                    setSelectedPrimaryColor={setSelectedPrimaryColor}
+                  />
+                  <TouchableOpacity
+                    className="flex-row justify-between items-center py-3"
+                    onPress={() => setOccasionModal(true)}>
+                    <Text
+                      className="text-white"
+                      style={{
+                        fontFamily: "HelveticaNeue-Medium",
+                      }}>
+                      Occasion
+                    </Text>
+                    <View className="flex-row items-center gap-2">
+                      <Text
+                        className="text-typography-500 text-sm"
+                        style={{
+                          fontFamily: "HelveticaNeue-Medium",
+                        }}>
+                        {selectedOccasion}
+                      </Text>
+                      <Ionicons
+                        name="chevron-forward"
+                        size={18}
+                        color="white"
+                      />
+                    </View>
+                  </TouchableOpacity>
+                  <OccasionModal
+                    occasionModal={occasionModal}
+                    setOccasionModal={setOccasionModal}
+                    selectedOccasion={selectedOccasion}
+                    setSelectedOccasion={setSelectedOccasion}
+                  />
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </View>
+        </ScrollView>
+
+        {/* Publish Button */}
+        <TouchableOpacity
+          className="bg-yellow-400 py-2 m-2 rounded-sm shadow-lg shadow-slate-50 items-center"
+          onPress={() => {
+            if (validateForm()) {
+              const product = {
+                image,
+                video,
+                additionalImages,
+                selectedBrand,
+                selectedCategory,
+                originalPrice,
+                discountedPrice,
+                pieces,
+                description,
+                selectedProductCondition,
+                selectedPrimaryMaterial,
+                selectedPrimaryColor,
+                selectedOccasion,
+              };
+              saveProductToFile(product);
+            }
           }}>
-          PUBLISH
-        </Text>
-      </TouchableOpacity>
-    </SafeAreaView>
+          <Text
+            className="text-black"
+            style={{
+              fontFamily: "PPFormulaCondensed-Bold",
+              fontSize: 34,
+            }}>
+            PUBLISH
+          </Text>
+        </TouchableOpacity>
+      </SafeAreaView>
+    </ImageBackground>
   );
 };
 

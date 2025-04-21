@@ -12,9 +12,7 @@ export default function RootLayout() {
         options={{
           headerShown: true,
           title: "", // Empty title
-          headerStyle: {
-            backgroundColor: "#161616",
-          },
+          headerTransparent: true,
           headerLeft: () => (
             <TouchableOpacity
               onPressIn={() => router.back()}
