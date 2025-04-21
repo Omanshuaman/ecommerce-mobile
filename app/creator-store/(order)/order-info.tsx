@@ -3,7 +3,7 @@ import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 
 export default function OrderCard() {
   const [isPacked, setIsPacked] = useState(false);
-
+  const [isShipped, setIsShipped] = useState(false);
   return (
     <View className="p-4 bg-[#161616] h-full flex-1">
       <ScrollView showsHorizontalScrollIndicator={false}>
@@ -76,26 +76,31 @@ export default function OrderCard() {
         </View>
 
         <TouchableOpacity
+          onPress={() => setIsShipped(true)}
           disabled={!isPacked}
           className="border border-white rounded-sm py-2 my-3"
           style={{
             borderColor: isPacked ? "green" : "white",
+            opacity: isPacked ? 1 : 0.5,
           }}>
           <Text
             style={{
-              color: isPacked ? "#A3FAC7" : "white",
+              color: isShipped ? "#A3FAC7" : "white",
               fontFamily: "PPFormulaCondensed-Bold",
               fontSize: 28,
             }}
             className="text-center p-1 uppercase">
-            {isPacked ? "Delivery slip printed" : "PRINT DELIVERY SLIP"}
+            {isShipped ? "Delivery slip printed" : "PRINT DELIVERY SLIP"}
           </Text>
         </TouchableOpacity>
       </ScrollView>
 
       <TouchableOpacity
-        disabled={!isPacked}
-        className="bg-[#E5FF03] rounded-sm w-full py-3 justify-center items-center shadow-lg shadow-slate-50">
+        disabled={!isShipped}
+        className="bg-[#E5FF03] rounded-sm w-full py-3 justify-center items-center shadow-lg shadow-slate-50"
+        style={{
+          opacity: isShipped ? 1 : 0.5,
+        }}>
         <Text
           style={{
             fontFamily: "PPFormulaCondensed-Bold",

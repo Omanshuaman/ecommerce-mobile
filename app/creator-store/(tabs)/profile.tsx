@@ -65,7 +65,7 @@ export default function Profile() {
 
       {menuItems.map((item, index) => (
         <Link href={item.href} asChild key={index} withAnchor>
-          <Pressable className="flex-row items-center justify-between py-5 border-b border-white/10">
+          <TouchableOpacity className="flex-row items-center justify-between py-5 border-b border-white/10">
             <View className="flex-row items-center gap-4">
               <Text className="text-white">{item.icon}</Text>
               <Text
@@ -75,21 +75,21 @@ export default function Profile() {
               </Text>
             </View>
             <MaterialIcons name="navigate-next" size={18} color="white" />
-          </Pressable>
+          </TouchableOpacity>
         </Link>
       ))}
       <Select className="py-4">
         <SelectTrigger
           size="lg"
           className="flex-row items-center justify-between border border-[#161616] text-white">
-          <View className="flex-row items-center gap-4">
+          <TouchableOpacity className="flex-row items-center gap-4">
             <MaterialIcons name="logout" size={24} color="white" />
             <Text
               className="text-white"
               style={{ fontSize: 15, fontFamily: "HelveticaNeue-Medium" }}>
               Logout
             </Text>
-          </View>
+          </TouchableOpacity>
         </SelectTrigger>
         <SelectPortal>
           <SelectBackdrop />

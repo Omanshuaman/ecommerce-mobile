@@ -53,7 +53,7 @@ export default function OtpPhoneScreen() {
                 })
               }
               style={{
-                fontSize: 22,
+                fontSize: 24,
               }}
               value={profileLink}
               onChangeText={setProfileLink}
@@ -61,48 +61,44 @@ export default function OtpPhoneScreen() {
           </View>
           <View className="h-[60px]">
             <View className="relative w-full flex-1 my-1 bg-gray-400 bg-opacity-30 rounded-sm">
-              <Link href="/sign-up/name" asChild>
-                <TouchableOpacity
-                  className={`bg-black rounded-sm absolute -top-1 -left-1 w-full h-[98%] justify-center items-center border border-solid border-white ${
-                    isPressed
-                      ? "bg-[#E5FF03] translate-x-0.5 -translate-y-0.5"
-                      : "bg-[#E5FF03] -translate-x-0.5 -translate-y-0.5"
-                  }`}
-                  onPressIn={() => setIsPressed(true)}
-                  onPressOut={() => setIsPressed(false)}>
-                  <Text
-                    className="text-center text-white uppercase"
-                    style={{
-                      fontFamily: "PPFormulaCondensed-Bold",
-                      fontSize: 35,
-                    }}>
-                    Add another link
-                  </Text>
-                </TouchableOpacity>
-              </Link>
+              <TouchableOpacity
+                className={`bg-black rounded-sm absolute -top-1 -left-1 w-full h-[98%] justify-center items-center border border-solid border-white ${
+                  isPressed
+                    ? "bg-[#E5FF03] translate-x-0.5 -translate-y-0.5"
+                    : "bg-[#E5FF03] -translate-x-0.5 -translate-y-0.5"
+                }`}
+                onPressIn={() => setIsPressed(true)}
+                onPressOut={() => setIsPressed(false)}>
+                <Text
+                  className="text-center text-white uppercase"
+                  style={{
+                    fontFamily: "PPFormulaCondensed-Bold",
+                    fontSize: 35,
+                  }}>
+                  Add another link
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
           <View className="h-[60px]">
             <View className="relative w-full flex-1 my-1 bg-[#E5FF03] bg-opacity-30 rounded-sm">
-              <Link href="/sign-up/name" asChild>
-                <TouchableOpacity
-                  className={`bg-[#E5FF03] rounded-sm absolute -top-1 -left-1 w-full h-[98%] justify-center items-center ${
-                    isPressed
-                      ? "bg-[#E5FF03] translate-x-0.5 -translate-y-0.5"
-                      : "bg-[#E5FF03] -translate-x-0.5 -translate-y-0.5"
-                  }`}
-                  onPressIn={() => setIsPressed(true)}
-                  onPressOut={() => setIsPressed(false)}>
-                  <Text
-                    className="text-center text-black uppercase"
-                    style={{
-                      fontFamily: "PPFormulaCondensed-Bold",
-                      fontSize: 35,
-                    }}>
-                    SEND FOR VERIFICATION
-                  </Text>
-                </TouchableOpacity>
-              </Link>
+              <TouchableOpacity
+                className={`bg-[#E5FF03] rounded-sm absolute -top-1 -left-1 w-full h-[98%] justify-center items-center ${
+                  isPressed
+                    ? "bg-[#E5FF03] translate-x-0.5 -translate-y-0.5"
+                    : "bg-[#E5FF03] -translate-x-0.5 -translate-y-0.5"
+                }`}
+                onPressIn={() => setIsPressed(true)}
+                onPressOut={() => setIsPressed(false)}>
+                <Text
+                  className="text-center text-black uppercase"
+                  style={{
+                    fontFamily: "PPFormulaCondensed-Bold",
+                    fontSize: 35,
+                  }}>
+                  SEND FOR VERIFICATION
+                </Text>
+              </TouchableOpacity>
             </View>
           </View>
         </View>
