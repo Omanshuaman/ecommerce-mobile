@@ -6,9 +6,7 @@ export default function RootLayout() {
   return (
     <Stack
       screenOptions={{
-        headerStyle: {
-          backgroundColor: "black",
-        },
+        headerTransparent: true, // Allow content to flow under the header
         headerRight: () => (
           <View className="flex-row items-center">
             <Text
