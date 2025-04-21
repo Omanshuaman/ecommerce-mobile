@@ -27,8 +27,8 @@ const API_ENDPOINT = "https://randomuser.me/api/?results=50";
 const ProductConditions = ["New", "Like New", "Used", "Worn"];
 
 interface ProductConditionModalProps {
-  selectedProductCondition: string[];
-  setSelectedProductCondition: (ProductCondition: string[]) => void;
+  selectedProductCondition: string | null;
+  setSelectedProductCondition: (ProductCondition: string) => void;
   productConditionModal: boolean;
   setProductConditionModal: (modalState: boolean) => void;
   conditionDescription: string;
@@ -55,21 +55,6 @@ const ProductConditionModal = ({
     );
   };
 
-  const selectProductCondition = (condition: string) => {
-    setSelectedProductCondition([condition]); // single selection
-  };
-  const toggleProductConditionSelection = (productCondition: string) => {
-    if (selectedProductCondition.includes(productCondition)) {
-      setSelectedProductCondition(
-        selectedProductCondition.filter((item) => item !== productCondition)
-      );
-    } else {
-      setSelectedProductCondition([
-        ...selectedProductCondition,
-        productCondition,
-      ]);
-    }
-  };
   return (
     <SafeAreaView>
       <Center className="h-fit">
@@ -84,7 +69,7 @@ const ProductConditionModal = ({
               <View className="bg-neutral-800 rounded-md mb-4 px-3 py-1 flex-row items-center">
                 <Ionicons name="search" size={16} color="#A0AEC0" />
                 <TextInput
-                  placeholder="Search Category name"
+                  placeholder="Search Product Condition"
                   placeholderTextColor="#A0AEC0"
                   className="flex-1 text-white ml-2"
                   value={searchQuery}
@@ -101,12 +86,12 @@ const ProductConditionModal = ({
                 {data.map((condition) => (
                   <Button
                     key={condition}
-                    onPress={() => toggleProductConditionSelection(condition)}
+                    onPress={() => setSelectedProductCondition(condition)}
                     className="flex-row justify-between items-center bg-transparent">
                     <ButtonText className="text-white text-base">
                       {condition}
                     </ButtonText>
-                    {selectedProductCondition.includes(condition) && (
+                    {selectedProductCondition === condition && (
                       <Ionicons name="checkmark" size={20} color="white" />
                     )}
                   </Button>

@@ -52,8 +52,8 @@ const AddProduct = () => {
   const [description, setDescription] = useState<string | null>("");
   const [productConditionmodal, setProductConditionModal] = useState(false);
   const [selectedProductCondition, setSelectedProductCondition] = useState<
-    string[]
-  >([]);
+    string | null
+  >("");
 
   const [conditionDescription, setConditionDescription] = useState("");
 
@@ -163,7 +163,7 @@ const AddProduct = () => {
 
   return (
     <SafeAreaView className="flex-1 bg-[#161616]">
-      <ScrollView className="px-4 py-2" nestedScrollEnabled={true}>
+      <ScrollView className="px-4 py-2 " nestedScrollEnabled={true}>
         {/* Upload Photo & Reel */}
         <View className="flex-row justify-between gap-1 mb-4">
           {image ? (
@@ -177,7 +177,10 @@ const AddProduct = () => {
                 onPress={() => {
                   setImage(null);
                 }}
-                className="bg-red-600 w-fit absolute top-3 right-4 rounded-md p-1 px-3 text-white font-bold text-xl">
+                className="bg-red-600 w-fit absolute top-3 right-4 rounded-md p-1 px-3 text-white font-bold text-xl"
+                style={{
+                  fontFamily: "HelveticaNeue-Medium",
+                }}>
                 X
               </Text>
             </TouchableOpacity>
@@ -186,7 +189,13 @@ const AddProduct = () => {
               onPress={pickImage}
               className="flex-1 aspect-square border border-white items-center justify-center rounded-md">
               <Ionicons name="image-outline" size={24} color="white" />
-              <Text className="text-white mt-2">Upload Photo</Text>
+              <Text
+                className="text-white mt-2"
+                style={{
+                  fontFamily: "HelveticaNeue-Medium",
+                }}>
+                Upload Photo
+              </Text>
             </TouchableOpacity>
           )}
           {video ? (
@@ -200,7 +209,10 @@ const AddProduct = () => {
                 onPress={() => {
                   setVideo(null);
                 }}
-                className="bg-red-600 w-fit absolute top-3 right-4 rounded-md p-1 px-3 text-white font-bold text-xl">
+                className="bg-red-600 w-fit absolute top-3 right-4 rounded-md p-1 px-3 text-white font-bold text-xl"
+                style={{
+                  fontFamily: "HelveticaNeue-Medium",
+                }}>
                 X
               </Text>
             </TouchableOpacity>
@@ -209,7 +221,13 @@ const AddProduct = () => {
               onPress={pickVideo}
               className="flex-1 aspect-square border border-white items-center justify-center rounded-md">
               <Ionicons name="videocam-outline" size={24} color="white" />
-              <Text className="text-white mt-2">Upload Reel</Text>
+              <Text
+                className="text-white mt-2"
+                style={{
+                  fontFamily: "HelveticaNeue-Medium",
+                }}>
+                Upload Reel
+              </Text>
             </TouchableOpacity>
           )}
         </View>
@@ -233,7 +251,10 @@ const AddProduct = () => {
                     })
                   );
                 }}
-                className="bg-red-600 w-fit absolute top-3 right-4 rounded-md p-1 px-3 text-white font-bold text-xl">
+                className="bg-red-600 w-fit absolute top-3 right-4 rounded-md p-1 px-3 text-white font-bold text-xl"
+                style={{
+                  fontFamily: "HelveticaNeue-Medium",
+                }}>
                 X
               </Text>
             </TouchableOpacity>
@@ -244,15 +265,33 @@ const AddProduct = () => {
         <TouchableOpacity
           onPress={addAnotherPhoto}
           className="border border-dashed border-white py-3 rounded-md mb-4 items-center">
-          <Text className="text-white">Add another photo</Text>
+          <Text
+            className="text-white"
+            style={{
+              fontFamily: "HelveticaNeue-Medium",
+            }}>
+            Add another photo
+          </Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           className="flex-row justify-between items-center py-3"
           onPress={() => setBrandModal(true)}>
-          <Text className="text-white">Brand</Text>
+          <Text
+            className="text-white"
+            style={{
+              fontFamily: "HelveticaNeue-Medium",
+            }}>
+            Brand
+          </Text>
           <View className="flex-row items-center gap-2">
-            <Text className="text-typography-500 text-sm">{selectedBrand}</Text>
+            <Text
+              className="text-typography-500 text-sm"
+              style={{
+                fontFamily: "HelveticaNeue-Medium",
+              }}>
+              {selectedBrand}
+            </Text>
             <Ionicons name="chevron-forward" size={18} color="white" />
           </View>
         </TouchableOpacity>
@@ -263,11 +302,21 @@ const AddProduct = () => {
           setSelectedBrand={setSelectedBrand}
         />
         <TouchableOpacity
-          className="flex-row justify-between items-center py-3"
+          className="flex-row justify-between items-center py-4"
           onPress={() => setCategoryModal(true)}>
-          <Text className="text-white">Category</Text>
+          <Text
+            className="text-white"
+            style={{
+              fontFamily: "HelveticaNeue-Medium",
+            }}>
+            Category
+          </Text>
           <View className="flex-row items-center gap-2">
-            <Text className="text-typography-500 text-sm">
+            <Text
+              className="text-typography-500 text-sm"
+              style={{
+                fontFamily: "HelveticaNeue-Medium",
+              }}>
               {selectedCategory.length}
             </Text>
             <Ionicons name="chevron-forward" size={18} color="white" />
@@ -280,10 +329,22 @@ const AddProduct = () => {
           setSelectedCategory={setSelectedCategory}
         />
 
-        <View className="flex-row justify-between items-center py-1">
-          <Text className="text-white">Original Price</Text>
+        <View className="flex-row justify-between items-center py-2">
+          <Text
+            className="text-white"
+            style={{
+              fontFamily: "HelveticaNeue-Medium",
+            }}>
+            Original Price
+          </Text>
           <View className="flex-row items-center gap-2">
-            <Text className="text-white">₹</Text>
+            <Text
+              className="text-white"
+              style={{
+                fontFamily: "HelveticaNeue-Medium",
+              }}>
+              ₹
+            </Text>
             <TextInput
               keyboardType="numeric"
               className=" text-white w-16 text-center rounded-sm border border-white"
@@ -306,9 +367,21 @@ const AddProduct = () => {
           </View>
         </View>
         <View className="flex-row justify-between items-center py-1">
-          <Text className="text-white">Discounted Price</Text>
+          <Text
+            className="text-white"
+            style={{
+              fontFamily: "HelveticaNeue-Medium",
+            }}>
+            Discounted Price
+          </Text>
           <View className="flex-row items-center gap-2">
-            <Text className="text-white">₹</Text>
+            <Text
+              className="text-white"
+              style={{
+                fontFamily: "HelveticaNeue-Medium",
+              }}>
+              ₹
+            </Text>
             <TextInput
               keyboardType="numeric"
               className=" text-white w-16 text-center rounded-sm border border-white"
@@ -331,7 +404,13 @@ const AddProduct = () => {
           </View>
         </View>
         <View className="flex-row justify-between items-center py-1">
-          <Text className="text-white">No. of Pieces</Text>
+          <Text
+            className="text-white"
+            style={{
+              fontFamily: "HelveticaNeue-Medium",
+            }}>
+            No. of Pieces
+          </Text>
           <View className="flex-row items-center gap-2">
             <TextInput
               keyboardType="numeric"
@@ -356,11 +435,21 @@ const AddProduct = () => {
           </View>
         </View>
         <TouchableOpacity
-          className="flex-row justify-between items-center py-4"
+          className="flex-row justify-between items-center py-5"
           onPress={() => setProductConditionModal(true)}>
-          <Text className="text-white">ProductCondition</Text>
+          <Text
+            className="text-white"
+            style={{
+              fontFamily: "HelveticaNeue-Medium",
+            }}>
+            Product Condition
+          </Text>
           <View className="flex-row items-center gap-2">
-            <Text className="text-typography-500 text-sm">
+            <Text
+              className="text-typography-500 text-sm"
+              style={{
+                fontFamily: "HelveticaNeue-Medium",
+              }}>
               {selectedProductCondition}
             </Text>
             <Ionicons name="chevron-forward" size={18} color="white" />
@@ -389,7 +478,11 @@ const AddProduct = () => {
                   {({ isExpanded }) => {
                     return (
                       <>
-                        <AccordionTitleText className="text-white text-lg">
+                        <AccordionTitleText
+                          className="text-white text-lg"
+                          style={{
+                            fontFamily: "HelveticaNeue-Medium",
+                          }}>
                           Add Additional Details
                         </AccordionTitleText>
                         {isExpanded ? (
@@ -414,7 +507,13 @@ const AddProduct = () => {
               </AccordionHeader>
               <AccordionContent className="bg-[#161616]">
                 <View className="gap-2 py-1">
-                  <Text className="text-white mb-1">Design Description</Text>
+                  <Text
+                    className="text-white mb-1"
+                    style={{
+                      fontFamily: "HelveticaNeue-Medium",
+                    }}>
+                    Design Description
+                  </Text>
                   <TextInput
                     multiline
                     className=" text-white px-3 py-3 rounded h-fit border border-white"
@@ -439,9 +538,19 @@ const AddProduct = () => {
                 <TouchableOpacity
                   className="flex-row justify-between items-center py-3"
                   onPress={() => setPrimaryMaterialModal(true)}>
-                  <Text className="text-white">Primary Material</Text>
+                  <Text
+                    className="text-white"
+                    style={{
+                      fontFamily: "HelveticaNeue-Medium",
+                    }}>
+                    Primary Material
+                  </Text>
                   <View className="flex-row items-center gap-2">
-                    <Text className="text-typography-500 text-sm">
+                    <Text
+                      className="text-typography-500 text-sm"
+                      style={{
+                        fontFamily: "HelveticaNeue-Medium",
+                      }}>
                       {selectedPrimaryMaterial}
                     </Text>
                     <Ionicons name="chevron-forward" size={18} color="white" />
@@ -456,9 +565,19 @@ const AddProduct = () => {
                 <TouchableOpacity
                   className="flex-row justify-between items-center py-3"
                   onPress={() => setPrimaryColorModal(true)}>
-                  <Text className="text-white">Primary Color</Text>
+                  <Text
+                    className="text-white"
+                    style={{
+                      fontFamily: "HelveticaNeue-Medium",
+                    }}>
+                    Primary Color
+                  </Text>
                   <View className="flex-row items-center gap-2">
-                    <Text className="text-typography-500 text-sm">
+                    <Text
+                      className="text-typography-500 text-sm"
+                      style={{
+                        fontFamily: "HelveticaNeue-Medium",
+                      }}>
                       {selectedPrimaryColor}
                     </Text>
                     <Ionicons name="chevron-forward" size={18} color="white" />
@@ -473,9 +592,19 @@ const AddProduct = () => {
                 <TouchableOpacity
                   className="flex-row justify-between items-center py-3"
                   onPress={() => setOccasionModal(true)}>
-                  <Text className="text-white">Occasion</Text>
+                  <Text
+                    className="text-white"
+                    style={{
+                      fontFamily: "HelveticaNeue-Medium",
+                    }}>
+                    Occasion
+                  </Text>
                   <View className="flex-row items-center gap-2">
-                    <Text className="text-typography-500 text-sm">
+                    <Text
+                      className="text-typography-500 text-sm"
+                      style={{
+                        fontFamily: "HelveticaNeue-Medium",
+                      }}>
                       {selectedOccasion}
                     </Text>
                     <Ionicons name="chevron-forward" size={18} color="white" />

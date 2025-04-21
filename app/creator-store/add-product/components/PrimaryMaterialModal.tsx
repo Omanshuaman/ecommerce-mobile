@@ -70,7 +70,7 @@ const PrimaryMaterialModal = ({
                   className="mr-2"
                 />
                 <TextInput
-                  placeholder="Search brand name"
+                  placeholder="Search Material name"
                   placeholderTextColor="#A0AEC0"
                   className="flex-1 text-white"
                   value={searchQuery}

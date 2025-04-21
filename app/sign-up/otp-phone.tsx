@@ -78,7 +78,7 @@ export default function OtpPhoneScreen() {
                   className="text-center text-black uppercase"
                   style={{
                     fontFamily: "PPFormulaCondensed-Bold",
-                    fontSize: 40,
+                    fontSize: 36,
                   }}>
                   Get OTP
                 </Text>

@@ -100,9 +100,7 @@ const PrimaryColorModal = ({
                     <TouchableOpacity
                       key={color}
                       onPress={() => setSelectedPrimaryColor(color)}
-                      className={`flex-row justify-between items-center py-3 px-2 rounded-md ${
-                        selectedPrimaryColor === color ? "bg-yellow-600/20" : ""
-                      }`}>
+                      className={`flex-row justify-between items-center py-3 px-2 rounded-md`}>
                       <Text className="text-white text-base">{color}</Text>
                       {selectedPrimaryColor === color && (
                         <Ionicons name="checkmark" size={20} color="white" />

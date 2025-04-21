@@ -100,9 +100,7 @@ const OccasionModal = ({
                     <TouchableOpacity
                       key={occasion}
                       onPress={() => setSelectedOccasion(occasion)}
-                      className={`flex-row justify-between items-center py-3 px-2 rounded-md ${
-                        selectedOccasion === occasion ? "bg-yellow-600/20" : ""
-                      }`}>
+                      className={`flex-row justify-between items-center py-3 px-2 rounded-md `}>
                       <Text className="text-white text-base">{occasion}</Text>
                       {selectedOccasion === occasion && (
                         <Ionicons name="checkmark" size={20} color="white" />
