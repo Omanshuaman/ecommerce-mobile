@@ -82,14 +82,14 @@ export default function Profile() {
         <SelectTrigger
           size="lg"
           className="flex-row items-center justify-between border border-[#161616] text-white">
-          <TouchableOpacity className="flex-row items-center gap-4">
+          <View className="flex-row items-center gap-4 w-full">
             <MaterialIcons name="logout" size={24} color="white" />
             <Text
               className="text-white"
               style={{ fontSize: 15, fontFamily: "HelveticaNeue-Medium" }}>
               Logout
             </Text>
-          </TouchableOpacity>
+          </View>
         </SelectTrigger>
         <SelectPortal>
           <SelectBackdrop />
