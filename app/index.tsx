@@ -57,7 +57,7 @@ const OnboardingScreen = () => {
           </TouchableOpacity>
         </Link>
 
-        <Link href="/creator-store/order-info" asChild>
+        <Link href="/test" asChild>
           <TouchableOpacity className="bg-black border border-white rounded-md flex-row items-center justify-center w-full py-3 my-2 gap-4">
             <Image
               source={require("../assets/facebook.png")}

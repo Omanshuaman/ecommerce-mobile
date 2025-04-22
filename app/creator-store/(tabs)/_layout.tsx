@@ -3,6 +3,7 @@ import React from "react";
 import { Tabs, usePathname, useRouter } from "expo-router";
 
 import icons from "@/constants/icons";
+import TabBar from "@/components/TabBar";
 
 const TabIcon = ({
   focused,
@@ -29,26 +30,12 @@ const TabIcon = ({
 const TabsLayout = () => {
   const pathname = usePathname();
   return (
-    <Tabs
-      backBehavior="history"
-      screenOptions={{
-        tabBarShowLabel: false,
-        tabBarStyle: {
-          backgroundColor: "#161616",
-          position: "absolute",
-          borderTopColor: "#0061FF1A",
-          minHeight: 65,
-        },
-      }}>
+    <Tabs backBehavior="history" tabBar={(props: any) => <TabBar {...props} />}>
       <Tabs.Screen
         name="index"
         options={{
           title: "Home",
           headerShown: false,
-
-          tabBarIcon: ({ focused }: { focused: boolean }) => (
-            <TabIcon icon={icons.warehouse} focused={focused} title="Home" />
-          ),
         }}
       />
       <Tabs.Screen
@@ -56,9 +43,6 @@ const TabsLayout = () => {
         options={{
           title: "Add",
           headerShown: false,
-          tabBarIcon: ({ focused }: { focused: boolean }) => (
-            <TabIcon icon={icons.PlusCircle} focused={focused} title="Home" />
-          ),
         }}
       />
       <Tabs.Screen
@@ -66,13 +50,6 @@ const TabsLayout = () => {
         options={{
           title: "Order",
           headerShown: false,
-          tabBarIcon: ({ focused }: { focused: boolean }) => (
-            <TabIcon
-              icon={icons.packageIcon}
-              focused={focused}
-              title="Explore"
-            />
-          ),
         }}
       />
       <Tabs.Screen
@@ -80,9 +57,6 @@ const TabsLayout = () => {
         options={{
           title: "Profile",
           headerShown: false,
-          tabBarIcon: ({ focused }: { focused: boolean }) => (
-            <TabIcon icon={icons.person} focused={focused} title="Profile" />
-          ),
         }}
       />
     </Tabs>
