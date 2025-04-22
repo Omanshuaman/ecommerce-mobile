@@ -22,6 +22,7 @@ import {
   FlatList,
   ScrollView,
   SafeAreaView,
+  ImageBackground,
 } from "react-native";
 const API_ENDPOINT = "https://randomuser.me/api/?results=50";
 
@@ -73,68 +74,73 @@ const BrandModal = ({
           onClose={() => {
             setBrandModal(false);
           }}
-          size="md">
-          <ModalBackdrop />
-          <ModalContent className="max-h-[90%] bg-[#161616]">
-            <ModalHeader>
-              <View className="bg-neutral-800 rounded-md mb-4 px-3 py-1 flex-row items-center">
-                <Ionicons
-                  name="search"
-                  size={16}
-                  color="#A0AEC0"
-                  className="mr-2"
-                />
-                <TextInput
-                  placeholder="Search brand name"
-                  placeholderTextColor="#A0AEC0"
-                  className="flex-1 text-white"
-                  value={searchQuery}
-                  onChangeText={(query) => handleSearch(query)}
-                />
-              </View>
-              <ModalCloseButton>
-                <Icon
-                  as={CloseIcon}
-                  size="md"
-                  className="stroke-background-400 group-[:hover]/modal-close-button:stroke-background-700 group-[:active]/modal-close-button:stroke-background-900 group-[:focus-visible]/modal-close-button:stroke-background-900"
-                />
-              </ModalCloseButton>
-            </ModalHeader>
-            <ModalBody>
-              <ScrollView showsVerticalScrollIndicator={false}>
-                {data.map((brand) => (
-                  <Button
-                    key={brand}
-                    onPress={() => setSelectedBrand(brand)}
-                    className="flex-row justify-between items-center bg-transparent">
-                    <ButtonText className="text-white text-base">
-                      {brand}
-                    </ButtonText>
-                    {selectedBrand === brand && (
-                      <Ionicons name="checkmark" size={20} color="white" />
-                    )}
-                  </Button>
-                ))}
-              </ScrollView>
-            </ModalBody>
-            <ModalFooter>
-              <Button
-                variant="outline"
-                action="secondary"
-                onPress={() => {
-                  setBrandModal(false);
-                }}>
-                <ButtonText>Cancel</ButtonText>
-              </Button>
-              <Button
-                className="bg-[#E5FF03]"
-                onPress={() => {
-                  setBrandModal(false);
-                }}>
-                <ButtonText className="text-black">Save</ButtonText>
-              </Button>
-            </ModalFooter>
-          </ModalContent>
+          size="full">
+          <ImageBackground
+            source={require("../../../../assets/bg-image.jpg")}
+            style={{ flex: 1 }} // Add padding to avoid overlap with the header
+            resizeMode="cover">
+            <ModalBackdrop />
+            <ModalContent className="h-full bg-transparent border border-transparent">
+              <ModalHeader>
+                <View className="bg-neutral-800 rounded-md mb-4 px-3 py-1 flex-row items-center">
+                  <Ionicons
+                    name="search"
+                    size={16}
+                    color="#A0AEC0"
+                    className="mr-2"
+                  />
+                  <TextInput
+                    placeholder="Search brand name"
+                    placeholderTextColor="#A0AEC0"
+                    className="flex-1 text-white"
+                    value={searchQuery}
+                    onChangeText={(query) => handleSearch(query)}
+                  />
+                </View>
+                <ModalCloseButton>
+                  <Icon
+                    as={CloseIcon}
+                    size="md"
+                    className="stroke-background-400 group-[:hover]/modal-close-button:stroke-background-700 group-[:active]/modal-close-button:stroke-background-900 group-[:focus-visible]/modal-close-button:stroke-background-900"
+                  />
+                </ModalCloseButton>
+              </ModalHeader>
+              <ModalBody>
+                <ScrollView showsVerticalScrollIndicator={false}>
+                  {data.map((brand) => (
+                    <Button
+                      key={brand}
+                      onPress={() => setSelectedBrand(brand)}
+                      className="flex-row justify-between items-center bg-transparent">
+                      <ButtonText className="text-white text-base">
+                        {brand}
+                      </ButtonText>
+                      {selectedBrand === brand && (
+                        <Ionicons name="checkmark" size={20} color="white" />
+                      )}
+                    </Button>
+                  ))}
+                </ScrollView>
+              </ModalBody>
+              <ModalFooter>
+                <Button
+                  variant="outline"
+                  action="secondary"
+                  onPress={() => {
+                    setBrandModal(false);
+                  }}>
+                  <ButtonText>Cancel</ButtonText>
+                </Button>
+                <Button
+                  className="bg-[#E5FF03]"
+                  onPress={() => {
+                    setBrandModal(false);
+                  }}>
+                  <ButtonText className="text-black">Save</ButtonText>
+                </Button>
+              </ModalFooter>
+            </ModalContent>
+          </ImageBackground>
         </Modal>
       </Center>
     </SafeAreaView>

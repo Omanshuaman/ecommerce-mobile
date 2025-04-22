@@ -297,7 +297,7 @@ const Warehouse = () => {
           isOpen={showActionsheet}
           onClose={handleClose}
           className="">
-          <ActionsheetBackdrop className="h-2/3" />
+          <ActionsheetBackdrop className="" />
           <ActionsheetContent className="bg-black border border-black pb-0 absolute -top-36">
             <ActionsheetDragIndicatorWrapper className="pb-4">
               <ActionsheetDragIndicator className="w-12 h-[5px]" />
