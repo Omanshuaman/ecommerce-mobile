@@ -298,29 +298,34 @@ const Warehouse = () => {
           onClose={handleClose}
           className="">
           <ActionsheetBackdrop className="h-2/3" />
-          <ActionsheetContent className="bg-black border border-black pb-0 absolute -top-36 rounded-t-lg">
+          <ActionsheetContent className="bg-black border border-black pb-0 absolute -top-36">
             <ActionsheetDragIndicatorWrapper className="pb-4">
-              <ActionsheetDragIndicator className="w-12 h-2" />
+              <ActionsheetDragIndicator className="w-12 h-[5px]" />
             </ActionsheetDragIndicatorWrapper>
             <View className="border border-white rounded-sm">
               <ActionsheetItem
                 onPress={() =>
                   handleOptionSelect("Add first product", "/add-product", 1)
                 }
-                className="flex-row justify-between items-center border-[0.5px] border-b-white/40 px-5 py-5  ">
+                className="flex-row justify-between items-center border-[0.5px] border-b-white/40 px-5 py-5 active:bg-[#E5FF03] ">
                 <Text
                   className="text-white"
                   style={{ fontSize: 16, fontFamily: "HelveticaNeue-Medium" }}>
                   Add first product
                 </Text>
-                <Feather name="box" size={26} color="white" />
+                <Feather
+                  name="box"
+                  size={26}
+                  color="white"
+                  activeColor="black"
+                />
               </ActionsheetItem>
 
               <ActionsheetItem
                 onPress={() =>
                   handleOptionSelect("Setup Payments", "/setup-payments", 2)
                 }
-                className="flex-row justify-between items-center border-[0.5px] border-b-white/40 px-5 py-5 ">
+                className="flex-row justify-between items-center border-[0.5px] border-b-white/40 px-5 py-5 active:bg-[#E5FF03] ">
                 <Text
                   className="text-white"
                   style={{ fontSize: 16, fontFamily: "HelveticaNeue-Medium" }}>
@@ -337,7 +342,7 @@ const Warehouse = () => {
                     3
                   )
                 }
-                className="flex-row justify-between items-center border-[0.5px] border-b-white/40 px-5 py-5 ">
+                className="flex-row justify-between items-center border-[0.5px] border-b-white/40 px-5 py-5 active:bg-[#E5FF03] ">
                 <Text
                   className="text-white"
                   style={{ fontSize: 16, fontFamily: "HelveticaNeue-Medium" }}>
@@ -350,7 +355,7 @@ const Warehouse = () => {
                 onPress={() =>
                   handleOptionSelect("Make store live", "/make-store-live", 4)
                 }
-                className="flex-row justify-between items-center px-5 py-5 ">
+                className="flex-row justify-between items-center px-5 py-5 active:bg-[#E5FF03]">
                 <Text
                   className="text-white"
                   style={{ fontSize: 16, fontFamily: "HelveticaNeue-Medium" }}>
