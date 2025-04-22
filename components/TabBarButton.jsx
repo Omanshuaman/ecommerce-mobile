@@ -6,6 +6,7 @@ import Animated, {
   withSpring,
 } from "react-native-reanimated";
 import tabicons from "@/constants/tabicons";
+import { SvgUri } from "react-native-svg";
 
 const TabBarButton = (props) => {
   const { isFocused, label, routeName, color } = props;
@@ -36,19 +37,23 @@ const TabBarButton = (props) => {
     ),
     profile: (props) => (
       <Image
-        source={tabicons.person}
-        tintColor="white"
+        source={{
+          uri: "https://randomuser.me/api/portraits/men/1.jpg",
+        }}
         resizeMode="contain"
-        className="size-8"
+        className="size-9 rounded-full"
       />
     ),
   };
-  const backgroundColor = useSharedValue("transparent");
+  const backgroundColor = useSharedValue("rgba(0,0,0,0)");
 
   useEffect(() => {
-    backgroundColor.value = withSpring(isFocused ? "#323232" : "transparent", {
-      duration: 350,
-    });
+    backgroundColor.value = withSpring(
+      isFocused ? "#323232" : "rgba(0,0,0,0)",
+      {
+        duration: 0,
+      }
+    );
   }, [backgroundColor, isFocused]);
 
   const animatedIconStyle = useAnimatedStyle(() => {
