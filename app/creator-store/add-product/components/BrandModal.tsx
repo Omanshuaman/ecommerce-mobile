@@ -23,6 +23,7 @@ import {
   ScrollView,
   SafeAreaView,
   ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 const API_ENDPOINT = "https://randomuser.me/api/?results=50";
 
@@ -81,8 +82,29 @@ const BrandModal = ({
             resizeMode="cover">
             <ModalBackdrop />
             <ModalContent className="h-full bg-transparent border border-transparent">
+              <View className="flex-row items-center justify-between px-2 mb-4">
+                <TouchableOpacity
+                  onPress={() => {
+                    setBrandModal(false);
+                  }}>
+                  <Ionicons name="chevron-back" size={18} color="white" />
+                </TouchableOpacity>
+
+                <Text
+                  className="text-white text-center"
+                  style={{
+                    fontFamily: "HelveticaNeue-Bold",
+                    fontSize: 18,
+                  }}>
+                  Brand
+                </Text>
+
+                {/* Invisible placeholder for spacing */}
+                <View style={{ width: 20 }} />
+              </View>
+
               <ModalHeader>
-                <View className="bg-neutral-800 rounded-md mb-4 px-3 py-1 flex-row items-center">
+                <View className="bg-black border border-white rounded-sm mb-4 px-3 flex-row items-center justify-center w-full">
                   <Ionicons
                     name="search"
                     size={16}
@@ -92,7 +114,7 @@ const BrandModal = ({
                   <TextInput
                     placeholder="Search brand name"
                     placeholderTextColor="#A0AEC0"
-                    className="flex-1 text-white"
+                    className=" text-white"
                     value={searchQuery}
                     onChangeText={(query) => handleSearch(query)}
                   />
@@ -105,38 +127,47 @@ const BrandModal = ({
                   />
                 </ModalCloseButton>
               </ModalHeader>
-              <ModalBody>
-                <ScrollView showsVerticalScrollIndicator={false}>
+              <ModalBody className="px-0">
+                <ScrollView showsVerticalScrollIndicator={false} className="">
                   {data.map((brand) => (
-                    <Button
+                    <TouchableOpacity
                       key={brand}
-                      onPress={() => setSelectedBrand(brand)}
-                      className="flex-row justify-between items-center bg-transparent">
-                      <ButtonText className="text-white text-base">
-                        {brand}
-                      </ButtonText>
-                      {selectedBrand === brand && (
-                        <Ionicons name="checkmark" size={20} color="white" />
-                      )}
-                    </Button>
+                      className="py-3 px-2"
+                      onPress={() => setSelectedBrand(brand)}>
+                      <View
+                        key={brand}
+                        className="flex-row justify-between items-center bg-transparent">
+                        <Text
+                          className="text-white text-base"
+                          style={{
+                            fontFamily: "HelveticaNeue-Bold",
+                            fontSize: 15,
+                          }}>
+                          {brand}
+                        </Text>
+                        {selectedBrand === brand && (
+                          <Ionicons name="checkmark" size={20} color="white" />
+                        )}
+                      </View>
+                    </TouchableOpacity>
                   ))}
                 </ScrollView>
               </ModalBody>
               <ModalFooter>
                 <Button
-                  variant="outline"
-                  action="secondary"
+                  className="bg-[#E5FF03] w-full h-16 rounded-sm shadow-lg shadow-slate-50"
                   onPress={() => {
                     setBrandModal(false);
                   }}>
-                  <ButtonText>Cancel</ButtonText>
-                </Button>
-                <Button
-                  className="bg-[#E5FF03]"
-                  onPress={() => {
-                    setBrandModal(false);
-                  }}>
-                  <ButtonText className="text-black">Save</ButtonText>
+                  <ButtonText
+                    className="text-black"
+                    style={{
+                      fontFamily: "PPFormulaCondensed-Bold",
+                      fontSize: 36,
+                      paddingTop: 30,
+                    }}>
+                    SAVE
+                  </ButtonText>
                 </Button>
               </ModalFooter>
             </ModalContent>
