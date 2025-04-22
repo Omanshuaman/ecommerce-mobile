@@ -33,66 +33,76 @@ export default function OtpPhoneScreen() {
         <KeyboardAvoidingView
           className="flex-1 px-6 justify-center"
           behavior={Platform.OS === "ios" ? "padding" : "height"}>
-          <View className="gap-2">
-            <Text
-              className="text-white mb-2"
-              style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 50 }}>
-              WHAT IS YOUR PHONE NUMBER?
-            </Text>
-            <Text className="mb-32 " style={{ fontSize: 16, color: "white" }}>
-              We will not share with anyone and won’t be on your profile.
-            </Text>
-
-            <View className="border border-yellow-400 rounded-sm flex-row items-center px-4 py-1 mb-4">
+          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+            <View className="gap-2 pt-20">
               <Text
-                className="text-white"
-                style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 35 }}>
-                +91
+                className="text-white mb-2"
+                style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 50 }}>
+                WHAT IS YOUR PHONE NUMBER?
               </Text>
-              <TextInput
-                placeholder="000 000 0000"
-                placeholderTextColor="#888"
-                keyboardType="phone-pad"
-                maxLength={10}
-                autoFocus={true}
-                className="flex-1 text-white"
-                ref={(ref) =>
-                  ref &&
-                  ref.setNativeProps({
-                    style: { fontFamily: "PPFormulaCondensed-Bold" },
-                  })
-                }
+              <Text
+                className="mb-24 "
                 style={{
-                  fontSize: 35,
-                }}
-                value={phoneNumber}
-                onChangeText={setPhoneNumber}
-              />
+                  fontSize: 16,
+                  color: "white",
+                  fontFamily: "HelveticaNeue-Light",
+                }}>
+                We will not share with anyone and won’t be on your profile.
+              </Text>
 
-              <Ionicons name="call-outline" size={28} color="white" />
+              <View className="border border-[#E5FF03] rounded-sm flex-row items-center px-4 mb-4">
+                <Text
+                  className="text-white"
+                  style={{
+                    fontFamily: "PPFormulaCondensed-Bold",
+                    fontSize: 34,
+                  }}>
+                  +91
+                </Text>
+                <TextInput
+                  placeholder="000 000 0000"
+                  placeholderTextColor="#888"
+                  keyboardType="phone-pad"
+                  maxLength={10}
+                  className="flex-1 text-white mt-[6px]"
+                  ref={(ref) =>
+                    ref &&
+                    ref.setNativeProps({
+                      style: { fontFamily: "PPFormulaCondensed-Bold" },
+                    })
+                  }
+                  style={{
+                    fontSize: 34,
+                  }}
+                  value={phoneNumber}
+                  onChangeText={setPhoneNumber}
+                />
+
+                <Ionicons name="call-outline" size={28} color="white" />
+              </View>
+              <View className="">
+                <Link href="/sign-up/otp" asChild>
+                  <TouchableOpacity
+                    className={`bg-[#E5FF03] rounded-sm w-full py-2 justify-center items-center shadow-lg shadow-slate-50 ${
+                      isPressed
+                        ? "bg-[#E5FF03] translate-x-0.5 -translate-y-0.5"
+                        : "bg-[#E5FF03] -translate-x-0.5 -translate-y-0.5"
+                    }`}
+                    onPressIn={() => setIsPressed(true)}
+                    onPressOut={() => setIsPressed(false)}>
+                    <Text
+                      className="text-center text-black uppercase"
+                      style={{
+                        fontFamily: "PPFormulaCondensed-Bold",
+                        fontSize: 36,
+                      }}>
+                      Get OTP
+                    </Text>
+                  </TouchableOpacity>
+                </Link>
+              </View>
             </View>
-            <View className="">
-              <Link href="/sign-up/otp" asChild>
-                <TouchableOpacity
-                  className={`bg-[#E5FF03] rounded-sm w-full py-2 justify-center items-center shadow-lg shadow-slate-50 ${
-                    isPressed
-                      ? "bg-[#E5FF03] translate-x-0.5 -translate-y-0.5"
-                      : "bg-[#E5FF03] -translate-x-0.5 -translate-y-0.5"
-                  }`}
-                  onPressIn={() => setIsPressed(true)}
-                  onPressOut={() => setIsPressed(false)}>
-                  <Text
-                    className="text-center text-black uppercase"
-                    style={{
-                      fontFamily: "PPFormulaCondensed-Bold",
-                      fontSize: 36,
-                    }}>
-                    Get OTP
-                  </Text>
-                </TouchableOpacity>
-              </Link>
-            </View>
-          </View>
+          </ScrollView>
         </KeyboardAvoidingView>
       </ImageBackground>
     </SafeAreaProvider>

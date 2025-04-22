@@ -45,13 +45,12 @@ export default function OtpPhoneScreen() {
                 Enter the OTP sent to +91 9422345432 Change number
               </Text>
 
-              <View className="border border-yellow-400 rounded-sm flex-row items-center px-4 py-1 mb-4">
+              <View className="border border-[#E5FF03] rounded-sm flex-row items-center px-4 py-1 mb-4">
                 <TextInput
                   placeholder="0000"
                   placeholderTextColor="#888"
                   keyboardType="default"
                   maxLength={4}
-                  autoFocus={true}
                   className="flex-1 text-white text-center"
                   ref={(ref) =>
                     ref &&
@@ -70,11 +69,7 @@ export default function OtpPhoneScreen() {
               <View className="h-[66px]">
                 <Link href="/sign-up/name" asChild>
                   <TouchableOpacity
-                    className={`bg-[#E5FF03] rounded-sm w-full py-2 justify-center items-center shadow-lg shadow-slate-50 ${
-                      isPressed
-                        ? "bg-[#E5FF03] translate-x-0.5 -translate-y-0.5"
-                        : "bg-[#E5FF03] -translate-x-0.5 -translate-y-0.5"
-                    }`}
+                    className={`bg-[#E5FF03] rounded-sm w-full py-2 justify-center items-center shadow-lg shadow-slate-50`}
                     onPressIn={() => setIsPressed(true)}
                     onPressOut={() => setIsPressed(false)}>
                     <Text

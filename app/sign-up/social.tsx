@@ -41,7 +41,7 @@ export default function OtpPhoneScreen() {
               This will help us identify your profile
             </Text>
 
-            <View className="border border-yellow-400 rounded-sm flex-row items-center px-4 py-1 mb-4">
+            <View className="border border-[#E5FF03] rounded-sm flex-row items-center px-4 py-1 mb-4">
               <TextInput
                 placeholder="Enter Profile Link"
                 placeholderTextColor="#888"

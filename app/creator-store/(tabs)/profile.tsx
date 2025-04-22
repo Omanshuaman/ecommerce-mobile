@@ -126,7 +126,7 @@ export default function Profile() {
               </TouchableOpacity>
 
               {/* Update Button */}
-              <TouchableOpacity className="bg-yellow-400 py-1 mt-3 items-center shadow-lg shadow-slate-50 rounded-sm w-full">
+              <TouchableOpacity className="bg-[#E5FF03] py-1 mt-3 items-center shadow-lg shadow-slate-50 rounded-sm w-full">
                 <Text
                   className="text-black"
                   style={{

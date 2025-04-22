@@ -82,7 +82,7 @@ export default function ProductDetailsScreen() {
             {/* Absolute Tags */}
             <View className="absolute bottom-6 left-2 flex-row items-center space-x-1 gap-1  ">
               <Text
-                className="bg-yellow-400 text-black text-2xl px-2 pt-0.5 border border-gray-800 shadow-lg shadow-gray-950"
+                className="bg-[#E5FF03] text-black text-2xl px-2 pt-0.5 border border-gray-800 shadow-lg shadow-gray-950"
                 style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 20 }}>
                 OBSESSED
               </Text>
@@ -292,7 +292,7 @@ export default function ProductDetailsScreen() {
               UNPUBLISH
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity className="flex-1 bg-yellow-400 justify-center items-center py-1 rounded-sm shadow-lg shadow-white ">
+          <TouchableOpacity className="flex-1 bg-[#E5FF03] justify-center items-center py-1 rounded-sm shadow-lg shadow-white ">
             <Text
               className="text-black"
               style={{

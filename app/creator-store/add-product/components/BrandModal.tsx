@@ -127,7 +127,7 @@ const BrandModal = ({
                 <ButtonText>Cancel</ButtonText>
               </Button>
               <Button
-                className="bg-yellow-400"
+                className="bg-[#E5FF03]"
                 onPress={() => {
                   setBrandModal(false);
                 }}>

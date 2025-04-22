@@ -257,7 +257,7 @@ const AddPayments = () => {
       </ScrollView>
       {/* Save Button */}
       <TouchableOpacity
-        className="bg-yellow-400 py-1 mt-4 mx-4 rounded-sm shadow-lg shadow-slate-50 items-center"
+        className="bg-[#E5FF03] py-1 mt-4 mx-4 rounded-sm shadow-lg shadow-slate-50 items-center"
         onPress={handleSave}>
         <Text
           className="text-black"

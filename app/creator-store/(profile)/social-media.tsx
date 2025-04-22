@@ -49,7 +49,7 @@ const SocialMedia = () => {
       </ScrollView>
 
       <VStack className="w-full mt-8">
-        <TouchableOpacity className="bg-yellow-400 py-1 items-center shadow-lg shadow-slate-50 rounded-sm">
+        <TouchableOpacity className="bg-[#E5FF03] py-1 items-center shadow-lg shadow-slate-50 rounded-sm">
           <Text
             className="text-black"
             style={{

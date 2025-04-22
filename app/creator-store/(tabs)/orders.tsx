@@ -53,7 +53,7 @@ export default function OrdersScreen() {
                 <View
                   className="ml-2 px-2 py-1 rounded-sm"
                   style={{
-                    backgroundColor: activeTab === tab ? "#facc15" : "#404040", // Yellow-400 or Gray-700
+                    backgroundColor: activeTab === tab ? "#facc15" : "#404040", // [#E5FF03] or Gray-700
                   }}>
                   <Text
                     className="text-sm"

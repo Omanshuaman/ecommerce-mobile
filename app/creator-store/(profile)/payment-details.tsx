@@ -142,7 +142,7 @@ const PaymentDetails = () => {
 
       {/* Add New Payment Button */}
       <TouchableOpacity
-        className="bg-yellow-400 py-2 items-center mt-4 mx-2"
+        className="bg-[#E5FF03] py-2 items-center mt-4 mx-2"
         onPress={() => {
           router.push("/creator-store/add-payments");
         }}>

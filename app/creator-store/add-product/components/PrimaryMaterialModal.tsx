@@ -111,7 +111,7 @@ const PrimaryMaterialModal = ({
                 action="secondary">
                 <ButtonText>Cancel</ButtonText>
               </Button>
-              <Button onPress={handleSave} className="bg-yellow-400">
+              <Button onPress={handleSave} className="bg-[#E5FF03]">
                 <ButtonText className="text-black">Save</ButtonText>
               </Button>
             </ModalFooter>

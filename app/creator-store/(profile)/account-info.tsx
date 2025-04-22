@@ -200,7 +200,7 @@ const AccountInfo = () => {
 
             {/* Update Button */}
             <TouchableOpacity
-              className="bg-yellow-400 py-1 mt-3 items-center shadow-lg shadow-slate-50 rounded-sm"
+              className="bg-[#E5FF03] py-1 mt-3 items-center shadow-lg shadow-slate-50 rounded-sm"
               onPress={handleUpdate}>
               <Text
                 className="text-black"

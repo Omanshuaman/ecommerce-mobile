@@ -641,7 +641,7 @@ const AddProduct = () => {
 
         {/* Publish Button */}
         <TouchableOpacity
-          className="bg-yellow-400 py-2 m-2 rounded-sm shadow-lg shadow-slate-50 items-center"
+          className="bg-[#E5FF03] py-2 m-2 rounded-sm shadow-lg shadow-slate-50 items-center"
           onPress={() => {
             if (validateForm()) {
               const product = {

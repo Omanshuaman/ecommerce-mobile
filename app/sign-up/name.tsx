@@ -43,7 +43,7 @@ export default function OtpPhoneScreen() {
               You won’t be able to change this later.{" "}
             </Text>
 
-            <View className="border border-yellow-400 rounded-sm flex-row items-center px-4 py-1 mb-4">
+            <View className="border border-[#E5FF03] rounded-sm flex-row items-center px-4 py-1 mb-4">
               <TextInput
                 placeholder="Full Name"
                 placeholderTextColor="#888"
