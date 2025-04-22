@@ -92,7 +92,11 @@ const FirstRoute = () => {
         />
       ) : (
         <View className="flex-1 justify-center items-center">
-          <Text className="text-white text-lg">Your Product is Empty</Text>
+          <Image
+            source={require("@/assets/empty-screen.png")}
+            resizeMode="contain"
+            className="w-96"
+          />
         </View>
       )}
     </View>
@@ -106,7 +110,7 @@ const renderScene = SceneMap({
   second: SecondRoute,
 });
 const routes = [
-  { key: "first", title: "Product" },
+  { key: "first", title: "Products" },
   { key: "second", title: "Feed" },
 ];
 const Warehouse = () => {
@@ -293,66 +297,68 @@ const Warehouse = () => {
           isOpen={showActionsheet}
           onClose={handleClose}
           className="">
-          <ActionsheetBackdrop />
-          <ActionsheetContent className="bg-black border border-dashed pb-0">
-            <ActionsheetDragIndicatorWrapper>
-              <ActionsheetDragIndicator />
+          <ActionsheetBackdrop className="h-2/3" />
+          <ActionsheetContent className="bg-black border border-black pb-0 absolute -top-36 rounded-t-lg">
+            <ActionsheetDragIndicatorWrapper className="pb-4">
+              <ActionsheetDragIndicator className="w-12 h-2" />
             </ActionsheetDragIndicatorWrapper>
-            <ActionsheetItem
-              onPress={() =>
-                handleOptionSelect("Add first product", "/add-product", 1)
-              }
-              className="flex-row justify-between items-center border-[0.5px] border-b-white/40 h-20">
-              <Text
-                className="text-white"
-                style={{ fontSize: 16, fontFamily: "HelveticaNeue-Medium" }}>
-                Add first product
-              </Text>
-              <Feather name="box" size={26} color="white" />
-            </ActionsheetItem>
+            <View className="border border-white rounded-sm">
+              <ActionsheetItem
+                onPress={() =>
+                  handleOptionSelect("Add first product", "/add-product", 1)
+                }
+                className="flex-row justify-between items-center border-[0.5px] border-b-white/40 px-5 py-5  ">
+                <Text
+                  className="text-white"
+                  style={{ fontSize: 16, fontFamily: "HelveticaNeue-Medium" }}>
+                  Add first product
+                </Text>
+                <Feather name="box" size={26} color="white" />
+              </ActionsheetItem>
 
-            <ActionsheetItem
-              onPress={() =>
-                handleOptionSelect("Setup Payments", "/setup-payments", 2)
-              }
-              className="flex-row justify-between items-center border-[0.5px] border-b-white/40 h-20">
-              <Text
-                className="text-white"
-                style={{ fontSize: 16, fontFamily: "HelveticaNeue-Medium" }}>
-                Setup Payments
-              </Text>
-              <MaterialIcons name="payment" size={26} color="white" />
-            </ActionsheetItem>
+              <ActionsheetItem
+                onPress={() =>
+                  handleOptionSelect("Setup Payments", "/setup-payments", 2)
+                }
+                className="flex-row justify-between items-center border-[0.5px] border-b-white/40 px-5 py-5 ">
+                <Text
+                  className="text-white"
+                  style={{ fontSize: 16, fontFamily: "HelveticaNeue-Medium" }}>
+                  Setup Payments
+                </Text>
+                <MaterialIcons name="payment" size={26} color="white" />
+              </ActionsheetItem>
 
-            <ActionsheetItem
-              onPress={() =>
-                handleOptionSelect(
-                  "Setup pickup address",
-                  "/setup-pickup-address",
-                  3
-                )
-              }
-              className="flex-row justify-between items-center border-[0.5px] border-b-white/40 h-20">
-              <Text
-                className="text-white"
-                style={{ fontSize: 16, fontFamily: "HelveticaNeue-Medium" }}>
-                Setup pickup address
-              </Text>
-              <Ionicons name="location-outline" size={26} color="white" />
-            </ActionsheetItem>
+              <ActionsheetItem
+                onPress={() =>
+                  handleOptionSelect(
+                    "Setup pickup address",
+                    "/setup-pickup-address",
+                    3
+                  )
+                }
+                className="flex-row justify-between items-center border-[0.5px] border-b-white/40 px-5 py-5 ">
+                <Text
+                  className="text-white"
+                  style={{ fontSize: 16, fontFamily: "HelveticaNeue-Medium" }}>
+                  Setup pickup address
+                </Text>
+                <Ionicons name="location-outline" size={26} color="white" />
+              </ActionsheetItem>
 
-            <ActionsheetItem
-              onPress={() =>
-                handleOptionSelect("Make store live", "/make-store-live", 4)
-              }
-              className="flex-row justify-between items-center h-20">
-              <Text
-                className="text-white"
-                style={{ fontSize: 16, fontFamily: "HelveticaNeue-Medium" }}>
-                Make store live
-              </Text>
-              <Ionicons name="storefront-outline" size={26} color="white" />
-            </ActionsheetItem>
+              <ActionsheetItem
+                onPress={() =>
+                  handleOptionSelect("Make store live", "/make-store-live", 4)
+                }
+                className="flex-row justify-between items-center px-5 py-5 ">
+                <Text
+                  className="text-white"
+                  style={{ fontSize: 16, fontFamily: "HelveticaNeue-Medium" }}>
+                  Make store live
+                </Text>
+                <Ionicons name="storefront-outline" size={26} color="white" />
+              </ActionsheetItem>
+            </View>
           </ActionsheetContent>
         </Actionsheet>
       </ImageBackground>

@@ -43,14 +43,14 @@ export default function OtpPhoneScreen() {
               You won’t be able to change this later.{" "}
             </Text>
 
-            <View className="border border-[#E5FF03] rounded-sm flex-row items-center px-4 py-1 mb-4">
+            <View className="border border-[#E5FF03] rounded-sm flex-row items-center px-4 mb-4">
               <TextInput
                 placeholder="Full Name"
                 placeholderTextColor="#888"
                 keyboardType="default"
                 maxLength={50}
                 autoFocus={true}
-                className="flex-1 text-white"
+                className="flex-1 text-white mt-1"
                 ref={(ref) =>
                   ref &&
                   ref.setNativeProps({
