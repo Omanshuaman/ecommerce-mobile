@@ -10,7 +10,13 @@ import {
   ImageBackground,
 } from "react-native";
 import { Image } from "react-native";
-import { AntDesign, Ionicons, MaterialIcons } from "@expo/vector-icons";
+import {
+  AntDesign,
+  Feather,
+  FontAwesome6,
+  Ionicons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
 import { useRouter } from "expo-router";
@@ -182,7 +188,7 @@ const AddProduct = () => {
           {/* Upload Photo & Reel */}
           <View className="flex-row justify-between gap-2 mb-4 px-2 mr-2">
             {image ? (
-              <TouchableOpacity className="w-2/3 mx-auto border border-white relative rounded-sm h-64">
+              <TouchableOpacity className="w-3/5 mx-auto border border-white relative rounded-sm h-60">
                 <Image
                   source={{ uri: image }}
                   resizeMode="cover"
@@ -205,7 +211,7 @@ const AddProduct = () => {
             ) : (
               <TouchableOpacity
                 onPress={pickImage}
-                className="w-2/3 mx-auto border border-white items-center justify-center rounded-sm h-64">
+                className="w-3/5 mx-auto border border-white items-center justify-center rounded-sm h-60">
                 <Ionicons name="image-outline" size={24} color="white" />
                 <Text
                   className="text-white mt-2"
@@ -218,51 +224,68 @@ const AddProduct = () => {
             )}
           </View>
           <View className="px-6">
-            <ScrollView horizontal className="mb-4">
+            <ScrollView horizontal className="mb-2">
               {mediaFiles.map((file, index) => (
                 <View key={index} className="relative mr-4">
                   {file.type === "image" ? (
                     <Image
                       source={{ uri: file.uri }}
-                      resizeMode="contain"
-                      className="w-48 h-56 rounded-sm bg-black"
+                      resizeMode="cover"
+                      className="w-40 h-48 rounded-sm bg-black"
                     />
                   ) : (
                     <Video
                       source={{ uri: file.uri }}
-                      className="w-32 h-32 rounded-sm bg-black"
-                      style={{ width: 192, height: 224 }}
+                      className="rounded-sm bg-black"
+                      style={{ width: 160, height: 192 }}
                       useNativeControls
                     />
                   )}
-                  <Text
+                  <TouchableOpacity
                     onPress={() => {
                       setMediaFiles((prev) =>
                         prev.filter((_, i) => i !== index)
                       );
                     }}
-                    className="bg-red-600 w-fit absolute top-2 right-2 rounded-md p-1 px-3 text-white font-bold text-xl"
+                    className="absolute text-white bg-black px-2 py-2 rounded-sm"
                     style={{
-                      fontFamily: "HelveticaNeue-Medium",
+                      top: "15%",
+                      left: "50%",
+                      transform: [{ translateX: -16 }],
                     }}>
-                    X
-                  </Text>
+                    <AntDesign name="delete" size={14} color="white" />
+                  </TouchableOpacity>
                 </View>
               ))}
             </ScrollView>
 
-            {/* Add Another Media */}
-            <TouchableOpacity
-              onPress={addAnotherMedia}
-              className="border border-dashed border-white py-3 rounded-md mb-4 items-center">
-              <Text
-                className="text-white"
-                style={{
-                  fontFamily: "HelveticaNeue-Medium",
-                }}>
-                Add more
-              </Text>
-            </TouchableOpacity>
+            <View className="">
+              <View className="flex-row justify-between items-center mb-4">
+                {/* Left: Heading */}
+                <Text
+                  className="text-white text-base"
+                  style={{
+                    fontFamily: "HelveticaNeue-Light",
+                  }}>
+                  Product Information
+                </Text>
+
+                {/* Right: Add more button */}
+                <TouchableOpacity
+                  onPress={addAnotherMedia}
+                  className="flex-row items-center gap-2 border border-white/60 px-4 py-2.5 rounded-sm">
+                  <FontAwesome6 name="photo-film" size={16} color="white" />
+                  <Text
+                    className="text-white text-lg"
+                    style={{
+                      fontFamily: "HelveticaNeue-Light",
+                    }}>
+                    Add more
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
             <View className="py-2">
               <Text
                 className="text-white mb-2"
@@ -276,7 +299,7 @@ const AddProduct = () => {
               <TextInput
                 placeholder="ENTER AN ENGAGING NAME"
                 placeholderTextColor="#888"
-                className="border border-white rounded-sm px-4 pt-2 text-white pb-1"
+                className="border border-white rounded-sm px-3 pt-1.5 text-white pb-0"
                 style={{
                   fontSize: 26,
                 }}
