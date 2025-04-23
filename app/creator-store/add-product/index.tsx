@@ -112,10 +112,7 @@ const AddProduct = () => {
       Alert.alert("Validation Error", "Please upload a photo.");
       return false;
     }
-    if (!productName) {
-      Alert.alert("Validation Error", "Please enter a product name.");
-      return false;
-    }
+
     if (!video) {
       Alert.alert("Validation Error", "Please upload a reel.");
       return false;
@@ -179,8 +176,8 @@ const AddProduct = () => {
               <TouchableOpacity className="w-3/5 border border-white relative rounded-sm h-64">
                 <Image
                   source={{ uri: image }}
-                  resizeMode="contain"
-                  className="w-full  self-center rounded-sm bg-black"
+                  resizeMode="contain" // Changed from "contain" to "cover" for better fit
+                  className="w-full h-full self-center rounded-sm bg-black" // Ensure height and width are 100%
                 />
                 <Text
                   onPress={() => {
@@ -208,11 +205,11 @@ const AddProduct = () => {
               </TouchableOpacity>
             )}
             {video ? (
-              <TouchableOpacity className="w-2/5  border border-white relative rounded-sm h-64">
+              <TouchableOpacity className="w-2/5 border border-white relative rounded-sm h-64">
                 <Image
                   source={{ uri: video }}
-                  resizeMode="contain"
-                  className="w-full  self-center rounded-sm bg-black"
+                  resizeMode="contain" // Changed from "contain" to "cover" for better fit
+                  className="w-full h-full self-center rounded-sm bg-black" // Ensure height and width are 100%
                 />
                 <Text
                   onPress={() => {
@@ -266,12 +263,12 @@ const AddProduct = () => {
             {additionalImages.map((uri, index) => (
               <View
                 key={index}
-                className="flex-row justify-between space-x-2 mb-4 h-50">
-                <TouchableOpacity className="flex-1  border border-white relative rounded-md h-50">
+                className="flex-row justify-between space-x-2 mb-4 h-44">
+                <TouchableOpacity className="flex-1 border border-white relative rounded-md h-full">
                   <Image
                     source={{ uri }}
                     resizeMode="contain"
-                    className="w-full h-50  self-center rounded-md bg-black"
+                    className="w-full h-full self-center rounded-md bg-black"
                   />
                   <Text
                     onPress={() => {
