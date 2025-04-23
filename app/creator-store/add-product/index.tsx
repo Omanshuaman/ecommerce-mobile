@@ -39,11 +39,14 @@ import {
 } from "@/components/ui/icon";
 import { Divider } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Video } from "expo-av";
 
 const AddProduct = () => {
   const [image, setImage] = useState<string | null>(null);
   const [video, setVideo] = useState<string | null>(null);
-  const [additionalImages, setAdditionalImages] = useState<string[]>([]);
+  const [mediaFiles, setMediaFiles] = useState<{ uri: string; type: string }[]>(
+    []
+  );
   const router = useRouter();
   const [selectedBrand, setSelectedBrand] = useState<string | null>("");
   const [brandmodal, setBrandModal] = useState(false);
@@ -96,14 +99,20 @@ const AddProduct = () => {
     }
   };
 
-  const addAnotherPhoto = async () => {
+  const addAnotherMedia = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
       quality: 1,
     });
 
     if (!result.canceled) {
-      setAdditionalImages((prev) => [...prev, result.assets[0].uri]);
+      const fileType = result.assets[0].type?.includes("video")
+        ? "video"
+        : "image";
+      setMediaFiles((prev) => [
+        ...prev,
+        { uri: result.assets[0].uri, type: fileType },
+      ]);
     }
   };
 
@@ -209,38 +218,42 @@ const AddProduct = () => {
             )}
           </View>
           <View className="px-6">
-            {/* Display additional photos */}
-            {additionalImages.map((uri, index) => (
-              <View
-                key={index}
-                className="flex-row justify-between space-x-2 mb-4 h-44">
-                <TouchableOpacity className="flex-1 border border-white relative rounded-md h-full">
-                  <Image
-                    source={{ uri }}
-                    resizeMode="contain"
-                    className="w-full h-full self-center rounded-md bg-black"
-                  />
+            <ScrollView horizontal className="mb-4">
+              {mediaFiles.map((file, index) => (
+                <View key={index} className="relative mr-4">
+                  {file.type === "image" ? (
+                    <Image
+                      source={{ uri: file.uri }}
+                      resizeMode="contain"
+                      className="w-48 h-56 rounded-sm bg-black"
+                    />
+                  ) : (
+                    <Video
+                      source={{ uri: file.uri }}
+                      className="w-32 h-32 rounded-sm bg-black"
+                      style={{ width: 192, height: 224 }}
+                      useNativeControls
+                    />
+                  )}
                   <Text
                     onPress={() => {
-                      setAdditionalImages((prev) =>
-                        prev.filter((image) => {
-                          return image !== uri;
-                        })
+                      setMediaFiles((prev) =>
+                        prev.filter((_, i) => i !== index)
                       );
                     }}
-                    className="bg-red-600 w-fit absolute top-3 right-4 rounded-md p-1 px-3 text-white font-bold text-xl"
+                    className="bg-red-600 w-fit absolute top-2 right-2 rounded-md p-1 px-3 text-white font-bold text-xl"
                     style={{
                       fontFamily: "HelveticaNeue-Medium",
                     }}>
                     X
                   </Text>
-                </TouchableOpacity>
-              </View>
-            ))}
+                </View>
+              ))}
+            </ScrollView>
 
-            {/* Add Another Photo */}
+            {/* Add Another Media */}
             <TouchableOpacity
-              onPress={addAnotherPhoto}
+              onPress={addAnotherMedia}
               className="border border-dashed border-white py-3 rounded-md mb-4 items-center">
               <Text
                 className="text-white"
@@ -645,7 +658,7 @@ const AddProduct = () => {
               const product = {
                 image,
                 video,
-                additionalImages,
+                mediaFiles, // Include all uploaded media
                 selectedBrand,
                 selectedCategory,
                 originalPrice,
