@@ -41,7 +41,7 @@ const TabBarButton = (props) => {
           uri: "https://randomuser.me/api/portraits/men/1.jpg",
         }}
         resizeMode="contain"
-        className="size-9 rounded-full"
+        className="size-8 rounded-full"
       />
     ),
   };
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   iconContainer: {
-    paddingHorizontal: 18,
+    paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 4,
   },
