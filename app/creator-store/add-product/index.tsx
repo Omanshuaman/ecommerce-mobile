@@ -83,6 +83,8 @@ const AddProduct = () => {
   const [occasionModal, setOccasionModal] = useState(false);
   const [selectedOccasion, setSelectedOccasion] = useState<string | null>("");
 
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ["images"],
@@ -123,44 +125,25 @@ const AddProduct = () => {
   };
 
   const validateForm = () => {
-    if (!image) {
-      Alert.alert("Validation Error", "Please upload a photo.");
-      return false;
-    }
+    const newErrors: { [key: string]: string } = {};
 
-    if (!video) {
-      Alert.alert("Validation Error", "Please upload a reel.");
-      return false;
-    }
-    if (!selectedBrand) {
-      Alert.alert("Validation Error", "Please select a brand.");
-      return false;
-    }
-    if (selectedCategory.length === 0) {
-      Alert.alert("Validation Error", "Please select at least one category.");
-      return false;
-    }
-    if (!originalPrice || isNaN(Number(originalPrice))) {
-      Alert.alert("Validation Error", "Please enter a valid original price.");
-      return false;
-    }
-    if (!discountedPrice || isNaN(Number(discountedPrice))) {
-      Alert.alert("Validation Error", "Please enter a valid discounted price.");
-      return false;
-    }
-    if (!pieces || isNaN(Number(pieces))) {
-      Alert.alert("Validation Error", "Please enter a valid number of pieces.");
-      return false;
-    }
-    if (!description) {
-      Alert.alert("Validation Error", "Please provide a design description.");
-      return false;
-    }
-    if (!selectedProductCondition) {
-      Alert.alert("Validation Error", "Please select a product condition.");
-      return false;
-    }
-    return true;
+    if (!image) newErrors.image = "Please upload a photo.";
+    if (!productName) newErrors.productName = "Please enter a product name.";
+    if (!selectedBrand) newErrors.selectedBrand = "Please select a brand.";
+    if (selectedCategory.length === 0)
+      newErrors.selectedCategory = "Please select at least one category.";
+    if (!originalPrice || isNaN(Number(originalPrice)))
+      newErrors.originalPrice = "Please enter a valid original price.";
+    if (!discountedPrice || isNaN(Number(discountedPrice)))
+      newErrors.discountedPrice = "Please enter a valid discounted price.";
+    if (!pieces || isNaN(Number(pieces)))
+      newErrors.pieces = "Please enter a valid number of pieces.";
+
+    if (!selectedProductCondition)
+      newErrors.selectedProductCondition = "Please select a product condition.";
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const saveProductToFile = async (product: object) => {
@@ -223,6 +206,9 @@ const AddProduct = () => {
               </TouchableOpacity>
             )}
           </View>
+          {errors.image && (
+            <Text className="text-red-500 text-sm px-2">{errors.image}</Text>
+          )}
           <View className="px-6">
             <ScrollView horizontal className="mb-2">
               {mediaFiles.map((file, index) => (
@@ -311,6 +297,9 @@ const AddProduct = () => {
                 }
               />
             </View>
+            {errors.productName && (
+              <Text className="text-red-500 text-sm">{errors.productName}</Text>
+            )}
             <TouchableOpacity
               className="flex-row justify-between items-center py-3"
               onPress={() => setBrandModal(true)}>
@@ -332,6 +321,11 @@ const AddProduct = () => {
                 <Ionicons name="chevron-forward" size={18} color="white" />
               </View>
             </TouchableOpacity>
+            {errors.selectedBrand && (
+              <Text className="text-red-500 text-sm">
+                {errors.selectedBrand}
+              </Text>
+            )}
             <BrandModal
               brandModal={brandmodal}
               selectedBrand={selectedBrand}
@@ -359,6 +353,11 @@ const AddProduct = () => {
                 <Ionicons name="chevron-forward" size={18} color="white" />
               </View>
             </TouchableOpacity>
+            {errors.selectedCategory && (
+              <Text className="text-red-500 text-sm">
+                {errors.selectedCategory}
+              </Text>
+            )}
             <CategoryModal
               categoryModal={categorymodal}
               selectedCategory={selectedCategory}
@@ -404,6 +403,11 @@ const AddProduct = () => {
                 />
               </View>
             </View>
+            {errors.originalPrice && (
+              <Text className="text-red-500 text-sm">
+                {errors.originalPrice}
+              </Text>
+            )}
             <View className="flex-row justify-between items-center py-1">
               <Text
                 className="text-white"
@@ -441,6 +445,11 @@ const AddProduct = () => {
                 />
               </View>
             </View>
+            {errors.discountedPrice && (
+              <Text className="text-red-500 text-sm">
+                {errors.discountedPrice}
+              </Text>
+            )}
             <View className="flex-row justify-between items-center py-1">
               <Text
                 className="text-white"
@@ -472,6 +481,9 @@ const AddProduct = () => {
                 />
               </View>
             </View>
+            {errors.pieces && (
+              <Text className="text-red-500 text-sm">{errors.pieces}</Text>
+            )}
             <TouchableOpacity
               className="flex-row justify-between items-center py-5"
               onPress={() => setProductConditionModal(true)}>
@@ -493,6 +505,11 @@ const AddProduct = () => {
                 <Ionicons name="chevron-forward" size={18} color="white" />
               </View>
             </TouchableOpacity>
+            {errors.selectedProductCondition && (
+              <Text className="text-red-500 text-sm">
+                {errors.selectedProductCondition}
+              </Text>
+            )}
             <ProductConditionModal
               productConditionModal={productConditionmodal}
               setProductConditionModal={setProductConditionModal}
@@ -573,6 +590,7 @@ const AddProduct = () => {
                         }}
                       />
                     </View>
+
                     <TouchableOpacity
                       className="flex-row justify-between items-center py-3"
                       onPress={() => setPrimaryMaterialModal(true)}>
