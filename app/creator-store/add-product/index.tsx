@@ -10,7 +10,7 @@ import {
   ImageBackground,
 } from "react-native";
 import { Image } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { AntDesign, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
 import { useRouter } from "expo-router";
@@ -76,7 +76,7 @@ const AddProduct = () => {
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      mediaTypes: ["images"],
       quality: 1,
     });
 
@@ -87,7 +87,7 @@ const AddProduct = () => {
 
   const pickVideo = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Videos,
+      mediaTypes: ["images", "videos"],
       quality: 1,
     });
 
@@ -173,27 +173,30 @@ const AddProduct = () => {
           {/* Upload Photo & Reel */}
           <View className="flex-row justify-between gap-2 mb-4 px-2 mr-2">
             {image ? (
-              <TouchableOpacity className="w-3/5 border border-white relative rounded-sm h-64">
+              <TouchableOpacity className="w-2/3 mx-auto border border-white relative rounded-sm h-64">
                 <Image
                   source={{ uri: image }}
-                  resizeMode="contain" // Changed from "contain" to "cover" for better fit
-                  className="w-full h-full self-center rounded-sm bg-black" // Ensure height and width are 100%
+                  resizeMode="cover"
+                  className="w-full h-full self-center rounded-sm bg-black"
                 />
-                <Text
+
+                <TouchableOpacity
                   onPress={() => {
                     setImage(null);
                   }}
-                  className="bg-red-600 w-fit absolute top-3 right-4 rounded-sm p-1 px-3 text-white font-bold text-xl"
+                  className="absolute text-white bg-black p-3 rounded-sm"
                   style={{
-                    fontFamily: "HelveticaNeue-Medium",
+                    bottom: "5%",
+                    left: "50%",
+                    transform: [{ translateX: -16 }],
                   }}>
-                  X
-                </Text>
+                  <AntDesign name="delete" size={14} color="white" />
+                </TouchableOpacity>
               </TouchableOpacity>
             ) : (
               <TouchableOpacity
                 onPress={pickImage}
-                className="w-3/5 border border-white items-center justify-center rounded-sm h-64">
+                className="w-2/3 mx-auto border border-white items-center justify-center rounded-sm h-64">
                 <Ionicons name="image-outline" size={24} color="white" />
                 <Text
                   className="text-white mt-2"
@@ -202,59 +205,6 @@ const AddProduct = () => {
                   }}>
                   Upload Photo
                 </Text>
-              </TouchableOpacity>
-            )}
-            {video ? (
-              <TouchableOpacity className="w-2/5 border border-white relative rounded-sm h-64">
-                <Image
-                  source={{ uri: video }}
-                  resizeMode="contain" // Changed from "contain" to "cover" for better fit
-                  className="w-full h-full self-center rounded-sm bg-black" // Ensure height and width are 100%
-                />
-                <Text
-                  onPress={() => {
-                    setVideo(null);
-                  }}
-                  className="bg-red-600 w-fit absolute top-3 right-4 rounded-sm p-1 px-3 text-white font-bold text-xl"
-                  style={{
-                    fontFamily: "HelveticaNeue-Medium",
-                  }}>
-                  X
-                </Text>
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity
-                onPress={pickVideo}
-                className="w-2/5 h-64 border border-white items-center justify-between rounded-sm px-2 py-2"
-                style={{
-                  backgroundColor: "transparent",
-                }}>
-                <View></View>
-                <View className="items-center justify-center">
-                  <Ionicons name="film-outline" size={28} color="white" />
-                  <Text
-                    className="text-white mt-2 text-center"
-                    style={{
-                      fontFamily: "HelveticaNeue-Medium",
-                      fontSize: 14,
-                    }}>
-                    Upload{"\n"}Reel
-                  </Text>
-                </View>
-                <View className="items-center justify-center">
-                  <Text className="text-white mt-4">or</Text>
-
-                  <TouchableOpacity className="border border-white px-3 py-1 mt-2 rounded-sm">
-                    <Text
-                      className="text-white"
-                      style={{
-                        fontFamily: "HelveticaNeue-Medium",
-                        fontSize: 13,
-                      }}>
-                      Choose a reel
-                    </Text>
-                  </TouchableOpacity>
-                </View>
               </TouchableOpacity>
             )}
           </View>
@@ -297,10 +247,34 @@ const AddProduct = () => {
                 style={{
                   fontFamily: "HelveticaNeue-Medium",
                 }}>
-                Add another photo
+                Add more
               </Text>
             </TouchableOpacity>
+            <View className="py-2">
+              <Text
+                className="text-white mb-2"
+                style={{
+                  fontFamily: "HelveticaNeue-Medium",
+                  fontSize: 14,
+                }}>
+                Product Name
+              </Text>
 
+              <TextInput
+                placeholder="ENTER AN ENGAGING NAME"
+                placeholderTextColor="#888"
+                className="border border-white rounded-sm px-4 pt-2 text-white pb-1"
+                style={{
+                  fontSize: 26,
+                }}
+                ref={(ref) =>
+                  ref &&
+                  ref.setNativeProps({
+                    style: { fontFamily: "PPFormulaCondensed-Bold" },
+                  })
+                }
+              />
+            </View>
             <TouchableOpacity
               className="flex-row justify-between items-center py-3"
               onPress={() => setBrandModal(true)}>
@@ -355,31 +329,6 @@ const AddProduct = () => {
               setCategoryModal={setCategoryModal}
               setSelectedCategory={setSelectedCategory}
             />
-            <View className="py-2">
-              <Text
-                className="text-white mb-2"
-                style={{
-                  fontFamily: "HelveticaNeue-Medium",
-                  fontSize: 14,
-                }}>
-                Product Name
-              </Text>
-
-              <TextInput
-                placeholder="ENTER AN ENGAGING NAME"
-                placeholderTextColor="#888"
-                className="border border-white rounded-sm px-4 pt-3 text-white"
-                style={{
-                  fontSize: 20,
-                }}
-                ref={(ref) =>
-                  ref &&
-                  ref.setNativeProps({
-                    style: { fontFamily: "PPFormulaCondensed-Bold" },
-                  })
-                }
-              />
-            </View>
 
             <View className="flex-row justify-between items-center py-2">
               <Text
@@ -399,8 +348,9 @@ const AddProduct = () => {
                 </Text>
                 <TextInput
                   keyboardType="numeric"
-                  className=" text-white w-16 text-center rounded-sm border border-white"
+                  className=" text-white w-fit px-4 text-center rounded-sm border border-white pt-1 pb-0"
                   placeholder="0000"
+                  maxLength={8}
                   placeholderTextColor="#888"
                   ref={(ref) =>
                     ref &&
@@ -409,7 +359,7 @@ const AddProduct = () => {
                     })
                   }
                   style={{
-                    fontSize: 15,
+                    fontSize: 25,
                   }}
                   value={originalPrice ?? ""}
                   onChangeText={(text) => {

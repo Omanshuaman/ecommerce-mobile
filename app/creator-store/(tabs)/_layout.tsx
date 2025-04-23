@@ -1,6 +1,6 @@
 import { View, Text, Image, Modal } from "react-native";
 import React from "react";
-import { Tabs, usePathname, useRouter } from "expo-router";
+import { router, Tabs, usePathname, useRouter } from "expo-router";
 import {
   Actionsheet,
   ActionsheetContent,
@@ -67,8 +67,7 @@ const TabsLayout = () => {
           <View className="border border-white/90 rounded-md">
             <ActionsheetItem
               onPress={() => {
-                // Handle "Add a new product" action
-                handleClose();
+                router.push("/creator-store/add-product");
               }}
               className="flex-row justify-between items-center px-5 py-6 active:bg-[#E5FF03]">
               <Text
