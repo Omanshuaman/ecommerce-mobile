@@ -48,42 +48,36 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Video } from "expo-av";
 
 const AddProduct = () => {
-  const [image, setImage] = useState<string | null>(null);
-  const [video, setVideo] = useState<string | null>(null);
-  const [mediaFiles, setMediaFiles] = useState<{ uri: string; type: string }[]>(
-    []
-  );
-  const router = useRouter();
-  const [selectedBrand, setSelectedBrand] = useState<string | null>("");
+  const [product, setProduct] = useState({
+    image: null,
+    video: null,
+    mediaFiles: [] as { uri: string; type: "image" | "video" }[],
+    selectedBrand: "",
+    selectedCategory: [],
+    originalPrice: "",
+    discountedPrice: "",
+    pieces: "",
+    description: "",
+    selectedProductCondition: "",
+    selectedPrimaryMaterial: "",
+    selectedPrimaryColor: "",
+    selectedOccasion: "",
+    productName: "",
+    conditionDescription: "",
+  });
   const [brandmodal, setBrandModal] = useState(false);
-  const [originalPrice, setOriginalPrice] = useState<string | null>("");
-  const [discountedPrice, setDiscountedPrice] = useState<string | null>("");
-  const [pieces, setPieces] = useState<string | null>("");
-  const [description, setDescription] = useState<string | null>("");
-  const [productConditionmodal, setProductConditionModal] = useState(false);
-  const [selectedProductCondition, setSelectedProductCondition] = useState<
-    string | null
-  >("");
-  const [productName, setProductName] = useState<string | null>("");
-  const [conditionDescription, setConditionDescription] = useState("");
-
-  const [selectedCategory, setSelectedCategory] = useState<string[]>([]);
   const [categorymodal, setCategoryModal] = useState(false);
-
+  const [productConditionmodal, setProductConditionModal] = useState(false);
   const [primaryMaterialModal, setPrimaryMaterialModal] = useState(false);
-  const [selectedPrimaryMaterial, setSelectedPrimaryMaterial] = useState<
-    string | null
-  >("");
-
   const [primaryColorModal, setPrimaryColorModal] = useState(false);
-  const [selectedPrimaryColor, setSelectedPrimaryColor] = useState<
-    string | null
-  >("");
-
   const [occasionModal, setOccasionModal] = useState(false);
-  const [selectedOccasion, setSelectedOccasion] = useState<string | null>("");
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const router = useRouter();
+
+  const updateProduct = (key: string, value: any) => {
+    setProduct((prev) => ({ ...prev, [key]: value }));
+  };
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -92,7 +86,7 @@ const AddProduct = () => {
     });
 
     if (!result.canceled) {
-      setImage(result.assets[0].uri);
+      updateProduct("image", result.assets[0].uri);
     }
   };
 
@@ -103,7 +97,7 @@ const AddProduct = () => {
     });
 
     if (!result.canceled) {
-      setVideo(result.assets[0].uri);
+      updateProduct("video", result.assets[0].uri);
     }
   };
 
@@ -117,8 +111,8 @@ const AddProduct = () => {
       const fileType = result.assets[0].type?.includes("video")
         ? "video"
         : "image";
-      setMediaFiles((prev) => [
-        ...prev,
+      updateProduct("mediaFiles", [
+        ...product.mediaFiles,
         { uri: result.assets[0].uri, type: fileType },
       ]);
     }
@@ -127,30 +121,30 @@ const AddProduct = () => {
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
 
-    if (!image) newErrors.image = "Please upload a photo.";
-    if (!productName) newErrors.productName = "Please enter a product name.";
-    if (!selectedBrand) newErrors.selectedBrand = "Please select a brand.";
-    if (selectedCategory.length === 0)
+    if (!product.image) newErrors.image = "Please upload a photo.";
+    if (!product.productName)
+      newErrors.productName = "Please enter a product name.";
+    if (!product.selectedBrand)
+      newErrors.selectedBrand = "Please select a brand.";
+    if (product.selectedCategory.length === 0)
       newErrors.selectedCategory = "Please select at least one category.";
-    if (!originalPrice || isNaN(Number(originalPrice)))
+    if (!product.originalPrice || isNaN(Number(product.originalPrice)))
       newErrors.originalPrice = "Please enter a valid original price.";
-    if (!discountedPrice || isNaN(Number(discountedPrice)))
+    if (!product.discountedPrice || isNaN(Number(product.discountedPrice)))
       newErrors.discountedPrice = "Please enter a valid discounted price.";
-    if (!pieces || isNaN(Number(pieces)))
+    if (!product.pieces || isNaN(Number(product.pieces)))
       newErrors.pieces = "Please enter a valid number of pieces.";
-
-    if (!selectedProductCondition)
+    if (!product.selectedProductCondition)
       newErrors.selectedProductCondition = "Please select a product condition.";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const saveProductToFile = async (product: object) => {
+  const saveProductToFile = async () => {
     try {
       const existingData = await AsyncStorage.getItem("myData");
       const parsedData = existingData ? JSON.parse(existingData) : [];
-
       const updatedData = [...parsedData, product];
 
       await AsyncStorage.setItem("myData", JSON.stringify(updatedData));
@@ -164,24 +158,21 @@ const AddProduct = () => {
   return (
     <ImageBackground
       source={require("../../../assets/bg-image.jpg")}
-      style={{ flex: 1, paddingTop: 50 }} // Add padding to avoid overlap with the header
+      style={{ flex: 1, paddingTop: 50 }}
       resizeMode="cover">
       <SafeAreaView className="flex-1">
         <ScrollView className=" py-2 " nestedScrollEnabled={true}>
           {/* Upload Photo & Reel */}
           <View className="flex-row justify-between gap-2 mb-4 px-2 mr-2">
-            {image ? (
+            {product.image ? (
               <TouchableOpacity className="w-3/5 mx-auto border border-white relative rounded-sm h-60">
                 <Image
-                  source={{ uri: image }}
+                  source={{ uri: product.image }}
                   resizeMode="cover"
                   className="w-full h-full self-center rounded-sm bg-black"
                 />
-
                 <TouchableOpacity
-                  onPress={() => {
-                    setImage(null);
-                  }}
+                  onPress={() => updateProduct("image", null)}
                   className="absolute text-white bg-black p-3 rounded-sm"
                   style={{
                     bottom: "5%",
@@ -211,7 +202,7 @@ const AddProduct = () => {
           )}
           <View className="px-6">
             <ScrollView horizontal className="mb-2">
-              {mediaFiles.map((file, index) => (
+              {product.mediaFiles.map((file, index) => (
                 <View key={index} className="relative mr-4">
                   {file.type === "image" ? (
                     <Image
@@ -229,13 +220,14 @@ const AddProduct = () => {
                   )}
                   <TouchableOpacity
                     onPress={() => {
-                      setMediaFiles((prev) =>
-                        prev.filter((_, i) => i !== index)
+                      updateProduct(
+                        "mediaFiles",
+                        product.mediaFiles.filter((_, i) => i !== index)
                       );
                     }}
                     className="absolute text-white bg-black px-2 py-2 rounded-sm"
                     style={{
-                      top: "15%",
+                      top: "5%",
                       left: "50%",
                       transform: [{ translateX: -16 }],
                     }}>
@@ -295,6 +287,8 @@ const AddProduct = () => {
                     style: { fontFamily: "PPFormulaCondensed-Bold" },
                   })
                 }
+                value={product.productName}
+                onChangeText={(text) => updateProduct("productName", text)}
               />
             </View>
             {errors.productName && (
@@ -316,7 +310,7 @@ const AddProduct = () => {
                   style={{
                     fontFamily: "HelveticaNeue-Medium",
                   }}>
-                  {selectedBrand}
+                  {product.selectedBrand}
                 </Text>
                 <Ionicons name="chevron-forward" size={18} color="white" />
               </View>
@@ -328,9 +322,11 @@ const AddProduct = () => {
             )}
             <BrandModal
               brandModal={brandmodal}
-              selectedBrand={selectedBrand}
+              selectedBrand={product.selectedBrand}
               setBrandModal={setBrandModal}
-              setSelectedBrand={setSelectedBrand}
+              setSelectedBrand={(value) =>
+                updateProduct("selectedBrand", value)
+              }
             />
             <TouchableOpacity
               className="flex-row justify-between items-center py-4"
@@ -348,7 +344,7 @@ const AddProduct = () => {
                   style={{
                     fontFamily: "HelveticaNeue-Medium",
                   }}>
-                  {selectedCategory.length}
+                  {product.selectedCategory.length}
                 </Text>
                 <Ionicons name="chevron-forward" size={18} color="white" />
               </View>
@@ -360,9 +356,11 @@ const AddProduct = () => {
             )}
             <CategoryModal
               categoryModal={categorymodal}
-              selectedCategory={selectedCategory}
+              selectedCategory={product.selectedCategory}
               setCategoryModal={setCategoryModal}
-              setSelectedCategory={setSelectedCategory}
+              setSelectedCategory={(value) =>
+                updateProduct("selectedCategory", value)
+              }
             />
 
             <View className="flex-row justify-between items-center py-2">
@@ -396,10 +394,8 @@ const AddProduct = () => {
                   style={{
                     fontSize: 25,
                   }}
-                  value={originalPrice ?? ""}
-                  onChangeText={(text) => {
-                    setOriginalPrice(text);
-                  }}
+                  value={product.originalPrice}
+                  onChangeText={(text) => updateProduct("originalPrice", text)}
                 />
               </View>
             </View>
@@ -438,10 +434,10 @@ const AddProduct = () => {
                   style={{
                     fontSize: 15,
                   }}
-                  value={discountedPrice ?? ""}
-                  onChangeText={(text) => {
-                    setDiscountedPrice(text);
-                  }}
+                  value={product.discountedPrice}
+                  onChangeText={(text) =>
+                    updateProduct("discountedPrice", text)
+                  }
                 />
               </View>
             </View>
@@ -474,10 +470,8 @@ const AddProduct = () => {
                   style={{
                     fontSize: 15,
                   }}
-                  value={pieces ?? ""}
-                  onChangeText={(text) => {
-                    setPieces(text);
-                  }}
+                  value={product.pieces}
+                  onChangeText={(text) => updateProduct("pieces", text)}
                 />
               </View>
             </View>
@@ -500,7 +494,7 @@ const AddProduct = () => {
                   style={{
                     fontFamily: "HelveticaNeue-Medium",
                   }}>
-                  {selectedProductCondition}
+                  {product.selectedProductCondition}
                 </Text>
                 <Ionicons name="chevron-forward" size={18} color="white" />
               </View>
@@ -513,10 +507,14 @@ const AddProduct = () => {
             <ProductConditionModal
               productConditionModal={productConditionmodal}
               setProductConditionModal={setProductConditionModal}
-              selectedProductCondition={selectedProductCondition}
-              setSelectedProductCondition={setSelectedProductCondition}
-              conditionDescription={conditionDescription}
-              setConditionDescription={setConditionDescription}
+              selectedProductCondition={product.selectedProductCondition}
+              setSelectedProductCondition={(value) =>
+                updateProduct("selectedProductCondition", value)
+              }
+              conditionDescription={product.conditionDescription}
+              setConditionDescription={(value) =>
+                updateProduct("conditionDescription", value)
+              }
             />
             <Divider />
             <View className="mb-10">
@@ -584,10 +582,10 @@ const AddProduct = () => {
                         style={{
                           fontSize: 18,
                         }}
-                        value={description ?? ""}
-                        onChangeText={(text) => {
-                          setDescription(text);
-                        }}
+                        value={product.description}
+                        onChangeText={(text) =>
+                          updateProduct("description", text)
+                        }
                       />
                     </View>
 
@@ -607,7 +605,7 @@ const AddProduct = () => {
                           style={{
                             fontFamily: "HelveticaNeue-Medium",
                           }}>
-                          {selectedPrimaryMaterial}
+                          {product.selectedPrimaryMaterial}
                         </Text>
                         <Ionicons
                           name="chevron-forward"
@@ -617,10 +615,12 @@ const AddProduct = () => {
                       </View>
                     </TouchableOpacity>
                     <PrimaryMaterialModal
-                      primaryMaterialModal={primaryMaterialModal}
-                      setPrimaryMaterialModal={setPrimaryMaterialModal}
-                      selectedPrimaryMaterial={selectedPrimaryMaterial}
-                      setSelectedPrimaryMaterial={setSelectedPrimaryMaterial}
+                      primaryMaterialModal={primaryColorModal}
+                      setPrimaryMaterialModal={setPrimaryColorModal}
+                      selectedPrimaryMaterial={product.selectedPrimaryMaterial}
+                      setSelectedPrimaryMaterial={(value: string) =>
+                        updateProduct("selectedPrimaryMaterial", value)
+                      }
                     />
                     <TouchableOpacity
                       className="flex-row justify-between items-center py-3"
@@ -638,7 +638,7 @@ const AddProduct = () => {
                           style={{
                             fontFamily: "HelveticaNeue-Medium",
                           }}>
-                          {selectedPrimaryColor}
+                          {product.selectedPrimaryColor}
                         </Text>
                         <Ionicons
                           name="chevron-forward"
@@ -650,8 +650,10 @@ const AddProduct = () => {
                     <PrimaryColorModal
                       primaryColorModal={primaryColorModal}
                       setPrimaryColorModal={setPrimaryColorModal}
-                      selectedPrimaryColor={selectedPrimaryColor}
-                      setSelectedPrimaryColor={setSelectedPrimaryColor}
+                      selectedPrimaryColor={product.selectedPrimaryColor}
+                      setSelectedPrimaryColor={(value: string) =>
+                        updateProduct("selectedPrimaryColor", value)
+                      }
                     />
                     <TouchableOpacity
                       className="flex-row justify-between items-center py-3"
@@ -669,7 +671,7 @@ const AddProduct = () => {
                           style={{
                             fontFamily: "HelveticaNeue-Medium",
                           }}>
-                          {selectedOccasion}
+                          {product.selectedOccasion}
                         </Text>
                         <Ionicons
                           name="chevron-forward"
@@ -681,8 +683,10 @@ const AddProduct = () => {
                     <OccasionModal
                       occasionModal={occasionModal}
                       setOccasionModal={setOccasionModal}
-                      selectedOccasion={selectedOccasion}
-                      setSelectedOccasion={setSelectedOccasion}
+                      selectedOccasion={product.selectedOccasion}
+                      setSelectedOccasion={(value: string) =>
+                        updateProduct("selectedOccasion", value)
+                      }
                     />
                   </AccordionContent>
                 </AccordionItem>
@@ -696,23 +700,7 @@ const AddProduct = () => {
           className="bg-[#E5FF03] py-2 m-2 rounded-sm shadow-lg shadow-slate-50 items-center"
           onPress={() => {
             if (validateForm()) {
-              const product = {
-                image,
-                video,
-                mediaFiles, // Include all uploaded media
-                selectedBrand,
-                selectedCategory,
-                originalPrice,
-                discountedPrice,
-                pieces,
-                description,
-                selectedProductCondition,
-                selectedPrimaryMaterial,
-                selectedPrimaryColor,
-                selectedOccasion,
-                productName,
-              };
-              saveProductToFile(product);
+              saveProductToFile();
             }
           }}>
           <Text

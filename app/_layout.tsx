@@ -29,8 +29,6 @@ export default function RootLayout() {
     "HelveticaNeue-Medium": require("../assets/fonts/HelveticaNeue Medium.ttf"),
     "HelveticaNeue-Thin": require("../assets/fonts/HelveticaNeue Thin.ttf"),
   });
-  const cartItemsNum = useCart((state: any) => state.items.length);
-  const isLoggedIn = useAuth((s) => !!s.token);
 
   useEffect(() => {
     if (loaded || error) {
