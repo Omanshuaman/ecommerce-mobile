@@ -212,7 +212,7 @@ const TagProductsScreen = () => {
 
             <TouchableOpacity
               onPress={() => toggleTagProduct(product.id)}
-              className="border border-white rounded-sm h-14 w-12 items-center justify-center"
+              className="border border-white rounded-sm h-[52px] w-12 items-center justify-center"
               style={{
                 shadowColor: "white",
                 shadowOffset: {
@@ -241,6 +241,10 @@ const TagProductsScreen = () => {
         className="bg-[#E5FF03] py-2 items-center justify-center mx-3 rounded-sm mb-3 shadow-lg shadow-white"
         onPress={() => {
           console.log("Publishing with products:", taggedProducts);
+        }}
+        disabled={taggedProducts.length === 0}
+        style={{
+          opacity: taggedProducts.length === 0 ? 0.3 : 1,
         }}>
         <Text
           className="text-black"
@@ -248,7 +252,7 @@ const TagProductsScreen = () => {
             fontFamily: "PPFormulaCondensed-Bold",
             fontSize: 36,
           }}>
-          EDIT PRODUCT
+          PUBLISH
         </Text>
       </TouchableOpacity>
     </SafeAreaView>
