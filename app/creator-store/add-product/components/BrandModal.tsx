@@ -155,7 +155,7 @@ const BrandModal = ({
               </ModalBody>
               <ModalFooter>
                 <Button
-                  className="bg-[#E5FF03] w-full h-16 rounded-sm shadow-lg shadow-slate-50"
+                  className="bg-[#E5FF03] w-full h-[56px] rounded-sm shadow-lg shadow-slate-50"
                   onPress={() => {
                     setBrandModal(false);
                   }}>

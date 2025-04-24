@@ -81,8 +81,7 @@ const TabsLayout = () => {
 
             <ActionsheetItem
               onPress={() => {
-                // Handle "Upload reel" action
-                handleClose();
+                router.push("/creator-store/add-reel");
               }}
               className="flex-row justify-between items-center px-5 py-6 active:bg-[#E5FF03]">
               <Text

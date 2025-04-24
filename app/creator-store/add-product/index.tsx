@@ -392,7 +392,7 @@ const AddProduct = () => {
                     })
                   }
                   style={{
-                    fontSize: 25,
+                    fontSize: 22,
                   }}
                   value={product.originalPrice}
                   onChangeText={(text) => updateProduct("originalPrice", text)}
@@ -422,9 +422,10 @@ const AddProduct = () => {
                 </Text>
                 <TextInput
                   keyboardType="numeric"
-                  className=" text-white w-16 text-center rounded-sm border border-white"
+                  className=" text-white w-fit px-4 text-center rounded-sm border border-white pt-1 pb-0"
                   placeholder="0000"
                   placeholderTextColor="#888"
+                  maxLength={8}
                   ref={(ref) =>
                     ref &&
                     ref.setNativeProps({
@@ -432,7 +433,7 @@ const AddProduct = () => {
                     })
                   }
                   style={{
-                    fontSize: 15,
+                    fontSize: 22,
                   }}
                   value={product.discountedPrice}
                   onChangeText={(text) =>
@@ -457,7 +458,7 @@ const AddProduct = () => {
               <View className="flex-row items-center gap-2">
                 <TextInput
                   keyboardType="numeric"
-                  className=" text-white w-16 text-center rounded-sm border border-white"
+                  className=" text-white w-fit px-4 text-right rounded-sm border border-white pt-1 pb-0"
                   placeholder="01"
                   maxLength={2}
                   placeholderTextColor="#888"
@@ -468,7 +469,7 @@ const AddProduct = () => {
                     })
                   }
                   style={{
-                    fontSize: 15,
+                    fontSize: 22,
                   }}
                   value={product.pieces}
                   onChangeText={(text) => updateProduct("pieces", text)}
