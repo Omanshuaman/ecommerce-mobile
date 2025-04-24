@@ -247,20 +247,21 @@ const AddProduct = () => {
                   }}>
                   Product Information
                 </Text>
-
-                {/* Right: Add more button */}
-                <TouchableOpacity
-                  onPress={addAnotherMedia}
-                  className="flex-row items-center gap-2 border border-white/60 px-4 py-2.5 rounded-sm">
-                  <FontAwesome6 name="photo-film" size={16} color="white" />
-                  <Text
-                    className="text-white text-lg"
-                    style={{
-                      fontFamily: "HelveticaNeue-Light",
-                    }}>
-                    Add more
-                  </Text>
-                </TouchableOpacity>
+                {product.image && (
+                  <TouchableOpacity
+                    onPress={addAnotherMedia}
+                    className="flex-row items-center gap-2 border border-white/60 px-4 py-2.5 rounded-sm">
+                    <FontAwesome6 name="photo-film" size={12} color="white" />
+                    <Text
+                      className="text-white"
+                      style={{
+                        fontFamily: "HelveticaNeue-Light",
+                        fontSize: 14,
+                      }}>
+                      Add more
+                    </Text>
+                  </TouchableOpacity>
+                )}
               </View>
             </View>
 
@@ -533,9 +534,10 @@ const AddProduct = () => {
                         return (
                           <>
                             <AccordionTitleText
-                              className="text-white text-lg"
+                              className="text-white "
                               style={{
                                 fontFamily: "HelveticaNeue-Medium",
+                                fontSize: 15,
                               }}>
                               Add Additional Details
                             </AccordionTitleText>
@@ -616,8 +618,8 @@ const AddProduct = () => {
                       </View>
                     </TouchableOpacity>
                     <PrimaryMaterialModal
-                      primaryMaterialModal={primaryColorModal}
-                      setPrimaryMaterialModal={setPrimaryColorModal}
+                      primaryMaterialModal={primaryMaterialModal}
+                      setPrimaryMaterialModal={setPrimaryMaterialModal}
                       selectedPrimaryMaterial={product.selectedPrimaryMaterial}
                       setSelectedPrimaryMaterial={(value: string) =>
                         updateProduct("selectedPrimaryMaterial", value)

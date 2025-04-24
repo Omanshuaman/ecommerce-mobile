@@ -78,11 +78,11 @@ const BrandModal = ({
           size="full">
           <ImageBackground
             source={require("../../../../assets/bg-image.jpg")}
-            style={{ flex: 1 }} // Add padding to avoid overlap with the header
+            style={{ flex: 1 }}
             resizeMode="cover">
             <ModalBackdrop />
             <ModalContent className="h-full bg-transparent border border-transparent">
-              <View className="flex-row items-center justify-between px-2 mb-4">
+              <View className="flex-row items-center justify-between px-2 mb-2">
                 <TouchableOpacity
                   onPress={() => {
                     setBrandModal(false);
@@ -104,7 +104,7 @@ const BrandModal = ({
               </View>
 
               <ModalHeader>
-                <View className="bg-black border border-white rounded-sm mb-4 px-3 flex-row items-center justify-center w-full">
+                <View className="bg-black border border-white rounded-sm mb-2 my-4 px-3 flex-row items-center justify-center w-full">
                   <Ionicons
                     name="search"
                     size={16}
@@ -155,7 +155,7 @@ const BrandModal = ({
               </ModalBody>
               <ModalFooter>
                 <Button
-                  className="bg-[#E5FF03] w-full h-[56px] rounded-sm shadow-lg shadow-slate-50"
+                  className="bg-[#E5FF03] w-full h-[52px] rounded-sm shadow-lg shadow-slate-50"
                   onPress={() => {
                     setBrandModal(false);
                   }}>
