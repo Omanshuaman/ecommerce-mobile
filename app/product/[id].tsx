@@ -10,7 +10,7 @@ import {
   SafeAreaView,
   ImageBackground, // Added import
 } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Plus } from "lucide-react-native"; // or use Ionicons if preferred
 import {
@@ -35,10 +35,10 @@ import { VStack } from "@/components/ui/vstack";
 import { Button, ButtonText } from "@/components/ui/button";
 import { useCart } from "@/store/cartStore";
 import { Divider } from "react-native-paper";
+import { useProduct } from "@/store/productStore";
 
 export default function ProductDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const addProduct = useCart((state: any) => state.addProduct);
   const [filteredProduct, setFilteredProduct] = useState<any | null>(null);
   useEffect(() => {
     const fetchProduct = async () => {
@@ -56,6 +56,11 @@ export default function ProductDetailsScreen() {
 
     fetchProduct();
   }, [id]);
+  const products = useProduct((state: any) => state.addProduct);
+
+  const addProduct = () => {
+    products(filteredProduct);
+  };
 
   if (!filteredProduct) {
     return (
@@ -64,7 +69,7 @@ export default function ProductDetailsScreen() {
       </Box>
     );
   }
-
+  console.log(filteredProduct.image);
   return (
     <ImageBackground
       source={require("../../assets/bg-image.jpg")}
@@ -76,7 +81,7 @@ export default function ProductDetailsScreen() {
             <Image
               source={{ uri: filteredProduct.image }}
               className="w-full mb-4 h-96"
-              resizeMode="cover"
+              resizeMode="contain"
             />
 
             {/* Absolute Tags */}
@@ -292,7 +297,12 @@ export default function ProductDetailsScreen() {
               UNPUBLISH
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity className="flex-1 bg-[#E5FF03] justify-center items-center py-1 rounded-sm shadow-lg shadow-white ">
+          <TouchableOpacity
+            onPress={() => {
+              router.push(`/creator-store/edit-product`);
+              addProduct();
+            }}
+            className="flex-1 bg-[#E5FF03] justify-center items-center py-1 rounded-sm shadow-lg shadow-white ">
             <Text
               className="text-black"
               style={{

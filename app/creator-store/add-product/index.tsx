@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -46,6 +46,7 @@ import {
 import { Divider } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Video } from "expo-av";
+import { useProduct } from "@/store/productStore";
 
 const AddProduct = () => {
   const [product, setProduct] = useState({
@@ -74,6 +75,34 @@ const AddProduct = () => {
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const router = useRouter();
+  const items = useProduct((state: any) => state.items);
+  useEffect(() => {
+    if (!items[0].product) return;
+    setProduct((prev: any) => {
+      // Prevent re-setting if values are already same (optional optimization)
+      if (prev.productName === items[0].product.productName) return prev;
+      console.log(items[0].product, "items from zustand");
+
+      return {
+        ...prev,
+        productName: items[0].product.productName,
+        image: items[0].product.image,
+        video: items[0].product.video,
+        mediaFiles: items[0].product.mediaFiles,
+        selectedBrand: items[0].product.selectedBrand,
+        selectedCategory: items[0].product.selectedCategory,
+        originalPrice: items[0].product.originalPrice,
+        discountedPrice: items[0].product.discountedPrice,
+        pieces: items[0].product.pieces,
+        description: items[0].product.description,
+        selectedProductCondition: items[0].product.selectedProductCondition,
+        selectedPrimaryMaterial: items[0].product.selectedPrimaryMaterial,
+        selectedPrimaryColor: items[0].product.selectedPrimaryColor,
+        selectedOccasion: items[0].product.selectedOccasion,
+        conditionDescription: items[0].product.conditionDescription,
+      };
+    });
+  }, [items]);
 
   const updateProduct = (key: string, value: any) => {
     setProduct((prev) => ({ ...prev, [key]: value }));

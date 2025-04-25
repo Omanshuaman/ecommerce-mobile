@@ -4,7 +4,7 @@ import { Link } from "expo-router";
 
 const ProductCard = ({ product }: any) => (
   <Link href={`/product/${product.originalPrice}`} asChild>
-    <Pressable className="flex-1 px-1.5">
+    <Pressable className="w-1/2">
       <View className="overflow-hidden ">
         {/* Product Image */}
         <View className="relative">
@@ -16,13 +16,13 @@ const ProductCard = ({ product }: any) => (
 
           {/* Absolute Positioned Icons */}
           <View className="absolute bottom-1 left-1 flex-row items-center space-x-1 px-2 py-1 rounded-md gap-1">
-            <View className="bg-white flex-row border border-black p-1 gap-1 justify-center items-center rounded-sm  ">
-              <FontAwesome name="eye" color="black" size={14} />
-              <Text className="text-black text-sm">3</Text>
+            <View className="bg-white flex-row border border-black px-1 py-0.5 gap-1 justify-center items-center rounded-sm  ">
+              <FontAwesome name="eye" color="black" size={16} />
+              <Text className="text-black text-base">3</Text>
             </View>
-            <View className="bg-white flex-row border border-black p-1 gap-1 justify-between items-center rounded-sm">
-              <AntDesign name="hearto" size={14} color="black" />
-              <Text className="text-black text-sm">7</Text>
+            <View className="bg-white flex-row border border-black px-1 py-0.5 gap-1 justify-center items-center rounded-sm">
+              <AntDesign name="hearto" size={16} color="black" />
+              <Text className="text-black text-base">7</Text>
             </View>
           </View>
         </View>
@@ -33,14 +33,16 @@ const ProductCard = ({ product }: any) => (
             className="text-white w-full"
             numberOfLines={1}
             style={{ fontFamily: "HelveticaNeue-Bold", fontSize: 15 }}>
-            {product.description}
+            {product.productName}
           </Text>
           <Text
             className="text-white mt-1"
             style={{ fontFamily: "HelveticaNeue-Light", fontSize: 13 }}>
             ₹{product.originalPrice}
           </Text>
-          <Text className="text-neutral-400 text-xs mt-1">
+          <Text
+            className="text-white mt-1"
+            style={{ fontFamily: "HelveticaNeue-Light", fontSize: 13 }}>
             {product.selectedBrand}
           </Text>
         </View>
