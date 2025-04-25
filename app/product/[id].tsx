@@ -14,6 +14,18 @@ import { router, useLocalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Plus } from "lucide-react-native"; // or use Ionicons if preferred
 import {
+  Select,
+  SelectTrigger,
+  SelectInput,
+  SelectIcon,
+  SelectPortal,
+  SelectBackdrop,
+  SelectContent,
+  SelectDragIndicator,
+  SelectDragIndicatorWrapper,
+  SelectItem,
+} from "@/components/ui/select";
+import {
   Accordion,
   AccordionItem,
   AccordionHeader,
@@ -36,10 +48,13 @@ import { Button, ButtonText } from "@/components/ui/button";
 import { useCart } from "@/store/cartStore";
 import { Divider } from "react-native-paper";
 import { useProduct } from "@/store/productStore";
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function ProductDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const [filteredProduct, setFilteredProduct] = useState<any | null>(null);
+  const [showActionsheet, setShowActionsheet] = React.useState(false);
+  const handleClose = () => setShowActionsheet(false);
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -81,7 +96,7 @@ export default function ProductDetailsScreen() {
             <Image
               source={{ uri: filteredProduct.image }}
               className="w-full mb-4 h-96"
-              resizeMode="contain"
+              resizeMode="cover"
             />
 
             {/* Absolute Tags */}
@@ -287,7 +302,9 @@ export default function ProductDetailsScreen() {
         </ScrollView>
         {/* Action Buttons */}
         <Box className="flex-row gap-2 p-2">
-          <TouchableOpacity className="flex-1 border border-white bg-transparent justify-center items-center py-1 rounded-sm  ">
+          <TouchableOpacity
+            className="flex-1 border border-white bg-transparent justify-center items-center py-1 rounded-sm  "
+            onPress={() => setShowActionsheet(true)}>
             <Text
               className="text-white"
               style={{
@@ -313,6 +330,49 @@ export default function ProductDetailsScreen() {
             </Text>
           </TouchableOpacity>
         </Box>
+        <Select className="">
+          <SelectPortal isOpen={showActionsheet} onClose={handleClose}>
+            <SelectBackdrop />
+            <SelectContent className="bg-black border border-dashed p-4">
+              <SelectDragIndicatorWrapper>
+                <SelectDragIndicator />
+              </SelectDragIndicatorWrapper>
+              <Text
+                className="text-white py-2"
+                style={{ fontSize: 15, fontFamily: "HelveticaNeue-Medium" }}>
+                Are you sure you want to unpublish?
+              </Text>
+              <Text
+                className=" text-typography-400 pb-6 text-center "
+                style={{ fontSize: 14, fontFamily: "HelveticaNeue-Light" }}>
+                Unpublishing will remove it from people who have added it to
+                their bag
+              </Text>
+              <TouchableOpacity className="bg-black py-2 border border-white items-center shadow-lg shadow-slate-50 rounded-sm w-full">
+                <Text
+                  className="text-white"
+                  style={{
+                    fontFamily: "PPFormulaCondensed-Bold",
+                    fontSize: 36,
+                  }}>
+                  UNPUBLISH
+                </Text>
+              </TouchableOpacity>
+
+              {/* Update Button */}
+              <TouchableOpacity className="bg-[#E5FF03] py-1 mt-3 items-center shadow-lg shadow-slate-50 rounded-sm w-full">
+                <Text
+                  className="text-black"
+                  style={{
+                    fontFamily: "PPFormulaCondensed-Bold",
+                    fontSize: 36,
+                  }}>
+                  CANCEL
+                </Text>
+              </TouchableOpacity>
+            </SelectContent>
+          </SelectPortal>
+        </Select>
       </SafeAreaView>
     </ImageBackground>
   );

@@ -41,6 +41,7 @@ import { Link, useNavigation, usePathname } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ProductCard from "../../../components/ProductCard";
 import { useBreakpointValue } from "@/components/ui/utils/use-break-point-value";
+import FeedCard from "@/components/FeedCard";
 
 const FirstRoute = () => {
   interface Product {
@@ -103,8 +104,75 @@ const FirstRoute = () => {
   );
 };
 
-const SecondRoute = () => <View className="flex-1 bg-purple-700" />;
+const SecondRoute = () => {
+  interface Feed {
+    previewImage: string;
+    videoUrl: string;
+    title: string;
+  }
 
+  const [feeds, setFeeds] = useState<Feed[]>([]);
+
+  useEffect(() => {
+    const dummyFeeds: Feed[] = [
+      {
+        previewImage:
+          "https://images.pexels.com/photos/675951/pexels-photo-675951.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        videoUrl:
+          "https://player.vimeo.com/external/209179264.sd.mp4?s=007e91a9d6d0ac65ccaf509174cc0539bfb56368&profile_id=164",
+        title: "Ocean View",
+      },
+      {
+        previewImage:
+          "https://images.pexels.com/photos/3185488/pexels-photo-3185488.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        videoUrl:
+          "https://player.vimeo.com/external/438165678.sd.mp4?s=bf2b47aa9d8768f297a9995e676cf7aa14dc6b79&profile_id=164",
+        title: "Office Work",
+      },
+      {
+        previewImage:
+          "https://images.pexels.com/photos/1103970/pexels-photo-1103970.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        videoUrl:
+          "https://player.vimeo.com/external/370583890.sd.mp4?s=a0157356b7ebf2938cfc8a5ff3d94387168e7613&profile_id=164",
+        title: "Mountains",
+      },
+      {
+        previewImage:
+          "https://images.pexels.com/photos/1236701/pexels-photo-1236701.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+        videoUrl:
+          "https://player.vimeo.com/external/347236879.sd.mp4?s=944b305ab9d29f9983bfc50bce45cb43be5fc4ff&profile_id=164",
+        title: "City Night",
+      },
+    ];
+
+    setFeeds(dummyFeeds);
+  }, []);
+
+  const numColumns = 2;
+
+  return (
+    <View className="flex-1">
+      {feeds.length > 0 ? (
+        <FlatList
+          data={feeds}
+          numColumns={numColumns}
+          contentContainerClassName="gap-2 max-w-[960px] mx-auto w-full"
+          columnWrapperClassName="gap-2"
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => <FeedCard feed={item} />}
+        />
+      ) : (
+        <View className="flex-1 justify-center items-center">
+          <Image
+            source={require("@/assets/empty-screen.png")}
+            resizeMode="contain"
+            className="w-96"
+          />
+        </View>
+      )}
+    </View>
+  );
+};
 const renderScene = SceneMap({
   first: FirstRoute,
   second: SecondRoute,

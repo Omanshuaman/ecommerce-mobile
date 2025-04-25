@@ -19,7 +19,7 @@ import {
 } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import * as FileSystem from "expo-file-system";
-import { useRouter } from "expo-router";
+import { usePathname, useRouter } from "expo-router";
 import BrandModal from "./components/BrandModal";
 import CategoryModal from "./components/CategoryModal";
 import ProductConditionModal from "./components/ProductConditionModal";
@@ -81,7 +81,6 @@ const AddProduct = () => {
     setProduct((prev: any) => {
       // Prevent re-setting if values are already same (optional optimization)
       if (prev.productName === items[0].product.productName) return prev;
-      console.log(items[0].product, "items from zustand");
 
       return {
         ...prev,
@@ -103,6 +102,7 @@ const AddProduct = () => {
       };
     });
   }, [items]);
+  const path = usePathname();
 
   const updateProduct = (key: string, value: any) => {
     setProduct((prev) => ({ ...prev, [key]: value }));
@@ -741,7 +741,9 @@ const AddProduct = () => {
               fontFamily: "PPFormulaCondensed-Bold",
               fontSize: 34,
             }}>
-            PUBLISH
+            {path === "/creator-store/edit-product"
+              ? "SAVE CHANGES"
+              : "PUBLISH"}
           </Text>
         </TouchableOpacity>
       </SafeAreaView>
