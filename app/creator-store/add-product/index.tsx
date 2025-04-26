@@ -77,7 +77,7 @@ const AddProduct = () => {
   const router = useRouter();
   const items = useProduct((state: any) => state.items);
   useEffect(() => {
-    if (!items[0].product) return;
+    if (!items || items.length === 0 || !items[0].product) return;
     setProduct((prev: any) => {
       // Prevent re-setting if values are already same (optional optimization)
       if (prev.productName === items[0].product.productName) return prev;
