@@ -3,7 +3,11 @@ import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { Link } from "expo-router";
 
 const FeedCard = ({ feed }: any) => (
-  <Link href={`/product/${feed.title}`} asChild>
+  <Link
+    href={`/feed/${feed.id}?previewImage=${encodeURIComponent(
+      feed.previewImage
+    )}`}
+    asChild>
     <Pressable className="w-1/2">
       <View className=" ">
         <View className="relative">
