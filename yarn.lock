@@ -7306,6 +7306,11 @@ react-native-css-interop@^0.1.22, react-native-css-interop@0.1.22:
     lightningcss "^1.27.0"
     semver "^7.6.3"
 
+react-native-drop-shadow@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/react-native-drop-shadow/-/react-native-drop-shadow-1.0.3.tgz"
+  integrity sha512-R5AVDT2/8uRrNbcnkwvmCsW2qzVdvPOSx/81B8fHsTQdcYazsHAPtXW3IlBZnNf658NupfBr+o2ABWy5mFCfoQ==
+
 react-native-gesture-handler@~2.20.2:
   version "2.20.2"
   resolved "https://registry.npmjs.org/react-native-gesture-handler/-/react-native-gesture-handler-2.20.2.tgz"

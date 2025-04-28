@@ -10,14 +10,13 @@ import { router, useLocalSearchParams } from "expo-router";
 import PlayVideoListItem from "@/components/PlayVideoListItem";
 import { Ionicons } from "@expo/vector-icons";
 import dummyFeeds from "@/constants/video";
+import Carousal from "@/components/Carousal";
 
 const FeedReels = () => {
   const { videoUrl } = useLocalSearchParams<{ videoUrl: string }>();
   const [videoList, setVideoList] = useState<string[]>([]);
   const WindowHeight = Dimensions.get("window").height;
-  const [currentVideoIndex, setCurrentVideoIndex] = useState<
-    number | undefined
-  >();
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
   useEffect(() => {
     if (videoUrl) {
@@ -27,8 +26,6 @@ const FeedReels = () => {
   }, [videoUrl]);
 
   const fetchVideos = async () => {
-    console.log(dummyFeeds);
-
     const result = dummyFeeds.filter((feed) => feed.videoUrl !== videoUrl);
 
     const videoUrls = result.map((feed) => feed.videoUrl);
@@ -37,18 +34,7 @@ const FeedReels = () => {
   };
 
   return (
-    <View style={{ flex: 1 }}>
-      <TouchableOpacity
-        style={{
-          position: "absolute",
-          zIndex: 10,
-          padding: 20,
-          paddingTop: 50,
-        }}
-        onPress={() => router.back()}>
-        <Ionicons name="arrow-back" size={24} color="black" />
-      </TouchableOpacity>
-
+    <View style={{ flex: 1, backgroundColor: "black" }}>
       <FlatList
         data={videoList}
         keyExtractor={(item, index) => index.toString()}
@@ -59,8 +45,7 @@ const FeedReels = () => {
             activeIndex={currentVideoIndex}
           />
         )}
-        style={{ zIndex: -1 }}
-        onScroll={(e) => {
+        onMomentumScrollEnd={(e) => {
           const index = Math.round(
             e.nativeEvent.contentOffset.y / WindowHeight
           );
