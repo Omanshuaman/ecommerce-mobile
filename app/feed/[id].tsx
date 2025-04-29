@@ -1,16 +1,8 @@
-import {
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-  Dimensions,
-} from "react-native";
+import { View, FlatList, Dimensions } from "react-native";
 import React, { useEffect, useState } from "react";
-import { router, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import PlayVideoListItem from "@/components/PlayVideoListItem";
-import { Ionicons } from "@expo/vector-icons";
 import dummyFeeds from "@/constants/video";
-import Carousal from "@/components/Carousal";
 
 const FeedReels = () => {
   const { videoUrl } = useLocalSearchParams<{ videoUrl: string }>();
@@ -20,23 +12,21 @@ const FeedReels = () => {
 
   useEffect(() => {
     if (videoUrl) {
-      setVideoList([videoUrl]); // First video
-      fetchVideos(); // Fetch rest
+      const index = dummyFeeds.findIndex((feed) => feed.videoUrl === videoUrl);
+      setCurrentVideoIndex(index);
+      setTimeout(() => {
+        flatListRef?.current?.scrollToIndex({ index, animated: false });
+      }, 0);
     }
   }, [videoUrl]);
 
-  const fetchVideos = async () => {
-    const result = dummyFeeds.filter((feed) => feed.videoUrl !== videoUrl);
-
-    const videoUrls = result.map((feed) => feed.videoUrl);
-
-    setVideoList((prev) => [...prev, ...videoUrls]);
-  };
+  const flatListRef = React.useRef<FlatList>(null);
 
   return (
     <View style={{ flex: 1, backgroundColor: "black" }}>
       <FlatList
-        data={videoList}
+        ref={flatListRef}
+        data={dummyFeeds}
         keyExtractor={(item, index) => index.toString()}
         renderItem={({ item, index }) => (
           <PlayVideoListItem

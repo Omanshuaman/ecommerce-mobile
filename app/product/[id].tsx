@@ -138,7 +138,7 @@ export default function ProductDetailsScreen() {
               fontFamily: "PPFormulaCondensed-Bold",
               fontSize: 40,
             }}>
-            {filteredProduct.selectedBrand}
+            {filteredProduct.productName}
           </Text>
 
           {/* Price Row */}

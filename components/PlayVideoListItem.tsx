@@ -7,31 +7,24 @@ import {
   Image,
 } from "react-native";
 import React, { useState } from "react";
-import { useVideoPlayer, VideoView } from "expo-video";
-import { useEvent } from "expo";
 import { ResizeMode, Video } from "expo-av";
 import { router } from "expo-router";
 import { Box } from "./ui/box";
 import Carousal from "./Carousal";
-import { Feather } from "@expo/vector-icons";
 import {
   Select,
-  SelectTrigger,
-  SelectInput,
-  SelectIcon,
   SelectPortal,
   SelectBackdrop,
   SelectContent,
   SelectDragIndicator,
   SelectDragIndicatorWrapper,
-  SelectItem,
 } from "@/components/ui/select";
 import { useProduct } from "@/store/productStore";
 const PlayVideoListItem = ({ video, index, activeIndex }: any) => {
   const [status, setStatus] = useState({});
   const [showActionsheet, setShowActionsheet] = React.useState(false);
   const handleClose = () => setShowActionsheet(false);
-  console.log(activeIndex, index);
+  console.log(activeIndex, index, video);
   const reel = useProduct((state: any) => state.addReel);
   const addReel = () => {
     reel(video);
@@ -150,12 +143,12 @@ const PlayVideoListItem = ({ video, index, activeIndex }: any) => {
       <Video
         style={[styles.video]}
         source={{
-          uri: video,
+          uri: video.videoUrl,
         }}
         useNativeControls={false}
         resizeMode={ResizeMode.COVER}
         isLooping
-        shouldPlay={activeIndex == index}
+        shouldPlay={activeIndex === index}
         onPlaybackStatusUpdate={(status) => setStatus(() => status)}
       />
     </View>

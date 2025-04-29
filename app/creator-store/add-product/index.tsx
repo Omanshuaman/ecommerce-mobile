@@ -170,17 +170,27 @@ const AddProduct = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
   const saveProductToFile = async () => {
     try {
       const existingData = await AsyncStorage.getItem("myData");
       const parsedData = existingData ? JSON.parse(existingData) : [];
-      console.log(product);
 
-      const updatedData = [...parsedData, product];
+      let updatedData;
+
+      if (path === "/creator-store/edit-product") {
+        updatedData = parsedData.filter(
+          (item: { id: string }) => String(item.id) !== String(product.id)
+        );
+
+        updatedData.push(product);
+        Alert.alert("Success", "Product updated successfully.");
+      } else {
+        // Add new product
+        updatedData = [...parsedData, product];
+        Alert.alert("Success", "Product added successfully.");
+      }
 
       await AsyncStorage.setItem("myData", JSON.stringify(updatedData));
-      Alert.alert("Success", `${JSON.stringify(product)}`);
     } catch (error) {
       Alert.alert("Error", "Failed to save product.");
       console.error(error);
