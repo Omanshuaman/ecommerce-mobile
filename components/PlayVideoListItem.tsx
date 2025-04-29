@@ -5,8 +5,9 @@ import {
   Dimensions,
   TouchableOpacity,
   Image,
+  BackHandler,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ResizeMode, Video } from "expo-av";
 import { router } from "expo-router";
 import { Box } from "./ui/box";
@@ -19,15 +20,31 @@ import {
   SelectDragIndicator,
   SelectDragIndicatorWrapper,
 } from "@/components/ui/select";
-import { useProduct } from "@/store/productStore";
+import { backState, useProduct } from "@/store/productStore";
 const PlayVideoListItem = ({ video, index, activeIndex }: any) => {
   const [status, setStatus] = useState({});
   const [showActionsheet, setShowActionsheet] = React.useState(false);
   const handleClose = () => setShowActionsheet(false);
   const reel = useProduct((state: any) => state.addReel);
+  const setBack = backState((state: any) => state.setBack); // ✅ HOOK CALL HERE
+
   const addReel = () => {
     reel(video);
   };
+  useEffect(() => {
+    const backAction = () => {
+      setBack(1); // ✅ called inside handler, no issue now
+      router.back();
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
   return (
     <View>
       <View className="flex-row absolute top-5 z-10 w-full justify-between items-center px-4 py-4">
@@ -91,7 +108,7 @@ const PlayVideoListItem = ({ video, index, activeIndex }: any) => {
                 fontFamily: "PPFormulaCondensed-Bold",
                 fontSize: 36,
               }}>
-              EDIT PRODUCT
+              EDIT REEL
             </Text>
           </TouchableOpacity>
         </Box>

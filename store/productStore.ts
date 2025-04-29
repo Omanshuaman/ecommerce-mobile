@@ -16,3 +16,11 @@ export const useProduct = create((set) => ({
       reels: [{ reel }],
     })),
 }));
+
+export const backState = create((set) => ({
+  back: 0,
+  setBack: (back: number) =>
+    set((state: any) => ({
+      back: back,
+    })),
+}));

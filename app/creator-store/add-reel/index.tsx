@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -15,7 +15,8 @@ import {
   Ionicons,
 } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
-import { Video } from "expo-av";
+import { ResizeMode, Video } from "expo-av";
+import { useProduct } from "@/store/productStore";
 
 const mockProducts = [
   {
@@ -48,7 +49,27 @@ const TagProductsScreen = () => {
   const [taggedProducts, setTaggedProducts] = useState<string[]>([]);
   const [image, setImage] = useState<string | null>(null);
   const [video, setVideo] = useState<string | null>(null);
+  const reel = useProduct((state: any) => state.reels);
 
+  const [reelData, setReelData] = useState<any>({
+    id: "",
+    reel: null,
+    cover: null,
+    taggedProducts: [],
+  });
+  useEffect(() => {
+    if (!reel || reel.length === 0 || !reel[0].reel) return;
+    setReelData((prev: any) => {
+      if (prev.id === reel[0].reel.id) return prev;
+
+      return {
+        ...prev,
+        reel: reel[0].reel.videoUrl,
+        cover: reel[0].reel.previewImage,
+        taggedProducts: reel[0].reel.taggedProducts,
+      };
+    });
+  }, [reel]);
   const toggleTagProduct = (productId: string) => {
     setTaggedProducts((prev) =>
       prev.includes(productId)
@@ -56,6 +77,10 @@ const TagProductsScreen = () => {
         : [...prev, productId]
     );
   };
+  useEffect(() => {
+    console.log(reelData);
+  }, [reelData]);
+
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ["images"],
@@ -81,12 +106,14 @@ const TagProductsScreen = () => {
       <ScrollView contentContainerStyle={{ paddingTop: 60 }} className="mx-4">
         {/* Upload Reel and Cover */}
         <View className="flex-row justify-between mb-5 gap-3 ">
-          {video ? (
+          {reelData.reel ? (
             <TouchableOpacity className="flex-1 border border-white relative rounded-sm h-80">
               <Video
-                source={{ uri: video }}
-                className="rounded-sm bg-black"
-                style={{ width: 160, height: 192 }}
+                source={{ uri: reelData.reel }}
+                className="rounded-sm bg-black self-center"
+                style={{ width: 140, height: 205 }}
+                useNativeControls
+                resizeMode={ResizeMode.COVER}
               />
 
               <TouchableOpacity
@@ -117,10 +144,10 @@ const TagProductsScreen = () => {
             </TouchableOpacity>
           )}
 
-          {image ? (
+          {reelData.cover ? (
             <TouchableOpacity className="flex-1 border border-white relative rounded-sm h-80">
               <Image
-                source={{ uri: image }}
+                source={{ uri: reelData.cover }}
                 resizeMode="cover"
                 className="w-full h-full self-center rounded-sm bg-black"
               />

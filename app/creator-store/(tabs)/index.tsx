@@ -43,6 +43,7 @@ import ProductCard from "../../../components/ProductCard";
 import { useBreakpointValue } from "@/components/ui/utils/use-break-point-value";
 import FeedCard from "@/components/FeedCard";
 import dummyFeeds from "@/constants/video";
+import { backState } from "@/store/productStore";
 const FirstRoute = () => {
   interface Product {
     image: string;
@@ -180,16 +181,18 @@ const Warehouse = () => {
 
   //   return () => backHandler.remove();
   // }, []);
+  const backIndex = backState((state: any) => state.back);
+  console.log("backIndex", backIndex);
   const navigation = useNavigation();
   const focused = navigation.isFocused();
   const path = usePathname();
-
   useEffect(() => {
     console.log(
       `Current page is focused: ${focused}, current page name: ${path}`
     );
   }, [focused]);
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(backIndex);
+
   const renderTabBar = (props: any) => {
     const inputRange = props.navigationState.routes.map(
       (_: unknown, i: number) => i

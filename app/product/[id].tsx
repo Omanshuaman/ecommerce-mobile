@@ -10,6 +10,7 @@ import {
   ImageBackground, // Added import
   FlatList,
   Dimensions,
+  BackHandler,
 } from "react-native";
 import { ResizeMode, Video } from "expo-av";
 import { router, useLocalSearchParams } from "expo-router";
@@ -33,13 +34,15 @@ import {
 } from "@/components/ui/accordion";
 import { RemoveIcon, AddIcon } from "@/components/ui/icon";
 import { Box } from "@/components/ui/box";
-import { useProduct } from "@/store/productStore";
+import { backState, useProduct } from "@/store/productStore";
 
 export default function ProductDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const [filteredProduct, setFilteredProduct] = useState<any | null>(null);
   const [showActionsheet, setShowActionsheet] = React.useState(false);
   const handleClose = () => setShowActionsheet(false);
+  const setBack = backState((state: any) => state.setBack); // ✅ HOOK CALL HERE
+
   useEffect(() => {
     const fetchProduct = async () => {
       try {
@@ -58,7 +61,20 @@ export default function ProductDetailsScreen() {
     fetchProduct();
   }, [id]);
   const products = useProduct((state: any) => state.addProduct);
+  useEffect(() => {
+    const backAction = () => {
+      setBack(0);
+      router.back();
+      return true;
+    };
 
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      backAction
+    );
+
+    return () => backHandler.remove();
+  }, []);
   const addProduct = () => {
     products(filteredProduct);
   };
