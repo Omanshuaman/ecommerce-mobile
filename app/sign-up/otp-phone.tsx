@@ -63,6 +63,7 @@ export default function OtpPhoneScreen() {
                   placeholder="000 000 0000"
                   placeholderTextColor="#888"
                   keyboardType="phone-pad"
+                  autoFocus={true}
                   maxLength={10}
                   className="flex-1 text-white mt-[6px]"
                   ref={(ref) =>

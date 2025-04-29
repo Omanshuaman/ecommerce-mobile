@@ -24,7 +24,6 @@ const PlayVideoListItem = ({ video, index, activeIndex }: any) => {
   const [status, setStatus] = useState({});
   const [showActionsheet, setShowActionsheet] = React.useState(false);
   const handleClose = () => setShowActionsheet(false);
-  console.log(activeIndex, index, video);
   const reel = useProduct((state: any) => state.addReel);
   const addReel = () => {
     reel(video);

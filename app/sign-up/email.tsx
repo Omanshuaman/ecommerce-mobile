@@ -13,8 +13,8 @@ import { useState } from "react";
 import { Link, useRouter } from "expo-router";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 
-export default function OtpPhoneScreen() {
-  const [fullName, setFullName] = useState("");
+export default function EmailScreen() {
+  const [email, setEmail] = useState("");
   const [isPressed, setIsPressed] = useState(false);
 
   const router = useRouter();
@@ -37,15 +37,15 @@ export default function OtpPhoneScreen() {
             <Text
               className="text-white mb-2 uppercase"
               style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 50 }}>
-              what is your full name?
+              what is your Email?
             </Text>
             <Text className="mb-32 " style={{ fontSize: 16, color: "white" }}>
-              You won’t be able to change this later.{" "}
+              This will be used to send order updates, etc
             </Text>
 
             <View className="border border-[#E5FF03] rounded-sm flex-row items-center px-4 mb-4">
               <TextInput
-                placeholder="ENTER NAME"
+                placeholder="ENTER EMAIL"
                 placeholderTextColor="#888"
                 keyboardType="default"
                 maxLength={50}
@@ -61,12 +61,12 @@ export default function OtpPhoneScreen() {
                   fontSize: 32,
                   letterSpacing: 1,
                 }}
-                value={fullName}
-                onChangeText={setFullName}
+                onChangeText={(text) => setEmail(text)}
+                value={email}
               />
             </View>
-            <View className="h-[66px]">
-              <Link href="/sign-up/email" asChild>
+            <View className="h-[60px]">
+              <Link href="/sign-up/social" asChild>
                 <TouchableOpacity
                   className={`bg-[#E5FF03] rounded-sm w-full py-2 justify-center items-center shadow-lg shadow-slate-50 ${
                     isPressed

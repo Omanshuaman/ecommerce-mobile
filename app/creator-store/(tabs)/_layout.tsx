@@ -69,7 +69,7 @@ const TabsLayout = () => {
               onPress={() => {
                 router.push("/creator-store/add-product");
               }}
-              className="flex-row justify-between items-center px-5 py-6 active:bg-[#E5FF03]">
+              className="flex-row justify-between items-center px-5 py-5 active:bg-[#E5FF03]">
               <Text
                 className="text-white"
                 style={{ fontSize: 17, fontFamily: "HelveticaNeue-Medium" }}>
@@ -83,11 +83,11 @@ const TabsLayout = () => {
               onPress={() => {
                 router.push("/creator-store/add-reel");
               }}
-              className="flex-row justify-between items-center px-5 py-6 active:bg-[#E5FF03]">
+              className="flex-row justify-between items-center px-5 py-5 active:bg-[#E5FF03]">
               <Text
                 className="text-white"
                 style={{ fontSize: 17, fontFamily: "HelveticaNeue-Medium" }}>
-                Upload reel
+                Upload Reel
               </Text>
               <Feather
                 name="film"

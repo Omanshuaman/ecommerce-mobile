@@ -5,11 +5,17 @@ import { Ionicons } from "@expo/vector-icons";
 export default function RootLayout() {
   const pathname = usePathname();
   const step = pathname.includes("name")
-    ? "2/3"
+    ? "2/4"
     : pathname.includes("otp")
-    ? "1/3"
+    ? "1/4"
     : pathname.includes("social")
-    ? "3/3"
+    ? "4/4"
+    : pathname.includes("thankyou")
+    ? "4/4"
+    : pathname.includes("email")
+    ? "3/4"
+    : pathname.includes("otp-phone")
+    ? "1/4"
     : "";
 
   return (

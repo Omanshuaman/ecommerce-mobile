@@ -141,7 +141,6 @@ const AddProduct = () => {
       const fileType = result.assets[0].type?.includes("video")
         ? "video"
         : "image";
-      console.log(fileType, result.assets[0].uri);
       updateProduct("mediaFiles", [
         ...product.mediaFiles,
         { uri: result.assets[0].uri, type: fileType },

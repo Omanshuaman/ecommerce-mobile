@@ -90,7 +90,6 @@ export default function ProductDetailsScreen() {
               showsHorizontalScrollIndicator={true}
               keyExtractor={(item, index) => index.toString()}
               renderItem={({ item }) => {
-                console.log("item", item);
                 if (item.type === "image") {
                   return (
                     <Image

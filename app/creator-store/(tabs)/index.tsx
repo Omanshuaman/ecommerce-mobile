@@ -330,7 +330,7 @@ const Warehouse = () => {
                     fontFamily: "PPFormulaCondensed-Bold",
                     fontSize: 24,
                   }}>
-                  {selectedOption[2]}/4
+                  {selectedOption[2]}/5
                 </Text>
                 <Entypo name="chevron-down" size={24} color="black" />
               </View>
@@ -347,7 +347,7 @@ const Warehouse = () => {
             <ActionsheetDragIndicatorWrapper className="pb-4">
               <ActionsheetDragIndicator className="w-12 h-[5px]" />
             </ActionsheetDragIndicatorWrapper>
-            <View className="border border-white rounded-sm">
+            <View className="border border-white rounded-sm mx-0">
               <ActionsheetItem
                 onPress={() =>
                   handleOptionSelect("Add first product", "/add-product", 1)
@@ -365,10 +365,26 @@ const Warehouse = () => {
                   activeColor="black"
                 />
               </ActionsheetItem>
-
               <ActionsheetItem
                 onPress={() =>
-                  handleOptionSelect("Setup Payments", "/setup-payments", 2)
+                  handleOptionSelect("Add first Reel", "/add-reel", 2)
+                }
+                className="flex-row justify-between items-center border-[0.5px] border-b-white px-5 py-5 active:bg-[#E5FF03] ">
+                <Text
+                  className="text-white"
+                  style={{ fontSize: 16, fontFamily: "HelveticaNeue-Medium" }}>
+                  Add first Reel
+                </Text>
+                <Feather
+                  name="film"
+                  size={24}
+                  color="white"
+                  activeColor="black"
+                />
+              </ActionsheetItem>
+              <ActionsheetItem
+                onPress={() =>
+                  handleOptionSelect("Setup Payments", "/setup-payments", 3)
                 }
                 className="flex-row justify-between items-center border-[0.5px] border-b-white/40 px-5 py-5 active:bg-[#E5FF03] ">
                 <Text
@@ -384,7 +400,7 @@ const Warehouse = () => {
                   handleOptionSelect(
                     "Setup pickup address",
                     "/setup-pickup-address",
-                    3
+                    4
                   )
                 }
                 className="flex-row justify-between items-center border-[0.5px] border-b-white/40 px-5 py-5 active:bg-[#E5FF03] ">
@@ -398,7 +414,7 @@ const Warehouse = () => {
 
               <ActionsheetItem
                 onPress={() =>
-                  handleOptionSelect("Make store live", "/make-store-live", 4)
+                  handleOptionSelect("Make store live", "/make-store-live", 5)
                 }
                 className="flex-row justify-between items-center px-5 py-5 active:bg-[#E5FF03]">
                 <Text

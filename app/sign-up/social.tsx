@@ -64,7 +64,7 @@ export default function OtpPhoneScreen() {
                 onChangeText={setProfileLink}
               />
             </View>
-            <View className="h-[60px]">
+            <View className="h-[60px] ml-1">
               <View className="relative w-full flex-1 my-1 bg-gray-400 bg-opacity-30 rounded-sm">
                 <TouchableOpacity
                   className={`bg-black rounded-sm absolute -top-1 -left-1 w-full h-[98%] justify-center items-center border border-solid border-white ${
@@ -85,25 +85,27 @@ export default function OtpPhoneScreen() {
                 </TouchableOpacity>
               </View>
             </View>
-            <View className="h-[60px]">
+            <View className="h-[60px] ml-1">
               <View className="relative w-full flex-1 my-1 bg-[#E5FF03] bg-opacity-30 rounded-sm">
-                <TouchableOpacity
-                  className={`bg-[#E5FF03] rounded-sm absolute -top-1 -left-1 w-full h-[98%] justify-center items-center ${
-                    isPressed
-                      ? "bg-[#E5FF03] translate-x-0.5 -translate-y-0.5"
-                      : "bg-[#E5FF03] -translate-x-0.5 -translate-y-0.5"
-                  }`}
-                  onPressIn={() => setIsPressed(true)}
-                  onPressOut={() => setIsPressed(false)}>
-                  <Text
-                    className="text-center text-black uppercase"
-                    style={{
-                      fontFamily: "PPFormulaCondensed-Bold",
-                      fontSize: 35,
-                    }}>
-                    SEND FOR VERIFICATION
-                  </Text>
-                </TouchableOpacity>
+                <Link href="/sign-up/thankyou" asChild>
+                  <TouchableOpacity
+                    className={`bg-[#E5FF03] rounded-sm absolute -top-1 -left-1 w-full h-[98%] justify-center items-center ${
+                      isPressed
+                        ? "bg-[#E5FF03] translate-x-0.5 -translate-y-0.5"
+                        : "bg-[#E5FF03] -translate-x-0.5 -translate-y-0.5"
+                    }`}
+                    onPressIn={() => setIsPressed(true)}
+                    onPressOut={() => setIsPressed(false)}>
+                    <Text
+                      className="text-center text-black uppercase"
+                      style={{
+                        fontFamily: "PPFormulaCondensed-Bold",
+                        fontSize: 35,
+                      }}>
+                      SEND FOR VERIFICATION
+                    </Text>
+                  </TouchableOpacity>
+                </Link>
               </View>
             </View>
           </View>

@@ -45,13 +45,14 @@ export default function OtpPhoneScreen() {
                 Enter the OTP sent to +91 9422345432 Change number
               </Text>
 
-              <View className="border border-[#E5FF03] rounded-sm flex-row items-center px-4 py-1 mb-4">
+              <View className="border border-[#E5FF03] rounded-sm flex-row items-center px-4 mb-4">
                 <TextInput
                   placeholder="0000"
                   placeholderTextColor="#888"
                   keyboardType="default"
                   maxLength={4}
-                  className="flex-1 text-white text-center"
+                  className="flex-1 text-white"
+                  autoFocus={true}
                   ref={(ref) =>
                     ref &&
                     ref.setNativeProps({
@@ -59,8 +60,9 @@ export default function OtpPhoneScreen() {
                     })
                   }
                   style={{
-                    fontSize: 35,
-                    letterSpacing: 10,
+                    fontSize: 32,
+                    letterSpacing: 8,
+                    paddingTop: 12,
                   }}
                   value={otp}
                   onChangeText={setOtp}
