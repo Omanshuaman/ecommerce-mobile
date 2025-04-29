@@ -3,52 +3,37 @@ import {
   ActivityIndicator,
   ScrollView,
   View,
-  Image as RNImage,
   TouchableOpacity,
   Image,
   Text,
   SafeAreaView,
   ImageBackground, // Added import
+  FlatList,
+  Dimensions,
 } from "react-native";
+import { ResizeMode, Video } from "expo-av";
 import { router, useLocalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Plus } from "lucide-react-native"; // or use Ionicons if preferred
 import {
   Select,
-  SelectTrigger,
-  SelectInput,
-  SelectIcon,
   SelectPortal,
   SelectBackdrop,
   SelectContent,
   SelectDragIndicator,
   SelectDragIndicatorWrapper,
-  SelectItem,
 } from "@/components/ui/select";
 import {
   Accordion,
   AccordionItem,
   AccordionHeader,
   AccordionTrigger,
-  AccordionTitleText,
   AccordionContentText,
   AccordionIcon,
   AccordionContent,
 } from "@/components/ui/accordion";
-import {
-  ChevronUpIcon,
-  ChevronDownIcon,
-  RemoveIcon,
-  AddIcon,
-} from "@/components/ui/icon";
+import { RemoveIcon, AddIcon } from "@/components/ui/icon";
 import { Box } from "@/components/ui/box";
-import { Heading } from "@/components/ui/heading";
-import { VStack } from "@/components/ui/vstack";
-import { Button, ButtonText } from "@/components/ui/button";
-import { useCart } from "@/store/cartStore";
-import { Divider } from "react-native-paper";
 import { useProduct } from "@/store/productStore";
-import { MaterialIcons } from "@expo/vector-icons";
 
 export default function ProductDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -61,7 +46,8 @@ export default function ProductDetailsScreen() {
         const value = await AsyncStorage.getItem("myData");
         if (value !== null) {
           const products = JSON.parse(value);
-          const product = products.find((p: any) => p.originalPrice === id); // replace with p.image === id if using image as identifier
+
+          const product = products.find((p: any) => p.id === parseInt(id));
           setFilteredProduct(product);
         }
       } catch (e) {
@@ -93,14 +79,47 @@ export default function ProductDetailsScreen() {
       <SafeAreaView className="flex-1">
         <ScrollView className="px-4 py-6">
           <View className="relative">
-            <Image
-              source={{ uri: filteredProduct.image }}
-              className="w-full mb-4 h-96"
-              resizeMode="cover"
+            <FlatList
+              data={[
+                { type: "image", uri: filteredProduct.image },
+                ...filteredProduct.mediaFiles,
+              ]}
+              horizontal
+              pagingEnabled
+              centerContent
+              showsHorizontalScrollIndicator={true}
+              keyExtractor={(item, index) => index.toString()}
+              renderItem={({ item }) => {
+                console.log("item", item);
+                if (item.type === "image") {
+                  return (
+                    <Image
+                      source={{ uri: item.uri }}
+                      className="w-full mb-4 h-96"
+                      style={{ width: Dimensions.get("window").width - 40 }}
+                      resizeMode="cover"
+                    />
+                  );
+                } else if (item.type === "video") {
+                  return (
+                    <Video
+                      source={{ uri: item.uri }}
+                      style={{
+                        width: Dimensions.get("window").width - 40,
+                        height: 384,
+                      }}
+                      resizeMode={ResizeMode.COVER}
+                      useNativeControls
+                      isLooping
+                    />
+                  );
+                }
+                return null;
+              }}
             />
 
             {/* Absolute Tags */}
-            <View className="absolute bottom-6 left-2 flex-row items-center space-x-1 gap-1  ">
+            <View className="absolute bottom-6 left-2 flex-row items-center space-x-1 gap-1">
               <Text
                 className="bg-[#E5FF03] text-black text-2xl px-2 pt-0.5 border border-gray-800 shadow-lg shadow-gray-950"
                 style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 20 }}>

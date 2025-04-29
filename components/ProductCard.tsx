@@ -1,10 +1,19 @@
-import { Image, View, Text, Pressable } from "react-native";
+import { Image, View, Text, Pressable, TouchableOpacity } from "react-native";
 import { AntDesign, FontAwesome } from "@expo/vector-icons";
-import { Link } from "expo-router";
+import { Link, useRouter } from "expo-router";
 
-const ProductCard = ({ product }: any) => (
-  <Link href={`/product/${product.originalPrice}`} asChild>
-    <Pressable className="w-1/2">
+const ProductCard = ({ product }: any) => {
+  const router = useRouter();
+
+  const handlePress = () => {
+    console.log(product);
+    router.push({
+      pathname: `/product/${product.id}`,
+    });
+  };
+  return (
+    // Link to Product Details Page
+    <TouchableOpacity className="w-1/2" onPress={handlePress}>
       <View className="overflow-hidden ">
         {/* Product Image */}
         <View className="relative">
@@ -47,8 +56,8 @@ const ProductCard = ({ product }: any) => (
           </Text>
         </View>
       </View>
-    </Pressable>
-  </Link>
-);
+    </TouchableOpacity>
+  );
+};
 
 export default ProductCard;

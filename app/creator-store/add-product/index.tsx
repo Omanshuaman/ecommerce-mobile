@@ -50,6 +50,7 @@ import { useProduct } from "@/store/productStore";
 
 const AddProduct = () => {
   const [product, setProduct] = useState({
+    id: Date.now(),
     image: null,
     video: null,
     mediaFiles: [] as { uri: string; type: "image" | "video" }[],
@@ -140,6 +141,7 @@ const AddProduct = () => {
       const fileType = result.assets[0].type?.includes("video")
         ? "video"
         : "image";
+      console.log(fileType, result.assets[0].uri);
       updateProduct("mediaFiles", [
         ...product.mediaFiles,
         { uri: result.assets[0].uri, type: fileType },
@@ -165,7 +167,6 @@ const AddProduct = () => {
       newErrors.pieces = "Please enter a valid number of pieces.";
     if (!product.selectedProductCondition)
       newErrors.selectedProductCondition = "Please select a product condition.";
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -174,6 +175,8 @@ const AddProduct = () => {
     try {
       const existingData = await AsyncStorage.getItem("myData");
       const parsedData = existingData ? JSON.parse(existingData) : [];
+      console.log(product);
+
       const updatedData = [...parsedData, product];
 
       await AsyncStorage.setItem("myData", JSON.stringify(updatedData));
