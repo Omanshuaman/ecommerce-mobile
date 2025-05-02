@@ -267,6 +267,7 @@ const Warehouse = () => {
             className="border border-transparent bg-gray-500/20 px-2 text-white flex-row items-center justify-between">
             <SelectInput
               placeholder="Active"
+              placeholderClassName="text-white"
               className="text-white text-base"
               placeholderTextColor="white"
             />
@@ -274,12 +275,56 @@ const Warehouse = () => {
           </SelectTrigger>
           <SelectPortal>
             <SelectBackdrop />
-            <SelectContent>
-              <SelectDragIndicatorWrapper>
-                <SelectDragIndicator />
-              </SelectDragIndicatorWrapper>
-              <SelectItem label="Active" value="active" />
-              <SelectItem label="Unactive" value="unactive" />
+            <SelectContent className="bg-black border border-black pb-0">
+              <ActionsheetDragIndicatorWrapper className="pb-4">
+                <ActionsheetDragIndicator className="w-12 h-[5px]" />
+              </ActionsheetDragIndicatorWrapper>
+
+              <View className="border border-white rounded-sm mx-0">
+                <ActionsheetItem className="flex-row justify-between items-center px-5 py-5 border-b border-dashed border-white/40">
+                  <View className="flex-row items-center gap-2">
+                    <Feather name="check" size={24} color="white" />
+                    <Text
+                      className="text-white"
+                      style={{
+                        fontSize: 16,
+                        fontFamily: "HelveticaNeue-Bold",
+                      }}>
+                      Active
+                    </Text>
+                  </View>
+
+                  <View className="bg-[#E5FF03] rounded-md px-2 py-2">
+                    <Text
+                      className="text-black"
+                      style={{
+                        fontSize: 14,
+                        fontFamily: "HelveticaNeue-Bold",
+                      }}>
+                      22
+                    </Text>
+                  </View>
+                </ActionsheetItem>
+
+                <ActionsheetItem className="flex-row justify-between items-center px-5 py-5">
+                  <Text
+                    className="text-white"
+                    style={{ fontSize: 16, fontFamily: "HelveticaNeue-Bold" }}>
+                    Inactive
+                  </Text>
+
+                  <View className="bg-[#E5FF03] rounded-md px-2 py-2">
+                    <Text
+                      className="text-black"
+                      style={{
+                        fontSize: 14,
+                        fontFamily: "HelveticaNeue-Bold",
+                      }}>
+                      22
+                    </Text>
+                  </View>
+                </ActionsheetItem>
+              </View>
             </SelectContent>
           </SelectPortal>
         </Select>
