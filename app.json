@@ -20,7 +20,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.omanshu.obsessedowls"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -35,7 +36,8 @@
           "supportsBackgroundPlayback": true,
           "supportsPictureInPicture": true
         }
-      ]
+      ],
+      "expo-web-browser"
     ],
     "extra": {
       "router": {
