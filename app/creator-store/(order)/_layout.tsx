@@ -27,6 +27,24 @@ export default function RootLayout() {
           ),
         }}
       />
+      <Stack.Screen
+        name="camera"
+        options={{
+          headerShown: false,
+          headerTitleAlign: "center",
+          headerTintColor: "white",
+          headerTitleStyle: {
+            fontFamily: "HelveticaNeue-Bold",
+            fontSize: 18,
+          },
+          headerTransparent: true,
+          headerLeft: () => (
+            <TouchableOpacity onPressIn={() => router.back()}>
+              <Ionicons name="chevron-back" size={18} color="white" />
+            </TouchableOpacity>
+          ),
+        }}
+      />
     </Stack>
   );
 }

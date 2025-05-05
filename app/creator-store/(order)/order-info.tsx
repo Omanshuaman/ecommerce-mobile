@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import React, { useState } from "react";
 import {
   View,
@@ -109,6 +110,7 @@ export default function OrderCard() {
 
         <TouchableOpacity
           disabled={!isShipped}
+          onPress={() => router.push("/creator-store/(order)/camera")}
           className="bg-[#E5FF03] rounded-sm w-full py-3 justify-center items-center shadow-lg shadow-slate-50"
           style={{
             opacity: isShipped ? 1 : 0.5,
