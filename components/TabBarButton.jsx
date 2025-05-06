@@ -5,15 +5,14 @@ import Animated, {
   useSharedValue,
   withSpring,
 } from "react-native-reanimated";
-import tabicons from "@/constants/tabicons";
 import { SvgUri } from "react-native-svg";
 
 const TabBarButton = (props) => {
-  const { isFocused, label, routeName, color } = props;
+  const { isFocused, label, routeName, color, tabIcons } = props;
   const icons = {
     index: (props) => (
       <Image
-        source={tabicons.warehouse}
+        source={tabIcons.index}
         tintColor="white"
         resizeMode="contain"
         className="size-8"
@@ -21,7 +20,7 @@ const TabBarButton = (props) => {
     ),
     addproduct: (props) => (
       <Image
-        source={tabicons.PlusCircle}
+        source={tabIcons.addproduct}
         tintColor="white"
         resizeMode="contain"
         className="size-8"
@@ -29,7 +28,7 @@ const TabBarButton = (props) => {
     ),
     orders: (props) => (
       <Image
-        source={tabicons.packageIcon}
+        source={tabIcons.orders}
         tintColor="white"
         resizeMode="contain"
         className="size-8"
@@ -38,7 +37,7 @@ const TabBarButton = (props) => {
     profile: (props) => (
       <Image
         source={{
-          uri: "https://randomuser.me/api/portraits/men/1.jpg",
+          uri: tabIcons.profile,
         }}
         resizeMode="contain"
         className="size-8 rounded-full"

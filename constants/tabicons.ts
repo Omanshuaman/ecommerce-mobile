@@ -34,6 +34,9 @@ import edit from "@/assets/icons/edit.png";
 import warehouse from "@/assets/icons/warehouse.png";
 import PlusCircle from "@/assets/icons/plusCircle.png";
 import packageIcon from "@/assets/icons/package.png";
+import MonitorIcon from "@/assets/icons/monitor.png";
+import magnifyingGlass from "@/assets/icons/magnifyingGlass.png";
+import shoppingBag from "@/assets/icons/shoppingBag.png";
 
 export default {
   google,
@@ -72,4 +75,7 @@ export default {
   warehouse,
   PlusCircle,
   packageIcon,
+  MonitorIcon,
+  magnifyingGlass,
+  shoppingBag,
 };

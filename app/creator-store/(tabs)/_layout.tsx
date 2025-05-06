@@ -13,16 +13,23 @@ import {
 import { Button, ButtonText } from "@/components/ui/button";
 import TabBar from "@/components/TabBar";
 import { Feather } from "@expo/vector-icons";
+import tabicons from "@/constants/tabicons";
 
 const TabsLayout = () => {
   const pathname = usePathname();
   const [showActionsheet, setShowActionsheet] = React.useState(false);
   const handleClose = () => setShowActionsheet(false);
+  const tabIcons = {
+    index: tabicons.warehouse,
+    addproduct: tabicons.PlusCircle,
+    orders: tabicons.packageIcon,
+    profile: "https://randomuser.me/api/portraits/men/1.jpg",
+  };
   return (
     <>
       <Tabs
         backBehavior="history"
-        tabBar={(props: any) => <TabBar {...props} />}>
+        tabBar={(props: any) => <TabBar {...props} tabIcons={tabIcons} />}>
         <Tabs.Screen
           name="index"
           options={{

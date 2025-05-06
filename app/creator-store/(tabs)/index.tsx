@@ -182,15 +182,10 @@ const Warehouse = () => {
   //   return () => backHandler.remove();
   // }, []);
   const backIndex = backState((state: any) => state.back);
-  console.log("backIndex", backIndex);
   const navigation = useNavigation();
   const focused = navigation.isFocused();
   const path = usePathname();
-  useEffect(() => {
-    console.log(
-      `Current page is focused: ${focused}, current page name: ${path}`
-    );
-  }, [focused]);
+
   const [index, setIndex] = useState(backIndex);
 
   const renderTabBar = (props: any) => {

@@ -2,7 +2,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
 import React from "react";
 import TabBarButton from "./TabBarButton";
 
-const TabBar = ({ state, descriptors, navigation }) => {
+const TabBar = ({ state, descriptors, navigation, tabIcons }) => {
   const primaryColor = "#0891b2";
   const greyColor = "#737373";
 
@@ -50,6 +50,7 @@ const TabBar = ({ state, descriptors, navigation }) => {
             routeName={route.name}
             color={isFocused ? primaryColor : greyColor}
             label={label}
+            tabIcons={tabIcons}
           />
         );
       })}

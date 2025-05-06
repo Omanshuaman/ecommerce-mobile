@@ -250,7 +250,7 @@ export default function ProductDetailsScreen() {
                     borderStyle: "dashed",
                   }}>
                   <AccordionTrigger>
-                    {({ isExpanded }) => {
+                    {({ isExpanded }: { isExpanded: boolean }) => {
                       return (
                         <>
                           <Text
@@ -295,7 +295,7 @@ export default function ProductDetailsScreen() {
                     borderStyle: "dashed",
                   }}>
                   <AccordionTrigger>
-                    {({ isExpanded }) => {
+                    {({ isExpanded }: { isExpanded: boolean }) => {
                       return (
                         <>
                           <Text
