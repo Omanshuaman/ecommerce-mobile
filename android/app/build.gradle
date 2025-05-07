@@ -62,6 +62,7 @@ react {
     /* Autolinking */
     autolinkLibrariesWithApp()
 }
+def enableSeparateBuildPerCPUArchitecture = false
 
 /**
  * Set this to true to Run Proguard on Release builds to minify the Java bytecode.
