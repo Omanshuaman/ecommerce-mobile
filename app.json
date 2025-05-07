@@ -14,14 +14,27 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "runtimeVersion": {
+        "policy": "appVersion"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/53dd9dca-dfa9-4dcd-b4af-4df958f47fd4"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.omanshu.obsessedowls"
+      "package": "com.omanshu.obsessedowls",
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ],
+      "runtimeVersion": "1.0.0"
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -52,7 +65,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "bfbd9a2c-3ee9-4103-af42-f4b5cbad986e"
+        "projectId": "53dd9dca-dfa9-4dcd-b4af-4df958f47fd4"
       }
     },
     "owner": "omanshu"
