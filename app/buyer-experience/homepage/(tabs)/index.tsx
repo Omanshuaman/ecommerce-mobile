@@ -3,104 +3,85 @@ import {
   Text,
   useWindowDimensions,
   TouchableOpacity,
-  Animated,
   SafeAreaView,
   Image,
-  Dimensions,
   FlatList,
-  BackHandler,
   ImageBackground,
+  Dimensions,
 } from "react-native";
-import {
-  Actionsheet,
-  ActionsheetContent,
-  ActionsheetItem,
-  ActionsheetItemText,
-  ActionsheetDragIndicator,
-  ActionsheetDragIndicatorWrapper,
-  ActionsheetBackdrop,
-} from "@/components/ui/actionsheet";
-import { Button, ButtonText } from "@/components/ui/button";
 import { TabView, SceneMap } from "react-native-tab-view";
 import React, { useEffect, useState } from "react";
-import { Entypo, MaterialIcons, Ionicons, Feather } from "@expo/vector-icons";
-import {
-  Select,
-  SelectTrigger,
-  SelectInput,
-  SelectIcon,
-  SelectPortal,
-  SelectBackdrop,
-  SelectContent,
-  SelectDragIndicator,
-  SelectDragIndicatorWrapper,
-  SelectItem,
-} from "@/components/ui/select";
-import { FontAwesome } from "@expo/vector-icons";
-import { Link, useNavigation, usePathname } from "expo-router";
+import { useLocalSearchParams, useNavigation } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import ProductCard from "../../../../components/ProductCard";
 import { useBreakpointValue } from "@/components/ui/utils/use-break-point-value";
 import FeedCard from "@/components/FeedCard";
 import dummyFeeds from "@/constants/video";
 import { backState } from "@/store/productStore";
+import FeedReels from "@/app/feed/[id]";
+import PlayVideoListItem from "@/components/PlayVideoListItem";
+import PlayVideoListItemBuyer from "@/components/PlayVideoListItemBuyer";
 const FirstRoute = () => {
-  interface Product {
-    image: string;
-    selectedBrand: string;
-    selectedCategory: string[];
-    discountedPrice: number;
-    originalPrice: number;
-    pieces: number;
+  interface Populars {
+    previewImage: string;
+    videoUrl: string;
+    title: string;
+    id: string;
+    duration: string;
+    uploadTime: string;
+    views: string;
+    author: string;
     description: string;
-    selectedProductCondition: string[];
-    selectedPrimaryMaterial: string;
-    selectedPrimaryColor: string;
-    selectedOccasion: string;
+    subscriber: string;
+    isLive: boolean;
   }
 
-  const [products, setProducts] = useState<Product[]>([]);
+  const [populars, setPopulars] = useState<Populars[]>([]);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const value = await AsyncStorage.getItem("myData");
-        console.log("object");
-        if (value !== null) {
-          setProducts(JSON.parse(value));
-          return JSON.parse(value);
-        }
-      } catch (e) {
-        console.log("Loading error", e);
-      }
-    };
-    fetchData();
+    setPopulars(dummyFeeds);
   }, []);
   const numColumns = useBreakpointValue({
     default: 2,
     sm: 3,
     xl: 4,
   }) as number;
+  const { videoUrl } = useLocalSearchParams<{ videoUrl: string }>();
+  const [videoList, setVideoList] = useState<string[]>([]);
+  const WindowHeight = Dimensions.get("window").height;
+  const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 
+  useEffect(() => {
+    if (videoUrl) {
+      const index = dummyFeeds.findIndex((feed) => feed.videoUrl === videoUrl);
+      setCurrentVideoIndex(index);
+      setTimeout(() => {
+        flatListRef?.current?.scrollToIndex({ index, animated: false });
+      }, 0);
+    }
+  }, [videoUrl]);
+
+  const flatListRef = React.useRef<FlatList>(null);
   return (
-    <View className="flex-1">
-      {products.length > 0 ? (
-        <FlatList
-          data={products}
-          numColumns={numColumns}
-          contentContainerClassName="gap-2 max-w-[960px] mx-auto w-full"
-          columnWrapperClassName="gap-2"
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={({ item }) => <ProductCard product={item} />}
-        />
-      ) : (
-        <View className="flex-1 justify-center items-center">
-          <Image
-            source={require("@/assets/empty-screen.png")}
-            resizeMode="contain"
-            className="w-96"
+    <View style={{ flex: 1, backgroundColor: "black" }}>
+      <FlatList
+        ref={flatListRef}
+        data={dummyFeeds}
+        keyExtractor={(item, index) => index.toString()}
+        renderItem={({ item, index }) => (
+          <PlayVideoListItemBuyer
+            video={item}
+            index={index}
+            activeIndex={currentVideoIndex}
           />
-        </View>
-      )}
+        )}
+        onMomentumScrollEnd={(e) => {
+          const index = Math.round(
+            e.nativeEvent.contentOffset.y / WindowHeight
+          );
+          setCurrentVideoIndex(index);
+        }}
+        pagingEnabled={true}
+      />
     </View>
   );
 };
@@ -156,36 +137,14 @@ const renderScene = SceneMap({
   second: SecondRoute,
 });
 const routes = [
-  { key: "first", title: "Products" },
-  { key: "second", title: "Feed" },
+  { key: "first", title: "Popular" },
+  { key: "second", title: "Following" },
 ];
 const Warehouse = () => {
-  const [showActionsheet, setShowActionsheet] = React.useState(false);
-  const [selectedOption, setSelectedOption] = React.useState([
-    "Tap to add first product",
-    "/add-product",
-    1,
-  ]);
-  const handleClose = () => setShowActionsheet(false);
   const layout = useWindowDimensions();
-  // useEffect(() => {
-  //   const backAction = () => {
-  //     BackHandler.exitApp();
-  //     return true;
-  //   };
 
-  //   const backHandler = BackHandler.addEventListener(
-  //     "hardwareBackPress",
-  //     backAction
-  //   );
-
-  //   return () => backHandler.remove();
-  // }, []);
   const backIndex = backState((state: any) => state.back);
-  console.log("backIndex", backIndex);
   const navigation = useNavigation();
-  const focused = navigation.isFocused();
-  const path = usePathname();
 
   const [index, setIndex] = useState(backIndex);
 
@@ -202,7 +161,7 @@ const Warehouse = () => {
           return (
             <TouchableOpacity
               key={route.key}
-              className={`flex-1 items-center py-2 rounded-md ${
+              className={`flex-1 items-center py-2 rounded-sm mx-2 ${
                 isActive ? "bg-white/10" : ""
               }`}
               onPress={() => setIndex(i)}>
@@ -219,18 +178,21 @@ const Warehouse = () => {
     );
   };
 
-  const handleOptionSelect = (option: string, pages: string, num: any) => {
-    setSelectedOption([option, pages, num]);
-    setShowActionsheet(false);
-  };
-  const stats = [
-    { label: "Total Views", count: 200 },
-    { label: "Total Sold", count: 200 },
-    { label: "Wishlisted", count: 200 },
-  ];
   return (
     <SafeAreaView className="flex-1">
-      <Text>Warehouse</Text>
+      {/* Top section for 'Warehouse' text */}
+      <ImageBackground
+        source={require("../../../../assets/bg-image.jpg")}
+        style={{ flex: 1 }} // Add padding to avoid overlap with the header
+        resizeMode="cover">
+        <TabView
+          renderTabBar={renderTabBar}
+          navigationState={{ index, routes }}
+          renderScene={renderScene}
+          onIndexChange={setIndex}
+          initialLayout={{ width: layout.width }}
+        />
+      </ImageBackground>
     </SafeAreaView>
   );
 };
