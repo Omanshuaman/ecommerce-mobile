@@ -1,17 +1,13 @@
-import { Link, router, Slot, Stack } from "expo-router";
+import { Slot } from "expo-router";
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import "@/global.css";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Pressable, TouchableOpacity } from "react-native";
-import AntDesign from "@expo/vector-icons/AntDesign";
-import { Text } from "@/components/ui/text";
-import { useCart } from "@/store/cartStore";
-import { User } from "lucide-react-native";
-import { Icon } from "@/components/ui/icon";
-import { useAuth } from "@/store/authStore";
+import { StatusBar } from "expo-status-bar";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { setBackgroundColorAsync } from "expo-navigation-bar";
 
 SplashScreen.preventAutoHideAsync();
 const queryClient = new QueryClient();
@@ -42,7 +38,10 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <GluestackUIProvider mode="light">
+      <GluestackUIProvider>
+        <SafeAreaView style={{ backgroundColor: "#1E1E1E" }}>
+          <StatusBar style="light" />
+        </SafeAreaView>
         <Slot />
       </GluestackUIProvider>
     </QueryClientProvider>
