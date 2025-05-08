@@ -15,18 +15,6 @@ import {
   AntDesign,
   Ionicons,
 } from "@expo/vector-icons";
-import {
-  Select,
-  SelectTrigger,
-  SelectInput,
-  SelectIcon,
-  SelectPortal,
-  SelectBackdrop,
-  SelectContent,
-  SelectDragIndicator,
-  SelectDragIndicatorWrapper,
-  SelectItem,
-} from "@/components/ui/select";
 
 export default function Profile() {
   const menuItems = [

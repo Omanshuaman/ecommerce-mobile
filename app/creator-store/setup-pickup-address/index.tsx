@@ -7,6 +7,7 @@ import {
   ScrollView,
   TextInput,
   ImageBackground,
+  StatusBar,
 } from "react-native";
 import { useState } from "react";
 import { useRouter } from "expo-router";
@@ -22,6 +23,7 @@ import { Input, InputField } from "@/components/ui/input";
 import { VStack } from "@/components/ui/vstack";
 import { AlertCircleIcon } from "@/components/ui/icon";
 import React from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const SetupAddress = () => {
   const router = useRouter();
@@ -63,222 +65,226 @@ const SetupAddress = () => {
   };
 
   return (
-    <ImageBackground
-      source={require("../../../assets/bg-image.jpg")}
-      style={{ flex: 1, paddingTop: 50 }} // Add padding to avoid overlap with the header
-      resizeMode="cover">
-      <ScrollView className="flex-1">
-        <KeyboardAvoidingView
-          className="flex-1 px-6 justify-center"
-          behavior={Platform.OS === "ios" ? "padding" : "height"}>
-          <View className="gap-2">
-            <Text
-              className="text-white mb-2"
-              style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 50 }}>
-              SETUP ADDRESS
-            </Text>
-            <Text className="mb-16" style={{ fontSize: 16, color: "white" }}>
-              This will help us deliver your products
-            </Text>
+    <SafeAreaView style={{ flex: 1 }}>
+      <StatusBar barStyle="light-content" />
 
-            <VStack className="w-full rounded-md gap-2">
-              <FormControl isInvalid={address1Invalid}>
-                <FormControlLabel className="py-1">
-                  <FormControlLabelText className="text-white">
-                    Address line 1
-                  </FormControlLabelText>
-                </FormControlLabel>
-                <Input className="bg-black h-fit" size="xl">
-                  <TextInput
-                    keyboardType="default"
-                    placeholder="HOUSE NUMBER & STREET NAME"
-                    placeholderTextColor="#888"
-                    className="text-white py-5 px-3"
-                    ref={(ref) => {
-                      if (ref) {
-                        ref.setNativeProps({
-                          style: { fontFamily: "PPFormulaCondensed-Bold" },
-                        });
-                      }
-                    }}
+      <ImageBackground
+        source={require("../../../assets/bg-image.jpg")}
+        style={{ flex: 1, paddingTop: 50 }} // Add padding to avoid overlap with the header
+        resizeMode="cover">
+        <ScrollView className="flex-1">
+          <KeyboardAvoidingView
+            className="flex-1 px-6 justify-center"
+            behavior={Platform.OS === "ios" ? "padding" : "height"}>
+            <View className="gap-2">
+              <Text
+                className="text-white mb-2"
+                style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 50 }}>
+                SETUP ADDRESS
+              </Text>
+              <Text className="mb-16" style={{ fontSize: 16, color: "white" }}>
+                This will help us deliver your products
+              </Text>
+
+              <VStack className="w-full rounded-md gap-2">
+                <FormControl isInvalid={address1Invalid}>
+                  <FormControlLabel className="py-1">
+                    <FormControlLabelText className="text-white">
+                      Address line 1
+                    </FormControlLabelText>
+                  </FormControlLabel>
+                  <Input className="bg-black h-fit" size="xl">
+                    <TextInput
+                      keyboardType="default"
+                      placeholder="HOUSE NUMBER & STREET NAME"
+                      placeholderTextColor="#888"
+                      className="text-white py-5 px-3"
+                      ref={(ref) => {
+                        if (ref) {
+                          ref.setNativeProps({
+                            style: { fontFamily: "PPFormulaCondensed-Bold" },
+                          });
+                        }
+                      }}
+                      style={{
+                        fontSize: 20,
+                      }}
+                      value={address1}
+                      onChangeText={(text) => setAddress1(text)}
+                    />
+                  </Input>
+                  {address1Invalid && (
+                    <FormControlError>
+                      <FormControlErrorIcon as={AlertCircleIcon} />
+                      <FormControlErrorText>
+                        Address line 1 is required.
+                      </FormControlErrorText>
+                    </FormControlError>
+                  )}
+                </FormControl>
+
+                <FormControl isInvalid={address2Invalid}>
+                  <FormControlLabel className="py-1">
+                    <FormControlLabelText className="text-white">
+                      Address line 2
+                    </FormControlLabelText>
+                  </FormControlLabel>
+                  <Input className="bg-black h-fit" size="xl">
+                    <TextInput
+                      keyboardType="default"
+                      placeholder="APARTMENT OR BUILDING"
+                      placeholderTextColor="#888"
+                      className="text-white py-5 px-3"
+                      ref={(ref) => {
+                        if (ref) {
+                          ref.setNativeProps({
+                            style: { fontFamily: "PPFormulaCondensed-Bold" },
+                          });
+                        }
+                      }}
+                      style={{
+                        fontSize: 20,
+                      }}
+                      value={address2}
+                      onChangeText={(text) => setAddress2(text)}
+                    />
+                  </Input>
+                  {address2Invalid && (
+                    <FormControlError>
+                      <FormControlErrorIcon as={AlertCircleIcon} />
+                      <FormControlErrorText>
+                        Address line 2 is required.
+                      </FormControlErrorText>
+                    </FormControlError>
+                  )}
+                </FormControl>
+
+                <FormControl isInvalid={cityInvalid}>
+                  <FormControlLabel className="py-1">
+                    <FormControlLabelText className="text-white">
+                      City
+                    </FormControlLabelText>
+                  </FormControlLabel>
+                  <Input className="bg-black h-fit" size="xl">
+                    <TextInput
+                      keyboardType="default"
+                      placeholder="CITY OR TOWN NAME"
+                      placeholderTextColor="#888"
+                      className="text-white py-5 px-3"
+                      ref={(ref) => {
+                        if (ref) {
+                          ref.setNativeProps({
+                            style: { fontFamily: "PPFormulaCondensed-Bold" },
+                          });
+                        }
+                      }}
+                      style={{
+                        fontSize: 20,
+                      }}
+                      value={city}
+                      onChangeText={(text) => setCity(text)}
+                    />
+                  </Input>
+                  {cityInvalid && (
+                    <FormControlError>
+                      <FormControlErrorIcon as={AlertCircleIcon} />
+                      <FormControlErrorText>
+                        City is required.
+                      </FormControlErrorText>
+                    </FormControlError>
+                  )}
+                </FormControl>
+
+                <FormControl isInvalid={stateInvalid}>
+                  <FormControlLabel className="py-1">
+                    <FormControlLabelText className="text-white">
+                      State
+                    </FormControlLabelText>
+                  </FormControlLabel>
+                  <Input className="bg-black h-fit" size="xl">
+                    <TextInput
+                      keyboardType="default"
+                      placeholder="STATE OR REGION"
+                      className="text-white py-5 px-3"
+                      placeholderTextColor="#888"
+                      ref={(ref) => {
+                        if (ref) {
+                          ref.setNativeProps({
+                            style: { fontFamily: "PPFormulaCondensed-Bold" },
+                          });
+                        }
+                      }}
+                      style={{
+                        fontSize: 20,
+                      }}
+                      value={state}
+                      onChangeText={(text) => setState(text)}
+                    />
+                  </Input>
+                  {stateInvalid && (
+                    <FormControlError>
+                      <FormControlErrorIcon as={AlertCircleIcon} />
+                      <FormControlErrorText>
+                        State is required.
+                      </FormControlErrorText>
+                    </FormControlError>
+                  )}
+                </FormControl>
+
+                <FormControl isInvalid={pinInvalid}>
+                  <FormControlLabel className="py-1">
+                    <FormControlLabelText className="text-white">
+                      PIN Code
+                    </FormControlLabelText>
+                  </FormControlLabel>
+                  <Input className="bg-black h-fit" size="xl">
+                    <TextInput
+                      keyboardType="numeric"
+                      placeholder="6 DIGIT PIN CODE"
+                      className="text-white py-5 px-3"
+                      placeholderTextColor="#888"
+                      ref={(ref) => {
+                        if (ref) {
+                          ref.setNativeProps({
+                            style: { fontFamily: "PPFormulaCondensed-Bold" },
+                          });
+                        }
+                      }}
+                      style={{
+                        fontSize: 20,
+                      }}
+                      value={pinCode}
+                      onChangeText={(text) => setPinCode(text)}
+                    />
+                  </Input>
+                  {pinInvalid && (
+                    <FormControlError>
+                      <FormControlErrorIcon as={AlertCircleIcon} />
+                      <FormControlErrorText>
+                        PIN code must be exactly 6 digits.
+                      </FormControlErrorText>
+                    </FormControlError>
+                  )}
+                </FormControl>
+
+                <TouchableOpacity
+                  className="bg-[#E5FF03] py-2 mb-6 mt-4 rounded-sm shadow-lg shadow-slate-50 items-center"
+                  onPress={handleSubmit}>
+                  <Text
+                    className="text-black"
                     style={{
-                      fontSize: 20,
-                    }}
-                    value={address1}
-                    onChangeText={(text) => setAddress1(text)}
-                  />
-                </Input>
-                {address1Invalid && (
-                  <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} />
-                    <FormControlErrorText>
-                      Address line 1 is required.
-                    </FormControlErrorText>
-                  </FormControlError>
-                )}
-              </FormControl>
-
-              <FormControl isInvalid={address2Invalid}>
-                <FormControlLabel className="py-1">
-                  <FormControlLabelText className="text-white">
-                    Address line 2
-                  </FormControlLabelText>
-                </FormControlLabel>
-                <Input className="bg-black h-fit" size="xl">
-                  <TextInput
-                    keyboardType="default"
-                    placeholder="APARTMENT OR BUILDING"
-                    placeholderTextColor="#888"
-                    className="text-white py-5 px-3"
-                    ref={(ref) => {
-                      if (ref) {
-                        ref.setNativeProps({
-                          style: { fontFamily: "PPFormulaCondensed-Bold" },
-                        });
-                      }
-                    }}
-                    style={{
-                      fontSize: 20,
-                    }}
-                    value={address2}
-                    onChangeText={(text) => setAddress2(text)}
-                  />
-                </Input>
-                {address2Invalid && (
-                  <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} />
-                    <FormControlErrorText>
-                      Address line 2 is required.
-                    </FormControlErrorText>
-                  </FormControlError>
-                )}
-              </FormControl>
-
-              <FormControl isInvalid={cityInvalid}>
-                <FormControlLabel className="py-1">
-                  <FormControlLabelText className="text-white">
-                    City
-                  </FormControlLabelText>
-                </FormControlLabel>
-                <Input className="bg-black h-fit" size="xl">
-                  <TextInput
-                    keyboardType="default"
-                    placeholder="CITY OR TOWN NAME"
-                    placeholderTextColor="#888"
-                    className="text-white py-5 px-3"
-                    ref={(ref) => {
-                      if (ref) {
-                        ref.setNativeProps({
-                          style: { fontFamily: "PPFormulaCondensed-Bold" },
-                        });
-                      }
-                    }}
-                    style={{
-                      fontSize: 20,
-                    }}
-                    value={city}
-                    onChangeText={(text) => setCity(text)}
-                  />
-                </Input>
-                {cityInvalid && (
-                  <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} />
-                    <FormControlErrorText>
-                      City is required.
-                    </FormControlErrorText>
-                  </FormControlError>
-                )}
-              </FormControl>
-
-              <FormControl isInvalid={stateInvalid}>
-                <FormControlLabel className="py-1">
-                  <FormControlLabelText className="text-white">
-                    State
-                  </FormControlLabelText>
-                </FormControlLabel>
-                <Input className="bg-black h-fit" size="xl">
-                  <TextInput
-                    keyboardType="default"
-                    placeholder="STATE OR REGION"
-                    className="text-white py-5 px-3"
-                    placeholderTextColor="#888"
-                    ref={(ref) => {
-                      if (ref) {
-                        ref.setNativeProps({
-                          style: { fontFamily: "PPFormulaCondensed-Bold" },
-                        });
-                      }
-                    }}
-                    style={{
-                      fontSize: 20,
-                    }}
-                    value={state}
-                    onChangeText={(text) => setState(text)}
-                  />
-                </Input>
-                {stateInvalid && (
-                  <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} />
-                    <FormControlErrorText>
-                      State is required.
-                    </FormControlErrorText>
-                  </FormControlError>
-                )}
-              </FormControl>
-
-              <FormControl isInvalid={pinInvalid}>
-                <FormControlLabel className="py-1">
-                  <FormControlLabelText className="text-white">
-                    PIN Code
-                  </FormControlLabelText>
-                </FormControlLabel>
-                <Input className="bg-black h-fit" size="xl">
-                  <TextInput
-                    keyboardType="numeric"
-                    placeholder="6 DIGIT PIN CODE"
-                    className="text-white py-5 px-3"
-                    placeholderTextColor="#888"
-                    ref={(ref) => {
-                      if (ref) {
-                        ref.setNativeProps({
-                          style: { fontFamily: "PPFormulaCondensed-Bold" },
-                        });
-                      }
-                    }}
-                    style={{
-                      fontSize: 20,
-                    }}
-                    value={pinCode}
-                    onChangeText={(text) => setPinCode(text)}
-                  />
-                </Input>
-                {pinInvalid && (
-                  <FormControlError>
-                    <FormControlErrorIcon as={AlertCircleIcon} />
-                    <FormControlErrorText>
-                      PIN code must be exactly 6 digits.
-                    </FormControlErrorText>
-                  </FormControlError>
-                )}
-              </FormControl>
-
-              <TouchableOpacity
-                className="bg-[#E5FF03] py-2 mt-4 rounded-sm shadow-lg shadow-slate-50 items-center"
-                onPress={handleSubmit}>
-                <Text
-                  className="text-black"
-                  style={{
-                    fontFamily: "PPFormulaCondensed-Bold",
-                    fontSize: 34,
-                  }}>
-                  SUBMIT
-                </Text>
-              </TouchableOpacity>
-            </VStack>
-          </View>
-        </KeyboardAvoidingView>
-      </ScrollView>
-    </ImageBackground>
+                      fontFamily: "PPFormulaCondensed-Bold",
+                      fontSize: 34,
+                    }}>
+                    SUBMIT
+                  </Text>
+                </TouchableOpacity>
+              </VStack>
+            </View>
+          </KeyboardAvoidingView>
+        </ScrollView>
+      </ImageBackground>
+    </SafeAreaView>
   );
 };
 

@@ -12,6 +12,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
 import { Link, useRouter } from "expo-router";
 import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+import { StatusBar } from "react-native";
 
 export default function OtpPhoneScreen() {
   const [otp, setOtp] = useState("");
@@ -26,6 +27,8 @@ export default function OtpPhoneScreen() {
 
   return (
     <SafeAreaProvider>
+      <StatusBar barStyle="light-content" />
+
       <ImageBackground
         source={require("../../assets/bg-image.jpg")}
         style={{ flex: 1, paddingTop: 50 }} // Add padding to avoid overlap with the header
@@ -41,7 +44,7 @@ export default function OtpPhoneScreen() {
                 style={{ fontFamily: "PPFormulaCondensed-Bold", fontSize: 50 }}>
                 VERIFY YOUR PHONE NUMBER
               </Text>
-              <Text className="mb-32 " style={{ fontSize: 16, color: "white" }}>
+              <Text className="mb-24 " style={{ fontSize: 16, color: "white" }}>
                 Enter the OTP sent to +91 9422345432 Change number
               </Text>
 

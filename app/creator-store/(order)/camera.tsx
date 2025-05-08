@@ -13,9 +13,11 @@ import {
   View,
   Modal,
   Image,
+  StatusBar,
 } from "react-native";
 import * as MediaLibrary from "expo-media-library";
 import { router } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function Camera() {
   const [facing, setFacing] = useState<CameraType>("back");
@@ -67,7 +69,9 @@ export default function Camera() {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="light-content" />
+
       <CameraView
         style={styles.camera}
         facing={facing}
@@ -107,7 +111,7 @@ export default function Camera() {
           </View>
         </View>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 }
 

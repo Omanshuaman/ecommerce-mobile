@@ -7,7 +7,6 @@ import {
   Alert,
   BackHandler,
   TextInput,
-  SafeAreaView,
 } from "react-native";
 import {
   FormControl,
@@ -18,6 +17,8 @@ import { Input, InputField } from "@/components/ui/input";
 import { VStack } from "@/components/ui/vstack";
 import React, { useEffect } from "react";
 import { Link, useRouter } from "expo-router";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "react-native";
 
 const AccountInfo = () => {
   const [fullName, setFullName] = React.useState("");
@@ -67,6 +68,8 @@ const AccountInfo = () => {
 
   return (
     <SafeAreaView className="flex-1">
+      <StatusBar barStyle="light-content" />
+
       <KeyboardAvoidingView
         className="flex-1 bg-[#161616] px-6"
         behavior={Platform.OS === "ios" ? "padding" : "height"}>
@@ -186,7 +189,7 @@ const AccountInfo = () => {
               ) : null}
             </FormControl>
           </VStack>
-          <VStack className="w-full rounded-md">
+          <VStack className="w-full rounded-md mb-4">
             {/* Add Social Media */}
             <Link href="/creator-store/social-media" asChild>
               <TouchableOpacity className="bg-black mt-6 py-2 border border-white items-center shadow-lg shadow-slate-50 rounded-sm">

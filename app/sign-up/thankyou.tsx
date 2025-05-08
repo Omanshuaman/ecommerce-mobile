@@ -5,6 +5,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ImageBackground,
+  StatusBar,
 } from "react-native";
 import { useState } from "react";
 import { Link, useRouter } from "expo-router";
@@ -20,6 +21,8 @@ export default function ThankYouScreen() {
 
   return (
     <SafeAreaView className="flex-1">
+      <StatusBar barStyle="light-content" />
+
       <ImageBackground
         source={require("../../assets/bg-image.jpg")} // Ensure this matches your background
         style={{ flex: 1, paddingTop: 50 }}

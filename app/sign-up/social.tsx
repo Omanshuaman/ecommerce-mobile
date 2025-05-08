@@ -12,6 +12,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
 import { Link, useRouter } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "react-native";
 export default function OtpPhoneScreen() {
   const [profileLink, setProfileLink] = useState("");
   const [isPressed, setIsPressed] = useState(false);
@@ -24,6 +25,8 @@ export default function OtpPhoneScreen() {
   };
   return (
     <SafeAreaView className="flex-1">
+      <StatusBar barStyle="light-content" />
+
       <ImageBackground
         source={require("../../assets/bg-image.jpg")}
         style={{ flex: 1, paddingTop: 50 }}

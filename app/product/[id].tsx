@@ -6,13 +6,15 @@ import {
   TouchableOpacity,
   Image,
   Text,
-  SafeAreaView,
   ImageBackground, // Added import
   FlatList,
   Dimensions,
   BackHandler,
+  StatusBar,
 } from "react-native";
 import { ResizeMode, Video } from "expo-av";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import { router, useLocalSearchParams } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
@@ -89,6 +91,8 @@ export default function ProductDetailsScreen() {
   console.log(filteredProduct.image);
   return (
     <SafeAreaView className="flex-1">
+      <StatusBar barStyle="light-content" />
+
       <ImageBackground
         source={require("../../assets/bg-image.jpg")}
         style={{ flex: 1, paddingTop: 50 }} // Add padding to avoid overlap with the header

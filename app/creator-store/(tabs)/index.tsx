@@ -20,6 +20,8 @@ import {
   ActionsheetDragIndicatorWrapper,
   ActionsheetBackdrop,
 } from "@/components/ui/actionsheet";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import { Button, ButtonText } from "@/components/ui/button";
 import { TabView, SceneMap } from "react-native-tab-view";
 import React, { useEffect, useState } from "react";
@@ -36,7 +38,6 @@ import {
   SelectDragIndicatorWrapper,
   SelectItem,
 } from "@/components/ui/select";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import { FontAwesome } from "@expo/vector-icons";
 import { Link, useNavigation, usePathname } from "expo-router";
@@ -159,7 +160,7 @@ const renderScene = SceneMap({
 });
 const routes = [
   { key: "first", title: "Products" },
-  { key: "second", title: "Feed" },
+  { key: "second", title: "Reels" },
 ];
 const Warehouse = () => {
   const [showActionsheet, setShowActionsheet] = React.useState(false);
@@ -230,7 +231,7 @@ const Warehouse = () => {
     { label: "Wishlisted", count: 200 },
   ];
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
+    <SafeAreaView style={{ flex: 1 }}>
       {/* Top section for 'Warehouse' text */}
       <StatusBar barStyle="light-content" />
 

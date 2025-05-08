@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 4,
+    paddingVertical: 4,
   },
   iconContainer: {
     paddingHorizontal: 16,

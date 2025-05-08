@@ -26,7 +26,7 @@ export default function OtpPhoneScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
+    <SafeAreaView style={{ flex: 1 }}>
       <StatusBar barStyle="light-content" />
       <ImageBackground
         source={require("../../assets/bg-image.jpg")}
@@ -35,7 +35,8 @@ export default function OtpPhoneScreen() {
         <KeyboardAvoidingView
           className="flex-1 px-6 justify-center"
           behavior={Platform.OS === "ios" ? "padding" : "height"}>
-          <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <ScrollView
+            contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}>
             <View className="gap-2 pt-20">
               <Text
                 className="text-white mb-2"

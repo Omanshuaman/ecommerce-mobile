@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useLocalSearchParams } from "expo-router";
 import PlayVideoListItem from "@/components/PlayVideoListItem";
 import dummyFeeds from "@/constants/video";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "react-native";
 
 const FeedReels = () => {
   const { videoUrl } = useLocalSearchParams<{ videoUrl: string }>();
@@ -23,7 +25,9 @@ const FeedReels = () => {
   const flatListRef = React.useRef<FlatList>(null);
 
   return (
-    <View style={{ flex: 1, backgroundColor: "black" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
+      <StatusBar barStyle="light-content" />
+
       <FlatList
         ref={flatListRef}
         data={dummyFeeds}
@@ -43,7 +47,7 @@ const FeedReels = () => {
         }}
         pagingEnabled={true}
       />
-    </View>
+    </SafeAreaView>
   );
 };
 

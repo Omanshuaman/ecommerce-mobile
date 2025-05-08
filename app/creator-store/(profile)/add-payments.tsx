@@ -6,8 +6,11 @@ import {
   KeyboardAvoidingView,
   ScrollView,
   Platform,
+  StatusBar,
 } from "react-native";
 import { useState } from "react";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import {
   FormControl,
   FormControlLabel,
@@ -53,222 +56,233 @@ const AddPayments = () => {
   };
 
   return (
-    <View className="flex-1 bg-[#161616] px-2 pt-6 pb-4">
-      <ScrollView className="flex-grow" showsVerticalScrollIndicator={false}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          className="flex-1 px-4 justify-center">
-          <VStack className="w-full space-y-4">
-            {/* Card Number */}
-            <FormControl
-              isInvalid={errors.cardNumber}
-              size="md"
-              isDisabled={false}
-              isReadOnly={false}
-              isRequired={false}>
-              <FormControlLabel className="pt-3">
-                <FormControlLabelText
-                  className="text-white"
-                  style={{ fontFamily: "HelveticaNeue-Medium" }}>
-                  Card Number
-                </FormControlLabelText>
-              </FormControlLabel>
-              <Input className="bg-black h-fit" size="xl">
-                <TextInput
-                  keyboardType="numeric"
-                  maxLength={16}
-                  placeholder="0000 0000 0000 0000"
-                  placeholderTextColor="#888"
-                  className="text-white py-4 px-4"
-                  style={{
-                    fontSize: 26,
-                  }}
-                  ref={(ref) =>
-                    ref &&
-                    ref.setNativeProps({
-                      style: { fontFamily: "PPFormulaCondensed-Bold" },
-                    })
-                  }
-                  value={cardNumber}
-                  onChangeText={setCardNumber}
-                />
-              </Input>
-              {errors.cardNumber && (
-                <FormControlError>
-                  <FormControlErrorIcon as={AlertCircleIcon} />
-                  <FormControlErrorText>
-                    Enter valid 16-digit card number.
-                  </FormControlErrorText>
-                </FormControlError>
-              )}
-            </FormControl>
+    <SafeAreaView style={{ flex: 1 }}>
+      <StatusBar barStyle="light-content" />
 
-            {/* Expiry Date */}
-            <FormControl isInvalid={errors.expiry}>
-              <FormControlLabel className="pt-3">
-                <FormControlLabelText
-                  className="text-white"
-                  style={{ fontFamily: "HelveticaNeue-Medium" }}>
-                  Valid Through
-                </FormControlLabelText>
-              </FormControlLabel>
-              <Input className="bg-black h-fit" size="xl">
-                <TextInput
-                  keyboardType="numeric"
-                  maxLength={5}
-                  placeholder="MM/YY"
-                  placeholderTextColor="#888"
-                  className="text-white px-3 py-4"
-                  style={{
-                    fontSize: 26,
-                  }}
-                  ref={(ref) =>
-                    ref &&
-                    ref.setNativeProps({
-                      style: { fontFamily: "PPFormulaCondensed-Bold" },
-                    })
-                  }
-                  value={expiry}
-                  onChangeText={setExpiry}
-                />
-              </Input>
-              {errors.expiry && (
-                <FormControlError>
-                  <FormControlErrorIcon as={AlertCircleIcon} />
-                  <FormControlErrorText>
-                    Enter valid expiry date.
-                  </FormControlErrorText>
-                </FormControlError>
-              )}
-            </FormControl>
+      <View className="flex-1 bg-[#161616] px-2 pt-6 pb-4">
+        <ScrollView className="flex-grow" showsVerticalScrollIndicator={false}>
+          <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            className="flex-1 px-4 justify-center">
+            <VStack className="w-full space-y-4">
+              {/* Card Number */}
+              <FormControl
+                isInvalid={errors.cardNumber}
+                size="md"
+                isDisabled={false}
+                isReadOnly={false}
+                isRequired={false}>
+                <FormControlLabel className="pt-3">
+                  <FormControlLabelText
+                    className="text-white"
+                    style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                    Card Number
+                  </FormControlLabelText>
+                </FormControlLabel>
+                <Input className="bg-black h-fit" size="xl">
+                  <TextInput
+                    keyboardType="numeric"
+                    maxLength={16}
+                    placeholder="0000 0000 0000 0000"
+                    placeholderTextColor="#888"
+                    className="text-white py-4 px-4"
+                    style={{
+                      fontSize: 26,
+                    }}
+                    ref={(ref) => {
+                      if (ref) {
+                        ref.setNativeProps({
+                          style: { fontFamily: "PPFormulaCondensed-Bold" },
+                        });
+                      }
+                    }}
+                    value={cardNumber}
+                    onChangeText={setCardNumber}
+                  />
+                </Input>
+                {errors.cardNumber && (
+                  <FormControlError>
+                    <FormControlErrorIcon as={AlertCircleIcon} />
+                    <FormControlErrorText>
+                      Enter valid 16-digit card number.
+                    </FormControlErrorText>
+                  </FormControlError>
+                )}
+              </FormControl>
 
-            {/* CVV */}
-            <FormControl isInvalid={errors.cvv}>
-              <FormControlLabel className="pt-3">
-                <FormControlLabelText
-                  className="text-white"
-                  style={{ fontFamily: "HelveticaNeue-Medium" }}>
-                  CVV
-                </FormControlLabelText>
-              </FormControlLabel>
-              <Input className="bg-black h-fit" size="xl">
-                <TextInput
-                  keyboardType="numeric"
-                  maxLength={4}
-                  placeholder="000"
-                  placeholderTextColor="#888"
-                  className="text-white px-3 py-4"
-                  style={{
-                    fontSize: 26,
-                  }}
-                  ref={(ref) =>
-                    ref &&
-                    ref.setNativeProps({
-                      style: { fontFamily: "PPFormulaCondensed-Bold" },
-                    })
-                  }
-                  value={cvv}
-                  onChangeText={setCvv}
-                />
-              </Input>
-              {errors.cvv && (
-                <FormControlError>
-                  <FormControlErrorIcon as={AlertCircleIcon} />
-                  <FormControlErrorText>Enter valid CVV.</FormControlErrorText>
-                </FormControlError>
-              )}
-            </FormControl>
+              {/* Expiry Date */}
+              <FormControl isInvalid={errors.expiry}>
+                <FormControlLabel className="pt-3">
+                  <FormControlLabelText
+                    className="text-white"
+                    style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                    Valid Through
+                  </FormControlLabelText>
+                </FormControlLabel>
+                <Input className="bg-black h-fit" size="xl">
+                  <TextInput
+                    keyboardType="numeric"
+                    maxLength={5}
+                    placeholder="MM/YY"
+                    placeholderTextColor="#888"
+                    className="text-white px-3 py-4"
+                    style={{
+                      fontSize: 26,
+                    }}
+                    ref={(ref) => {
+                      if (ref) {
+                        ref.setNativeProps({
+                          style: { fontFamily: "PPFormulaCondensed-Bold" },
+                        });
+                      }
+                    }}
+                    value={expiry}
+                    onChangeText={setExpiry}
+                  />
+                </Input>
+                {errors.expiry && (
+                  <FormControlError>
+                    <FormControlErrorIcon as={AlertCircleIcon} />
+                    <FormControlErrorText>
+                      Enter valid expiry date.
+                    </FormControlErrorText>
+                  </FormControlError>
+                )}
+              </FormControl>
 
-            {/* Name on Card */}
-            <FormControl isInvalid={errors.nameOnCard}>
-              <FormControlLabel className="pt-3">
-                <FormControlLabelText
-                  className="text-white"
-                  style={{ fontFamily: "HelveticaNeue-Medium" }}>
-                  Name on card
-                </FormControlLabelText>
-              </FormControlLabel>
-              <Input className="bg-black h-fit" size="xl">
-                <TextInput
-                  placeholder="ENTER NAME AS ON CARD"
-                  placeholderTextColor="#888"
-                  className="text-white px-3 py-4"
-                  style={{
-                    fontSize: 26,
-                  }}
-                  ref={(ref) =>
-                    ref &&
-                    ref.setNativeProps({
-                      style: { fontFamily: "PPFormulaCondensed-Bold" },
-                    })
-                  }
-                  value={nameOnCard}
-                  onChangeText={setNameOnCard}
-                />
-              </Input>
-              {errors.nameOnCard && (
-                <FormControlError>
-                  <FormControlErrorIcon as={AlertCircleIcon} />
-                  <FormControlErrorText>
-                    This field is required.
-                  </FormControlErrorText>
-                </FormControlError>
-              )}
-            </FormControl>
+              {/* CVV */}
+              <FormControl isInvalid={errors.cvv}>
+                <FormControlLabel className="pt-3">
+                  <FormControlLabelText
+                    className="text-white"
+                    style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                    CVV
+                  </FormControlLabelText>
+                </FormControlLabel>
+                <Input className="bg-black h-fit" size="xl">
+                  <TextInput
+                    keyboardType="numeric"
+                    maxLength={4}
+                    placeholder="000"
+                    placeholderTextColor="#888"
+                    className="text-white px-3 py-4"
+                    style={{
+                      fontSize: 26,
+                    }}
+                    ref={(ref) => {
+                      if (ref) {
+                        ref.setNativeProps({
+                          style: { fontFamily: "PPFormulaCondensed-Bold" },
+                        });
+                      }
+                    }}
+                    value={cvv}
+                    onChangeText={setCvv}
+                  />
+                </Input>
+                {errors.cvv && (
+                  <FormControlError>
+                    <FormControlErrorIcon as={AlertCircleIcon} />
+                    <FormControlErrorText>
+                      Enter valid CVV.
+                    </FormControlErrorText>
+                  </FormControlError>
+                )}
+              </FormControl>
 
-            {/* Card Nickname */}
-            <FormControl isInvalid={errors.nickname}>
-              <FormControlLabel className="pt-3">
-                <FormControlLabelText
-                  className="text-white"
-                  style={{ fontFamily: "HelveticaNeue-Medium" }}>
-                  Card Nickname
-                </FormControlLabelText>
-              </FormControlLabel>
-              <Input className="bg-black h-fit" size="xl">
-                <TextInput
-                  placeholder="WHAT YOU WANT TO SAVE IT AS"
-                  placeholderTextColor="#888"
-                  className="text-white px-3 py-4"
-                  style={{
-                    fontSize: 26,
-                  }}
-                  ref={(ref) =>
-                    ref &&
-                    ref.setNativeProps({
-                      style: { fontFamily: "PPFormulaCondensed-Bold" },
-                    })
-                  }
-                  value={nickname}
-                  onChangeText={setNickname}
-                />
-              </Input>
-              {errors.nickname && (
-                <FormControlError>
-                  <FormControlErrorIcon as={AlertCircleIcon} />
-                  <FormControlErrorText>
-                    This field is required.
-                  </FormControlErrorText>
-                </FormControlError>
-              )}
-            </FormControl>
-          </VStack>
-        </KeyboardAvoidingView>
-      </ScrollView>
-      {/* Save Button */}
-      <TouchableOpacity
-        className="bg-[#E5FF03] py-1 mt-4 mx-4 rounded-sm shadow-lg shadow-slate-50 items-center"
-        onPress={handleSave}>
-        <Text
-          className="text-black"
-          style={{
-            fontFamily: "PPFormulaCondensed-Bold",
-            fontSize: 38,
-          }}>
-          SAVE
-        </Text>
-      </TouchableOpacity>
-    </View>
+              {/* Name on Card */}
+              <FormControl isInvalid={errors.nameOnCard}>
+                <FormControlLabel className="pt-3">
+                  <FormControlLabelText
+                    className="text-white"
+                    style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                    Name on card
+                  </FormControlLabelText>
+                </FormControlLabel>
+                <Input className="bg-black h-fit" size="xl">
+                  <TextInput
+                    placeholder="ENTER NAME AS ON CARD"
+                    placeholderTextColor="#888"
+                    className="text-white px-3 py-4"
+                    style={{
+                      fontSize: 26,
+                    }}
+                    ref={(ref) => {
+                      if (ref) {
+                        ref.setNativeProps({
+                          style: { fontFamily: "PPFormulaCondensed-Bold" },
+                        });
+                      }
+                    }}
+                    value={nameOnCard}
+                    onChangeText={setNameOnCard}
+                  />
+                </Input>
+                {errors.nameOnCard && (
+                  <FormControlError>
+                    <FormControlErrorIcon as={AlertCircleIcon} />
+                    <FormControlErrorText>
+                      This field is required.
+                    </FormControlErrorText>
+                  </FormControlError>
+                )}
+              </FormControl>
+
+              {/* Card Nickname */}
+              <FormControl isInvalid={errors.nickname}>
+                <FormControlLabel className="pt-3">
+                  <FormControlLabelText
+                    className="text-white"
+                    style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                    Card Nickname
+                  </FormControlLabelText>
+                </FormControlLabel>
+                <Input className="bg-black h-fit" size="xl">
+                  <TextInput
+                    placeholder="WHAT YOU WANT TO SAVE IT AS"
+                    placeholderTextColor="#888"
+                    className="text-white px-3 py-4"
+                    style={{
+                      fontSize: 26,
+                    }}
+                    ref={(ref) => {
+                      if (ref) {
+                        ref.setNativeProps({
+                          style: { fontFamily: "PPFormulaCondensed-Bold" },
+                        });
+                      }
+                    }}
+                    value={nickname}
+                    onChangeText={setNickname}
+                  />
+                </Input>
+                {errors.nickname && (
+                  <FormControlError>
+                    <FormControlErrorIcon as={AlertCircleIcon} />
+                    <FormControlErrorText>
+                      This field is required.
+                    </FormControlErrorText>
+                  </FormControlError>
+                )}
+              </FormControl>
+            </VStack>
+          </KeyboardAvoidingView>
+        </ScrollView>
+        {/* Save Button */}
+        <TouchableOpacity
+          className="bg-[#E5FF03] py-1 mt-4 mx-4 rounded-sm shadow-lg shadow-slate-50 items-center"
+          onPress={handleSave}>
+          <Text
+            className="text-black"
+            style={{
+              fontFamily: "PPFormulaCondensed-Bold",
+              fontSize: 38,
+            }}>
+            SAVE
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </SafeAreaView>
   );
 };
 

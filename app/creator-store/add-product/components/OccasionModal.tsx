@@ -9,6 +9,7 @@ import {
   ModalFooter,
 } from "@/components/ui/modal";
 import { Button, ButtonText } from "@/components/ui/button";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 import {
   View,
@@ -16,7 +17,6 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-  SafeAreaView,
   ImageBackground,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -51,15 +51,15 @@ const OccasionModal = ({
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Center className="h-fit">
-        <Modal
-          isOpen={occasionModal}
-          size="full"
-          closeOnOverlayClick={false}
-          onClose={() => {
-            setOccasionModal(false);
-          }}>
+    <Center className="h-fit">
+      <Modal
+        isOpen={occasionModal}
+        size="full"
+        closeOnOverlayClick={false}
+        onClose={() => {
+          setOccasionModal(false);
+        }}>
+        <SafeAreaView>
           <ImageBackground
             source={require("../../../../assets/bg-image.jpg")}
             style={{ flex: 1 }}
@@ -157,7 +157,7 @@ const OccasionModal = ({
                     style={{
                       fontFamily: "PPFormulaCondensed-Bold",
                       fontSize: 36,
-                      paddingTop: 30,
+                      paddingTop: 10,
                     }}>
                     SAVE
                   </ButtonText>
@@ -165,9 +165,9 @@ const OccasionModal = ({
               </ModalFooter>
             </ModalContent>
           </ImageBackground>
-        </Modal>
-      </Center>
-    </SafeAreaView>
+        </SafeAreaView>
+      </Modal>
+    </Center>
   );
 };
 

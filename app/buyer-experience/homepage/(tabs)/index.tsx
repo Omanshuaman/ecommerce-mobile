@@ -21,6 +21,7 @@ import FeedReels from "@/app/feed/[id]";
 import PlayVideoListItem from "@/components/PlayVideoListItem";
 import PlayVideoListItemBuyer from "@/components/PlayVideoListItemBuyer";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "react-native";
 const FirstRoute = () => {
   interface Populars {
     previewImage: string;
@@ -180,7 +181,8 @@ const Warehouse = () => {
 
   return (
     <SafeAreaView className="flex-1">
-      {/* Top section for 'Warehouse' text */}
+      <StatusBar barStyle="light-content" />
+
       <ImageBackground
         source={require("../../../../assets/bg-image.jpg")}
         style={{ flex: 1 }} // Add padding to avoid overlap with the header

@@ -9,6 +9,7 @@ import {
   ModalFooter,
 } from "@/components/ui/modal";
 import { Button, ButtonText } from "@/components/ui/button";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 import {
   View,
@@ -16,7 +17,6 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-  SafeAreaView,
   ImageBackground,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -51,15 +51,15 @@ const PrimaryMaterialModal = ({
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <Center className="h-fit">
-        <Modal
-          isOpen={primaryMaterialModal}
-          size="full"
-          closeOnOverlayClick={false}
-          onClose={() => {
-            setPrimaryMaterialModal(false);
-          }}>
+    <Center className="h-fit">
+      <Modal
+        isOpen={primaryMaterialModal}
+        size="full"
+        closeOnOverlayClick={false}
+        onClose={() => {
+          setPrimaryMaterialModal(false);
+        }}>
+        <SafeAreaView>
           <ImageBackground
             source={require("../../../../assets/bg-image.jpg")}
             style={{ flex: 1 }}
@@ -145,7 +145,7 @@ const PrimaryMaterialModal = ({
                     style={{
                       fontFamily: "PPFormulaCondensed-Bold",
                       fontSize: 36,
-                      paddingTop: 30,
+                      paddingTop: 10,
                     }}>
                     SAVE
                   </ButtonText>
@@ -153,9 +153,9 @@ const PrimaryMaterialModal = ({
               </ModalFooter>
             </ModalContent>
           </ImageBackground>
-        </Modal>
-      </Center>
-    </SafeAreaView>
+        </SafeAreaView>
+      </Modal>
+    </Center>
   );
 };
 

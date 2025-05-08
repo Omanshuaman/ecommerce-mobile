@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  SafeAreaView,
+  StatusBar,
 } from "react-native";
 import {
   AntDesign,
@@ -17,6 +17,7 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import { ResizeMode, Video } from "expo-av";
 import { useProduct } from "@/store/productStore";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const mockProducts = [
   {

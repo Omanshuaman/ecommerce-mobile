@@ -7,11 +7,14 @@ import {
   Platform,
   ScrollView,
   ImageBackground,
+  StatusBar,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
 import { Link, useRouter } from "expo-router";
 import { Button, ButtonText } from "@/components/ui/button";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import {
   FormControl,
   FormControlError,
@@ -26,7 +29,6 @@ import { Input, InputField } from "@/components/ui/input";
 import { VStack } from "@/components/ui/vstack";
 import { AlertCircleIcon } from "@/components/ui/icon";
 import React from "react";
-import { SafeAreaView } from "react-native";
 const SetupPayments = () => {
   const [otp, setOtp] = useState("");
   const [isPressed, setIsPressed] = useState(false);
@@ -57,6 +59,8 @@ const SetupPayments = () => {
   };
   return (
     <SafeAreaView className="flex-1">
+      <StatusBar barStyle="light-content" />
+
       <ImageBackground
         source={require("../../../assets/bg-image.jpg")}
         style={{ flex: 1, paddingTop: 50 }} // Add padding to avoid overlap with the header

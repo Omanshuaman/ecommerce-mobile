@@ -7,6 +7,7 @@ import {
   Platform,
   ScrollView,
   ImageBackground,
+  StatusBar,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
@@ -26,6 +27,8 @@ export default function EmailScreen() {
 
   return (
     <SafeAreaView className="flex-1">
+      <StatusBar barStyle="light-content" />
+
       <ImageBackground
         source={require("../../assets/bg-image.jpg")}
         style={{ flex: 1, paddingTop: 50 }} // Add padding to avoid overlap with the header

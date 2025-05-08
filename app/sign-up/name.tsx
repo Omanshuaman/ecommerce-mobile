@@ -27,6 +27,8 @@ export default function OtpPhoneScreen() {
 
   return (
     <SafeAreaProvider className="flex-1" style={{}}>
+      <StatusBar barStyle="light-content" />
+
       <ImageBackground
         source={require("../../assets/bg-image.jpg")}
         style={{ flex: 1, paddingTop: 50 }} // Add padding to avoid overlap with the header

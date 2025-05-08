@@ -165,7 +165,7 @@ const BrandModal = ({
                     style={{
                       fontFamily: "PPFormulaCondensed-Bold",
                       fontSize: 36,
-                      paddingTop: 30,
+                      paddingTop: 10,
                     }}>
                     SAVE
                   </ButtonText>

@@ -13,6 +13,7 @@ import {
 import { Text } from "@/components/ui/text";
 import { Icon, CloseIcon } from "@/components/ui/icon";
 import { Ionicons } from "@expo/vector-icons"; // For back arrow and checkmark
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 import React, { useEffect, useState } from "react";
 import {
@@ -21,7 +22,6 @@ import {
   View,
   FlatList,
   ScrollView,
-  SafeAreaView,
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
@@ -76,15 +76,15 @@ const CategoryModal = ({
   };
 
   return (
-    <SafeAreaView className="flex-1">
-      <Center className="h-fit">
-        <Modal
-          isOpen={categoryModal}
-          closeOnOverlayClick={false}
-          onClose={() => {
-            setCategoryModal(false);
-          }}
-          size="full">
+    <Center className="h-fit">
+      <Modal
+        isOpen={categoryModal}
+        closeOnOverlayClick={false}
+        onClose={() => {
+          setCategoryModal(false);
+        }}
+        size="full">
+        <SafeAreaView>
           <ImageBackground
             source={require("../../../../assets/bg-image.jpg")}
             style={{ flex: 1 }}
@@ -171,7 +171,7 @@ const CategoryModal = ({
                     style={{
                       fontFamily: "PPFormulaCondensed-Bold",
                       fontSize: 36,
-                      paddingTop: 30,
+                      paddingTop: 10,
                     }}>
                     SAVE
                   </ButtonText>
@@ -179,9 +179,9 @@ const CategoryModal = ({
               </ModalFooter>
             </ModalContent>
           </ImageBackground>
-        </Modal>
-      </Center>
-    </SafeAreaView>
+        </SafeAreaView>
+      </Modal>
+    </Center>
   );
 };
 
