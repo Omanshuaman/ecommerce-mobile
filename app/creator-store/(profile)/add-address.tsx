@@ -74,12 +74,13 @@ const AddAddress = () => {
                   placeholderTextColor="#888"
                   className="text-white py-4 px-4"
                   style={{ fontSize: 26 }}
-                  ref={(ref) =>
-                    ref &&
-                    ref.setNativeProps({
-                      style: { fontFamily: "PPFormulaCondensed-Bold" },
-                    })
-                  }
+                  ref={(ref) => {
+                    if (ref) {
+                      ref.setNativeProps({
+                        style: { fontFamily: "PPFormulaCondensed-Bold" },
+                      });
+                    }
+                  }}
                   value={addressLine1}
                   onChangeText={setAddressLine1}
                 />
@@ -107,12 +108,13 @@ const AddAddress = () => {
                   placeholderTextColor="#888"
                   className="text-white py-4 px-4"
                   style={{ fontSize: 26 }}
-                  ref={(ref) =>
-                    ref &&
-                    ref.setNativeProps({
-                      style: { fontFamily: "PPFormulaCondensed-Bold" },
-                    })
-                  }
+                  ref={(ref) => {
+                    if (ref) {
+                      ref.setNativeProps({
+                        style: { fontFamily: "PPFormulaCondensed-Bold" },
+                      });
+                    }
+                  }}
                   value={addressLine2}
                   onChangeText={setAddressLine2}
                 />
@@ -139,12 +141,13 @@ const AddAddress = () => {
                   placeholder="City Name"
                   placeholderTextColor="#888"
                   className="text-white py-4 px-4"
-                  ref={(ref) =>
-                    ref &&
-                    ref.setNativeProps({
-                      style: { fontFamily: "PPFormulaCondensed-Bold" },
-                    })
-                  }
+                  ref={(ref) => {
+                    if (ref) {
+                      ref.setNativeProps({
+                        style: { fontFamily: "PPFormulaCondensed-Bold" },
+                      });
+                    }
+                  }}
                   style={{ fontSize: 26 }}
                   value={city}
                   onChangeText={setCity}
@@ -173,12 +176,13 @@ const AddAddress = () => {
                   placeholderTextColor="#888"
                   className="text-white py-4 px-4"
                   style={{ fontSize: 26 }}
-                  ref={(ref) =>
-                    ref &&
-                    ref.setNativeProps({
-                      style: { fontFamily: "PPFormulaCondensed-Bold" },
-                    })
-                  }
+                  ref={(ref) => {
+                    if (ref) {
+                      ref.setNativeProps({
+                        style: { fontFamily: "PPFormulaCondensed-Bold" },
+                      });
+                    }
+                  }}
                   value={state}
                   onChangeText={setState}
                 />
@@ -208,12 +212,13 @@ const AddAddress = () => {
                   placeholderTextColor="#888"
                   className="text-white py-4 px-4"
                   style={{ fontSize: 26 }}
-                  ref={(ref) =>
-                    ref &&
-                    ref.setNativeProps({
-                      style: { fontFamily: "PPFormulaCondensed-Bold" },
-                    })
-                  }
+                  ref={(ref) => {
+                    if (ref) {
+                      ref.setNativeProps({
+                        style: { fontFamily: "PPFormulaCondensed-Bold" },
+                      });
+                    }
+                  }}
                   value={pincode}
                   onChangeText={setPincode}
                 />
