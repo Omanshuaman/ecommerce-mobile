@@ -27,7 +27,7 @@ export default function OrdersScreen() {
       source={require("../../../assets/bg-image.jpg")}
       style={{ flex: 1 }} // Add padding to avoid overlap with the header
       resizeMode="cover">
-      <View className="flex-1 px-4 pt-10">
+      <View className="flex-1 px-4 pt-2">
         {/* Tabs */}
         <View className="flex-row mb-4">
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>

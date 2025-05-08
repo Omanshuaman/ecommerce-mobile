@@ -11,7 +11,7 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
 import { Link, useRouter } from "expo-router";
-import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function EmailScreen() {
   const [email, setEmail] = useState("");
@@ -21,11 +21,11 @@ export default function EmailScreen() {
 
   const handleGetOTP = () => {
     // Add validation if needed
-    router.push("/verify"); // Navigate to next screen
+    router.push("/verify");
   };
 
   return (
-    <SafeAreaProvider>
+    <SafeAreaView className="flex-1">
       <ImageBackground
         source={require("../../assets/bg-image.jpg")}
         style={{ flex: 1, paddingTop: 50 }} // Add padding to avoid overlap with the header
@@ -51,12 +51,13 @@ export default function EmailScreen() {
                 maxLength={50}
                 autoFocus={true}
                 className="flex-1 text-white mt-1"
-                ref={(ref) =>
-                  ref &&
-                  ref.setNativeProps({
-                    style: { fontFamily: "PPFormulaCondensed-Bold" },
-                  })
-                }
+                ref={(ref) => {
+                  if (ref) {
+                    ref.setNativeProps({
+                      style: { fontFamily: "PPFormulaCondensed-Bold" },
+                    });
+                  }
+                }}
                 style={{
                   fontSize: 32,
                   letterSpacing: 1,
@@ -89,6 +90,6 @@ export default function EmailScreen() {
           </View>
         </KeyboardAvoidingView>
       </ImageBackground>
-    </SafeAreaProvider>
+    </SafeAreaView>
   );
 }

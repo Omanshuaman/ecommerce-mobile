@@ -1,5 +1,11 @@
-import { router, Stack, usePathname } from "expo-router";
-import { Text, View, TouchableOpacity } from "react-native";
+import { router, Slot, Stack, usePathname } from "expo-router";
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  SafeAreaView,
+  StatusBar,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function RootLayout() {

@@ -88,11 +88,11 @@ export default function ProductDetailsScreen() {
   }
   console.log(filteredProduct.image);
   return (
-    <ImageBackground
-      source={require("../../assets/bg-image.jpg")}
-      style={{ flex: 1, paddingTop: 50 }} // Add padding to avoid overlap with the header
-      resizeMode="cover">
-      <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1">
+      <ImageBackground
+        source={require("../../assets/bg-image.jpg")}
+        style={{ flex: 1, paddingTop: 50 }} // Add padding to avoid overlap with the header
+        resizeMode="cover">
         <ScrollView className="px-4 py-6">
           <View className="relative">
             <FlatList
@@ -407,7 +407,7 @@ export default function ProductDetailsScreen() {
             </SelectContent>
           </SelectPortal>
         </Select>
-      </SafeAreaView>
-    </ImageBackground>
+      </ImageBackground>
+    </SafeAreaView>
   );
 }

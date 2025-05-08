@@ -11,7 +11,7 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
 import { Link, useRouter } from "expo-router";
-import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 export default function OtpPhoneScreen() {
   const [profileLink, setProfileLink] = useState("");
   const [isPressed, setIsPressed] = useState(false);
@@ -23,7 +23,7 @@ export default function OtpPhoneScreen() {
     router.push("/verify"); // Navigate to next screen
   };
   return (
-    <SafeAreaProvider>
+    <SafeAreaView className="flex-1">
       <ImageBackground
         source={require("../../assets/bg-image.jpg")}
         style={{ flex: 1, paddingTop: 50 }}
@@ -51,12 +51,13 @@ export default function OtpPhoneScreen() {
                 maxLength={100}
                 autoFocus={true}
                 className="flex-1 text-white"
-                ref={(ref) =>
-                  ref &&
-                  ref.setNativeProps({
-                    style: { fontFamily: "PPFormulaCondensed-Bold" },
-                  })
-                }
+                ref={(ref) => {
+                  if (ref) {
+                    ref.setNativeProps({
+                      style: { fontFamily: "PPFormulaCondensed-Bold" },
+                    });
+                  }
+                }}
                 style={{
                   fontSize: 24,
                 }}
@@ -111,6 +112,6 @@ export default function OtpPhoneScreen() {
           </View>
         </KeyboardAvoidingView>
       </ImageBackground>
-    </SafeAreaProvider>
+    </SafeAreaView>
   );
 }

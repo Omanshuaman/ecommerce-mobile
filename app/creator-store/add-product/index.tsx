@@ -5,9 +5,9 @@ import {
   TextInput,
   ScrollView,
   TouchableOpacity,
-  SafeAreaView,
   Alert,
   ImageBackground,
+  StatusBar,
 } from "react-native";
 import { Image } from "react-native";
 import {
@@ -47,6 +47,7 @@ import { Divider } from "react-native-paper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Video } from "expo-av";
 import { useProduct } from "@/store/productStore";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const AddProduct = () => {
   const [product, setProduct] = useState({
@@ -197,11 +198,12 @@ const AddProduct = () => {
   };
 
   return (
-    <ImageBackground
-      source={require("../../../assets/bg-image.jpg")}
-      style={{ flex: 1, paddingTop: 50 }}
-      resizeMode="cover">
-      <SafeAreaView className="flex-1">
+    <SafeAreaView className="flex-1" style={{ backgroundColor: "#000" }}>
+      <StatusBar barStyle="light-content" />
+      <ImageBackground
+        source={require("../../../assets/bg-image.jpg")}
+        style={{ flex: 1, paddingTop: 50 }}
+        resizeMode="cover">
         <ScrollView className=" py-2 " nestedScrollEnabled={true}>
           {/* Upload Photo & Reel */}
           <View className="flex-row justify-between gap-2 mb-4 px-2 mr-2">
@@ -323,12 +325,13 @@ const AddProduct = () => {
                 style={{
                   fontSize: 26,
                 }}
-                ref={(ref) =>
-                  ref &&
-                  ref.setNativeProps({
-                    style: { fontFamily: "PPFormulaCondensed-Bold" },
-                  })
-                }
+                ref={(ref) => {
+                  if (ref) {
+                    ref.setNativeProps({
+                      style: { fontFamily: "PPFormulaCondensed-Bold" },
+                    });
+                  }
+                }}
                 value={product.productName}
                 onChangeText={(text) => updateProduct("productName", text)}
               />
@@ -427,12 +430,13 @@ const AddProduct = () => {
                   placeholder="0000"
                   maxLength={8}
                   placeholderTextColor="#888"
-                  ref={(ref) =>
-                    ref &&
-                    ref.setNativeProps({
-                      style: { fontFamily: "PPFormulaCondensed-Bold" },
-                    })
-                  }
+                  ref={(ref) => {
+                    if (ref) {
+                      ref.setNativeProps({
+                        style: { fontFamily: "PPFormulaCondensed-Bold" },
+                      });
+                    }
+                  }}
                   style={{
                     fontSize: 22,
                   }}
@@ -468,12 +472,13 @@ const AddProduct = () => {
                   placeholder="0000"
                   placeholderTextColor="#888"
                   maxLength={8}
-                  ref={(ref) =>
-                    ref &&
-                    ref.setNativeProps({
-                      style: { fontFamily: "PPFormulaCondensed-Bold" },
-                    })
-                  }
+                  ref={(ref) => {
+                    if (ref) {
+                      ref.setNativeProps({
+                        style: { fontFamily: "PPFormulaCondensed-Bold" },
+                      });
+                    }
+                  }}
                   style={{
                     fontSize: 22,
                   }}
@@ -504,12 +509,13 @@ const AddProduct = () => {
                   placeholder="01"
                   maxLength={2}
                   placeholderTextColor="#888"
-                  ref={(ref) =>
-                    ref &&
-                    ref.setNativeProps({
-                      style: { fontFamily: "PPFormulaCondensed-Regular" },
-                    })
-                  }
+                  ref={(ref) => {
+                    if (ref) {
+                      ref.setNativeProps({
+                        style: { fontFamily: "PPFormulaCondensed-Regular" },
+                      });
+                    }
+                  }}
                   style={{
                     fontSize: 22,
                   }}
@@ -571,7 +577,7 @@ const AddProduct = () => {
                 <AccordionItem value="a">
                   <AccordionHeader className="bg-[#161616]">
                     <AccordionTrigger>
-                      {({ isExpanded }) => {
+                      {({ isExpanded }: { isExpanded: boolean }) => {
                         return (
                           <>
                             <AccordionTitleText
@@ -617,12 +623,15 @@ const AddProduct = () => {
                         placeholder="DESCRIBE THE DESIGN"
                         placeholderTextColor="#888"
                         placeholderClassName=""
-                        ref={(ref) =>
-                          ref &&
-                          ref.setNativeProps({
-                            style: { fontFamily: "PPFormulaCondensed-Regular" },
-                          })
-                        }
+                        ref={(ref) => {
+                          if (ref) {
+                            ref.setNativeProps({
+                              style: {
+                                fontFamily: "PPFormulaCondensed-Regular",
+                              },
+                            });
+                          }
+                        }}
                         style={{
                           fontSize: 18,
                         }}
@@ -758,8 +767,8 @@ const AddProduct = () => {
               : "PUBLISH"}
           </Text>
         </TouchableOpacity>
-      </SafeAreaView>
-    </ImageBackground>
+      </ImageBackground>
+    </SafeAreaView>
   );
 };
 

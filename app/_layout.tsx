@@ -5,9 +5,9 @@ import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { StatusBar } from "expo-status-bar";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { setBackgroundColorAsync } from "expo-navigation-bar";
+import { StatusBar } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 
 SplashScreen.preventAutoHideAsync();
 const queryClient = new QueryClient();
@@ -38,12 +38,12 @@ export default function RootLayout() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <GluestackUIProvider>
-        <SafeAreaView style={{ backgroundColor: "#1E1E1E" }}>
-          <StatusBar style="light" />
-        </SafeAreaView>
-        <Slot />
-      </GluestackUIProvider>
+      <SafeAreaProvider>
+        <GluestackUIProvider>
+          <StatusBar />
+          <Slot />
+        </GluestackUIProvider>
+      </SafeAreaProvider>
     </QueryClientProvider>
   );
 }

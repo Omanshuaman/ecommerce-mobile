@@ -21,10 +21,11 @@ import {
   View,
   FlatList,
   ScrollView,
-  SafeAreaView,
   ImageBackground,
   TouchableOpacity,
 } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar } from "expo-status-bar";
 const API_ENDPOINT = "https://randomuser.me/api/?results=50";
 
 const brands = [
@@ -67,15 +68,15 @@ const BrandModal = ({
     );
   };
   return (
-    <SafeAreaView>
-      <Center className="h-fit">
-        <Modal
-          isOpen={brandModal}
-          closeOnOverlayClick={false}
-          onClose={() => {
-            setBrandModal(false);
-          }}
-          size="full">
+    <Center className="h-fit">
+      <Modal
+        isOpen={brandModal}
+        closeOnOverlayClick={false}
+        onClose={() => {
+          setBrandModal(false);
+        }}
+        size="full">
+        <SafeAreaView>
           <ImageBackground
             source={require("../../../../assets/bg-image.jpg")}
             style={{ flex: 1 }}
@@ -172,9 +173,9 @@ const BrandModal = ({
               </ModalFooter>
             </ModalContent>
           </ImageBackground>
-        </Modal>
-      </Center>
-    </SafeAreaView>
+        </SafeAreaView>
+      </Modal>
+    </Center>
   );
 };
 

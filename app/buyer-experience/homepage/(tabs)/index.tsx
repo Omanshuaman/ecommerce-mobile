@@ -3,7 +3,6 @@ import {
   Text,
   useWindowDimensions,
   TouchableOpacity,
-  SafeAreaView,
   Image,
   FlatList,
   ImageBackground,
@@ -21,6 +20,7 @@ import { backState } from "@/store/productStore";
 import FeedReels from "@/app/feed/[id]";
 import PlayVideoListItem from "@/components/PlayVideoListItem";
 import PlayVideoListItemBuyer from "@/components/PlayVideoListItemBuyer";
+import { SafeAreaView } from "react-native-safe-area-context";
 const FirstRoute = () => {
   interface Populars {
     previewImage: string;

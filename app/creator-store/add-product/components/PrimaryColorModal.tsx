@@ -51,7 +51,7 @@ const PrimaryColorModal = ({
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <Center className="h-fit">
         <Modal
           isOpen={primaryColorModal}

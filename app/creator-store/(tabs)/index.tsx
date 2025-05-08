@@ -4,12 +4,12 @@ import {
   useWindowDimensions,
   TouchableOpacity,
   Animated,
-  SafeAreaView,
   Image,
   Dimensions,
   FlatList,
   BackHandler,
   ImageBackground,
+  StatusBar,
 } from "react-native";
 import {
   Actionsheet,
@@ -36,6 +36,8 @@ import {
   SelectDragIndicatorWrapper,
   SelectItem,
 } from "@/components/ui/select";
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import { FontAwesome } from "@expo/vector-icons";
 import { Link, useNavigation, usePathname } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -228,8 +230,10 @@ const Warehouse = () => {
     { label: "Wishlisted", count: 200 },
   ];
   return (
-    <SafeAreaView className="flex-1">
+    <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
       {/* Top section for 'Warehouse' text */}
+      <StatusBar barStyle="light-content" />
+
       <ImageBackground
         source={require("../../../assets/bg-image.jpg")}
         style={{ flex: 1, paddingHorizontal: 15 }} // Add padding to avoid overlap with the header

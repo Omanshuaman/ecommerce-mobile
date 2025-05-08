@@ -11,7 +11,6 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
 import { Link, useRouter } from "expo-router";
-import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
 import { Button, ButtonText } from "@/components/ui/button";
 import {
   FormControl,
@@ -27,6 +26,7 @@ import { Input, InputField } from "@/components/ui/input";
 import { VStack } from "@/components/ui/vstack";
 import { AlertCircleIcon } from "@/components/ui/icon";
 import React from "react";
+import { SafeAreaView } from "react-native";
 const SetupPayments = () => {
   const [otp, setOtp] = useState("");
   const [isPressed, setIsPressed] = useState(false);
@@ -56,7 +56,7 @@ const SetupPayments = () => {
     }
   };
   return (
-    <SafeAreaProvider>
+    <SafeAreaView className="flex-1">
       <ImageBackground
         source={require("../../../assets/bg-image.jpg")}
         style={{ flex: 1, paddingTop: 50 }} // Add padding to avoid overlap with the header
@@ -92,12 +92,13 @@ const SetupPayments = () => {
                     placeholderTextColor="#888"
                     placeholder="ENTER YOUR ACCOUNT NUMBER"
                     className="text-white py-4 px-3"
-                    ref={(ref) =>
-                      ref &&
-                      ref.setNativeProps({
-                        style: { fontFamily: "PPFormulaCondensed-Bold" },
-                      })
-                    }
+                    ref={(ref) => {
+                      if (ref) {
+                        ref.setNativeProps({
+                          style: { fontFamily: "PPFormulaCondensed-Bold" },
+                        });
+                      }
+                    }}
                     style={{
                       fontSize: 24,
                     }}
@@ -131,12 +132,13 @@ const SetupPayments = () => {
                     placeholder="ENTER YOUR IFSC NUMBER"
                     placeholderTextColor="#888"
                     className="text-white py-4 px-3"
-                    ref={(ref) =>
-                      ref &&
-                      ref.setNativeProps({
-                        style: { fontFamily: "PPFormulaCondensed-Bold" },
-                      })
-                    }
+                    ref={(ref) => {
+                      if (ref) {
+                        ref.setNativeProps({
+                          style: { fontFamily: "PPFormulaCondensed-Bold" },
+                        });
+                      }
+                    }}
                     style={{
                       fontSize: 24,
                     }}
@@ -170,12 +172,13 @@ const SetupPayments = () => {
                     placeholder="ENTER YOUR GST NUMBER"
                     placeholderTextColor="#888"
                     className="text-white py-4 px-3"
-                    ref={(ref) =>
-                      ref &&
-                      ref.setNativeProps({
-                        style: { fontFamily: "PPFormulaCondensed-Bold" },
-                      })
-                    }
+                    ref={(ref) => {
+                      if (ref) {
+                        ref.setNativeProps({
+                          style: { fontFamily: "PPFormulaCondensed-Bold" },
+                        });
+                      }
+                    }}
                     style={{
                       fontSize: 24,
                     }}
@@ -208,7 +211,7 @@ const SetupPayments = () => {
           </View>
         </KeyboardAvoidingView>
       </ImageBackground>
-    </SafeAreaProvider>
+    </SafeAreaView>
   );
 };
 

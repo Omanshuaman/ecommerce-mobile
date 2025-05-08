@@ -60,7 +60,7 @@ export default function Profile() {
   return (
     <ImageBackground
       source={require("../../../assets/bg-image.jpg")}
-      style={{ flex: 1, paddingTop: 50 }} // Add padding to avoid overlap with the header
+      style={{ flex: 1, paddingTop: 25 }} // Add padding to avoid overlap with the header
       resizeMode="cover">
       <View className="flex-1 px-6 py-12">
         <View className="flex-row justify-between items-center mb-10">

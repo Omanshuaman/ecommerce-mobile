@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { Link, useRouter } from "expo-router";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function ThankYouScreen() {
   const [isPressed, setIsPressed] = useState(false);
@@ -19,7 +19,7 @@ export default function ThankYouScreen() {
   };
 
   return (
-    <SafeAreaProvider>
+    <SafeAreaView className="flex-1">
       <ImageBackground
         source={require("../../assets/bg-image.jpg")} // Ensure this matches your background
         style={{ flex: 1, paddingTop: 50 }}
@@ -69,6 +69,6 @@ export default function ThankYouScreen() {
           </View>
         </KeyboardAvoidingView>
       </ImageBackground>
-    </SafeAreaProvider>
+    </SafeAreaView>
   );
 }

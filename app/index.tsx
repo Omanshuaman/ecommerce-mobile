@@ -1,6 +1,13 @@
 // OnboardingScreen.tsx
 import React, { useState } from "react";
-import { View, Text, Image, TouchableOpacity, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  Image,
+  TouchableOpacity,
+  Pressable,
+  StatusBar,
+} from "react-native";
 import { FontAwesome, AntDesign } from "@expo/vector-icons";
 import { Link } from "expo-router";
 import { ActivityIndicator, MD2Colors } from "react-native-paper";
@@ -10,10 +17,10 @@ const OnboardingScreen = () => {
 
   return (
     <View className="flex-1 bg-black">
+      <StatusBar barStyle="light-content" />
+
       {/* Top image with content */}
-      <View
-        className="flex-1 justify-center items-center"
-        style={{ height: "70%" }}>
+      <View className="justify-center items-center" style={{ flex: 1 }}>
         <Image
           source={require("../assets/onboarding.png")}
           className="w-full h-full"
@@ -22,9 +29,7 @@ const OnboardingScreen = () => {
       </View>
 
       {/* Bottom buttons */}
-      <View
-        className="justify-center items-center px-8 py-6"
-        style={{ height: "30%" }}>
+      <View className="justify-center items-center px-8 py-6">
         <Link href="/sign-up/otp-phone" asChild>
           <TouchableOpacity
             className={`bg-[#E5FF03] rounded-md w-full py-2 justify-center items-center shadow-lg shadow-slate-50  ${

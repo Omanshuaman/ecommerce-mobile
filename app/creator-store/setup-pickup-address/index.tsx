@@ -10,7 +10,6 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { useRouter } from "expo-router";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 import {
   FormControl,
   FormControlError,
@@ -95,12 +94,13 @@ const SetupAddress = () => {
                     placeholder="HOUSE NUMBER & STREET NAME"
                     placeholderTextColor="#888"
                     className="text-white py-5 px-3"
-                    ref={(ref) =>
-                      ref &&
-                      ref.setNativeProps({
-                        style: { fontFamily: "PPFormulaCondensed-Bold" },
-                      })
-                    }
+                    ref={(ref) => {
+                      if (ref) {
+                        ref.setNativeProps({
+                          style: { fontFamily: "PPFormulaCondensed-Bold" },
+                        });
+                      }
+                    }}
                     style={{
                       fontSize: 20,
                     }}
@@ -130,12 +130,13 @@ const SetupAddress = () => {
                     placeholder="APARTMENT OR BUILDING"
                     placeholderTextColor="#888"
                     className="text-white py-5 px-3"
-                    ref={(ref) =>
-                      ref &&
-                      ref.setNativeProps({
-                        style: { fontFamily: "PPFormulaCondensed-Bold" },
-                      })
-                    }
+                    ref={(ref) => {
+                      if (ref) {
+                        ref.setNativeProps({
+                          style: { fontFamily: "PPFormulaCondensed-Bold" },
+                        });
+                      }
+                    }}
                     style={{
                       fontSize: 20,
                     }}
@@ -165,12 +166,13 @@ const SetupAddress = () => {
                     placeholder="CITY OR TOWN NAME"
                     placeholderTextColor="#888"
                     className="text-white py-5 px-3"
-                    ref={(ref) =>
-                      ref &&
-                      ref.setNativeProps({
-                        style: { fontFamily: "PPFormulaCondensed-Bold" },
-                      })
-                    }
+                    ref={(ref) => {
+                      if (ref) {
+                        ref.setNativeProps({
+                          style: { fontFamily: "PPFormulaCondensed-Bold" },
+                        });
+                      }
+                    }}
                     style={{
                       fontSize: 20,
                     }}
@@ -200,12 +202,13 @@ const SetupAddress = () => {
                     placeholder="STATE OR REGION"
                     className="text-white py-5 px-3"
                     placeholderTextColor="#888"
-                    ref={(ref) =>
-                      ref &&
-                      ref.setNativeProps({
-                        style: { fontFamily: "PPFormulaCondensed-Bold" },
-                      })
-                    }
+                    ref={(ref) => {
+                      if (ref) {
+                        ref.setNativeProps({
+                          style: { fontFamily: "PPFormulaCondensed-Bold" },
+                        });
+                      }
+                    }}
                     style={{
                       fontSize: 20,
                     }}
@@ -235,12 +238,13 @@ const SetupAddress = () => {
                     placeholder="6 DIGIT PIN CODE"
                     className="text-white py-5 px-3"
                     placeholderTextColor="#888"
-                    ref={(ref) =>
-                      ref &&
-                      ref.setNativeProps({
-                        style: { fontFamily: "PPFormulaCondensed-Bold" },
-                      })
-                    }
+                    ref={(ref) => {
+                      if (ref) {
+                        ref.setNativeProps({
+                          style: { fontFamily: "PPFormulaCondensed-Bold" },
+                        });
+                      }
+                    }}
                     style={{
                       fontSize: 20,
                     }}

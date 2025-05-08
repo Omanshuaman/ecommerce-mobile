@@ -60,7 +60,7 @@ const ProductConditionModal = ({
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView className="flex-1">
       <Center className="h-fit">
         <Modal
           isOpen={productConditionModal}
@@ -165,12 +165,13 @@ const ProductConditionModal = ({
                       style={{
                         fontSize: 24,
                       }}
-                      ref={(ref) =>
-                        ref &&
-                        ref.setNativeProps({
-                          style: { fontFamily: "PPFormulaCondensed-Bold" },
-                        })
-                      }
+                      ref={(ref) => {
+                        if (ref) {
+                          ref.setNativeProps({
+                            style: { fontFamily: "PPFormulaCondensed-Bold" },
+                          });
+                        }
+                      }}
                       placeholderTextColor="#888"
                       onChangeText={setConditionDescription}
                       className="border border-gray-600 text-white p-2 rounded-md"

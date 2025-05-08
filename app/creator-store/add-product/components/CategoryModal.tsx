@@ -76,7 +76,7 @@ const CategoryModal = ({
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView className="flex-1">
       <Center className="h-fit">
         <Modal
           isOpen={categoryModal}

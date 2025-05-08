@@ -7,8 +7,8 @@ import {
   Alert,
   BackHandler,
   TextInput,
+  SafeAreaView,
 } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
 import {
   FormControl,
   FormControlLabel,
@@ -66,7 +66,7 @@ const AccountInfo = () => {
   };
 
   return (
-    <SafeAreaProvider>
+    <SafeAreaView className="flex-1">
       <KeyboardAvoidingView
         className="flex-1 bg-[#161616] px-6"
         behavior={Platform.OS === "ios" ? "padding" : "height"}>
@@ -87,12 +87,13 @@ const AccountInfo = () => {
                   keyboardType="default"
                   placeholderTextColor="#888"
                   className="text-white py-4 px-3"
-                  ref={(ref) =>
-                    ref &&
-                    ref.setNativeProps({
-                      style: { fontFamily: "PPFormulaCondensed-Bold" },
-                    })
-                  }
+                  ref={(ref) => {
+                    if (ref) {
+                      ref.setNativeProps({
+                        style: { fontFamily: "PPFormulaCondensed-Bold" },
+                      });
+                    }
+                  }}
                   style={{
                     fontSize: 24,
                   }}
@@ -124,12 +125,13 @@ const AccountInfo = () => {
                   placeholder="EMAIL"
                   placeholderTextColor="#888"
                   className="text-white py-4 px-3"
-                  ref={(ref) =>
-                    ref &&
-                    ref.setNativeProps({
-                      style: { fontFamily: "PPFormulaCondensed-Bold" },
-                    })
-                  }
+                  ref={(ref) => {
+                    if (ref) {
+                      ref.setNativeProps({
+                        style: { fontFamily: "PPFormulaCondensed-Bold" },
+                      });
+                    }
+                  }}
                   style={{
                     fontSize: 24,
                   }}
@@ -161,12 +163,13 @@ const AccountInfo = () => {
                   placeholder="PHONE NUMBER"
                   placeholderTextColor="#888"
                   className="text-white py-4 px-3"
-                  ref={(ref) =>
-                    ref &&
-                    ref.setNativeProps({
-                      style: { fontFamily: "PPFormulaCondensed-Bold" },
-                    })
-                  }
+                  ref={(ref) => {
+                    if (ref) {
+                      ref.setNativeProps({
+                        style: { fontFamily: "PPFormulaCondensed-Bold" },
+                      });
+                    }
+                  }}
                   style={{
                     fontSize: 24,
                   }}
@@ -214,7 +217,7 @@ const AccountInfo = () => {
           </VStack>
         </View>
       </KeyboardAvoidingView>
-    </SafeAreaProvider>
+    </SafeAreaView>
   );
 };
 

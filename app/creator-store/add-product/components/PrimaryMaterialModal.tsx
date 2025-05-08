@@ -51,7 +51,7 @@ const PrimaryMaterialModal = ({
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <Center className="h-fit">
         <Modal
           isOpen={primaryMaterialModal}

@@ -7,11 +7,12 @@ import {
   Platform,
   ScrollView,
   ImageBackground,
+  StatusBar,
 } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useState } from "react";
 import { Link, useRouter } from "expo-router";
-import { SafeAreaView, SafeAreaProvider } from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 
 export default function OtpPhoneScreen() {
   const [fullName, setFullName] = useState("");
@@ -25,7 +26,7 @@ export default function OtpPhoneScreen() {
   };
 
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider className="flex-1" style={{}}>
       <ImageBackground
         source={require("../../assets/bg-image.jpg")}
         style={{ flex: 1, paddingTop: 50 }} // Add padding to avoid overlap with the header
@@ -51,12 +52,13 @@ export default function OtpPhoneScreen() {
                 maxLength={50}
                 autoFocus={true}
                 className="flex-1 text-white mt-1"
-                ref={(ref) =>
-                  ref &&
-                  ref.setNativeProps({
-                    style: { fontFamily: "PPFormulaCondensed-Bold" },
-                  })
-                }
+                ref={(ref) => {
+                  if (ref) {
+                    ref.setNativeProps({
+                      style: { fontFamily: "PPFormulaCondensed-Bold" },
+                    });
+                  }
+                }}
                 style={{
                   fontSize: 32,
                   letterSpacing: 1,
