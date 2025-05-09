@@ -13,6 +13,7 @@ import { Feather, Ionicons } from "@expo/vector-icons";
 import { useQuery } from "@tanstack/react-query";
 import { listProducts } from "@/api/products";
 import { useBreakpointValue } from "./ui/utils/use-break-point-value";
+import { router } from "expo-router";
 
 const { width } = Dimensions.get("window");
 
@@ -56,7 +57,12 @@ const Carousal = () => {
 
 const Cards = ({ item }: any) => {
   return (
-    <View className="gap-2 bg-transparent" style={{ width: width - 30 }}>
+    <Pressable
+      className="gap-2 bg-transparent"
+      style={{ width: width - 30 }}
+      onPress={() => {
+        router.push(`/buyer-experience/product/${item.id}`);
+      }}>
       <View className=" flex-row items-center space-x-1 gap-1 bg-transparent ">
         <Text
           className="bg-[#E5FF03] text-black px-2 pt-0.5 border border-gray-800 shadow-lg shadow-gray-950"
@@ -121,7 +127,7 @@ const Cards = ({ item }: any) => {
           </TouchableOpacity>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

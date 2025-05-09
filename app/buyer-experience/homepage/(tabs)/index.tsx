@@ -185,7 +185,7 @@ const Warehouse = () => {
 
       <ImageBackground
         source={require("../../../../assets/bg-image.jpg")}
-        style={{ flex: 1 }} // Add padding to avoid overlap with the header
+        style={{ flex: 1 }}
         resizeMode="cover">
         <TabView
           renderTabBar={renderTabBar}
@@ -193,6 +193,7 @@ const Warehouse = () => {
           renderScene={renderScene}
           onIndexChange={setIndex}
           initialLayout={{ width: layout.width }}
+          swipeEnabled={false}
         />
       </ImageBackground>
     </SafeAreaView>
