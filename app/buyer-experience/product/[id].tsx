@@ -11,6 +11,7 @@ import {
   Dimensions,
   BackHandler,
   StatusBar,
+  TextInput,
 } from "react-native";
 import { ResizeMode, Video } from "expo-av";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -40,12 +41,14 @@ import { backState, useProduct } from "@/store/productStore";
 import { fetchProductById } from "@/api/products";
 import { dataTagErrorSymbol, useQuery } from "@tanstack/react-query";
 import { AntDesign } from "@expo/vector-icons";
+import { Input } from "@/components/ui/input";
 
 export default function ProductDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const [showActionsheet, setShowActionsheet] = React.useState(false);
   const handleClose = () => setShowActionsheet(false);
-
+  const [offersexpanded, offersSetIsExpanded] = useState(false);
+  const [detailsExpanded, setDetailsExpanded] = useState(false);
   const {
     data: product,
     isLoading,
@@ -62,7 +65,6 @@ export default function ProductDetailsScreen() {
       </Box>
     );
   }
-  console.log("product", product);
   if (error) {
     return <Text>Product not found!</Text>;
   }
@@ -199,11 +201,12 @@ export default function ProductDetailsScreen() {
                   className="bg-[#161616] py-2"
                   style={{
                     borderBottomColor: "white",
-                    borderBottomWidth: 1,
+                    borderBottomWidth: detailsExpanded ? 0 : 1,
                     borderStyle: "dashed",
                   }}>
                   <AccordionTrigger>
                     {({ isExpanded }: { isExpanded: boolean }) => {
+                      setDetailsExpanded(isExpanded);
                       return (
                         <>
                           <Text
@@ -325,11 +328,12 @@ export default function ProductDetailsScreen() {
                   className="bg-[#161616] py-2"
                   style={{
                     borderBottomColor: "white",
-                    borderBottomWidth: 1,
+                    borderBottomWidth: offersexpanded ? 0 : 1,
                     borderStyle: "dashed",
                   }}>
                   <AccordionTrigger>
                     {({ isExpanded }: { isExpanded: boolean }) => {
+                      offersSetIsExpanded(isExpanded);
                       return (
                         <>
                           <Text
@@ -369,10 +373,73 @@ export default function ProductDetailsScreen() {
                         Flat 15% off on winterwear
                       </Text>
                       <Text
-                        className="text-gray-00"
+                        className="text-gray-300"
                         style={{ fontFamily: "HelveticaNeue-Light" }}>
                         Code: FLAT15
                       </Text>
+                    </View>
+                  </AccordionContentText>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="c">
+                <AccordionHeader className="bg-[#161616] py-2">
+                  <AccordionTrigger>
+                    {({ isExpanded }: { isExpanded: boolean }) => (
+                      <>
+                        <Text
+                          className="text-white font-semibold text-lg"
+                          style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                          Delivery
+                        </Text>
+                        {isExpanded ? (
+                          <AccordionIcon
+                            as={RemoveIcon}
+                            className="ml-3"
+                            color="white"
+                            size="xl"
+                          />
+                        ) : (
+                          <AccordionIcon
+                            as={AddIcon}
+                            className="ml-3"
+                            color="white"
+                            size="xl"
+                          />
+                        )}
+                      </>
+                    )}
+                  </AccordionTrigger>
+                </AccordionHeader>
+                <AccordionContent className="bg-[#161616]">
+                  <AccordionContentText className="text-white">
+                    <View className="py-2 flex-row justify-between items-center w-full">
+                      <Text
+                        className="text-white font-semibold text-lg"
+                        style={{
+                          fontFamily: "HelveticaNeue-Medium",
+                        }}>
+                        Enter PIN
+                      </Text>
+                      <View className="flex-row items-center gap-2">
+                        <Input className="bg-black h-fit" size="xl">
+                          <TextInput
+                            placeholder="Enter PIN"
+                            placeholderTextColor="#888"
+                            className="text-white px-3"
+                            style={{ fontSize: 18 }}
+                          />
+                        </Input>
+                        <TouchableOpacity className=" rounded-sm">
+                          <Text
+                            className="text-white"
+                            style={{
+                              fontFamily: "HelveticaNeue-Medium",
+                              fontSize: 16,
+                            }}>
+                            Check
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
                     </View>
                   </AccordionContentText>
                 </AccordionContent>
