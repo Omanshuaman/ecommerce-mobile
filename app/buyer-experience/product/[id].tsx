@@ -233,45 +233,89 @@ export default function ProductDetailsScreen() {
                 </AccordionHeader>
                 <AccordionContent className="bg-[#161616]">
                   <AccordionContentText className="text-white">
-                    <View className="px-4 py-2">
-                      <Text className="text-gray-400 text-sm mb-2">
+                    <View className="py-6">
+                      <Text
+                        className="text-white font-semibold text-lg"
+                        style={{ fontFamily: "HelveticaNeue-Medium" }}>
                         Condition Details
                       </Text>
-                      <Text className="text-white text-base mb-4">
+                      <Text
+                        className="text-gray-100 text-base mb-4"
+                        style={{ fontFamily: "HelveticaNeue-Light" }}>
                         Slight pilling on sleeves, soft fabric
                       </Text>
 
-                      <Text className="text-gray-400 text-sm mb-2">Design</Text>
-                      <Text className="text-white text-base mb-4">
+                      <Text
+                        className="text-white font-semibold text-lg"
+                        style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                        Design
+                      </Text>
+                      <Text
+                        className="text-gray-100 text-base mb-4"
+                        style={{ fontFamily: "HelveticaNeue-Light" }}>
                         Ribbed knit with relaxed fit
                       </Text>
+                      <View className="flex-row items-center gap-2 justify-between w-full mb-4">
+                        <Text
+                          className="text-white font-semibold text-lg"
+                          style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                          Listed date
+                        </Text>
+                        <Text
+                          className="text-white font-semibold text-lg"
+                          style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                          2025-03-31
+                        </Text>
+                      </View>
+                      <View className="flex-row items-center gap-2 justify-between w-full mb-4">
+                        <Text
+                          className="text-white font-semibold text-lg"
+                          style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                          Style
+                        </Text>
+                        <Text
+                          className="text-white font-semibold text-lg"
+                          style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                          Off Shoulder
+                        </Text>
+                      </View>
 
-                      <Text className="text-gray-400 text-sm mb-2">
-                        Listed date
-                      </Text>
-                      <Text className="text-white text-base mb-4">
-                        2025-03-31
-                      </Text>
-
-                      <Text className="text-gray-400 text-sm mb-2">Style</Text>
-                      <Text className="text-white text-base mb-4">
-                        Off Shoulder
-                      </Text>
-
-                      <Text className="text-gray-400 text-sm mb-2">
-                        Occasion
-                      </Text>
-                      <Text className="text-white text-base mb-4">Casual</Text>
-
-                      <Text className="text-gray-400 text-sm mb-2">
-                        Primary material
-                      </Text>
-                      <Text className="text-white text-base mb-4">Cotton</Text>
-
-                      <Text className="text-gray-400 text-sm mb-2">
-                        Brand Name
-                      </Text>
-                      <Text className="text-white text-base">Fab india</Text>
+                      <View className="flex-row items-center gap-2 justify-between w-full mb-4">
+                        <Text
+                          className="text-white font-semibold text-lg"
+                          style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                          Occasion
+                        </Text>
+                        <Text
+                          className="text-white font-semibold text-lg"
+                          style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                          Casual
+                        </Text>
+                      </View>
+                      <View className="flex-row items-center gap-2 justify-between w-full mb-4">
+                        <Text
+                          className="text-white font-semibold text-lg"
+                          style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                          Primary Material
+                        </Text>
+                        <Text
+                          className="text-white font-semibold text-lg"
+                          style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                          Cotton
+                        </Text>
+                      </View>
+                      <View className="flex-row items-center gap-2 justify-between w-full mb-4">
+                        <Text
+                          className="text-white font-semibold text-lg"
+                          style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                          Brand Name
+                        </Text>
+                        <Text
+                          className="text-white font-semibold text-lg"
+                          style={{ fontFamily: "HelveticaNeue-Medium" }}>
+                          Fab india
+                        </Text>
+                      </View>
                     </View>
                   </AccordionContentText>
                 </AccordionContent>
@@ -315,9 +359,21 @@ export default function ProductDetailsScreen() {
                 </AccordionHeader>
                 <AccordionContent className="bg-[#161616]">
                   <AccordionContentText className="text-white">
-                    To place an order, simply select the products you want,
-                    proceed to checkout, provide shipping and payment
-                    information, and finalize your purchase.
+                    <View className=" py-4">
+                      <Text
+                        className="text-white mb-2"
+                        style={{
+                          fontFamily: "HelveticaNeue-Medium",
+                          fontSize: 15,
+                        }}>
+                        Flat 15% off on winterwear
+                      </Text>
+                      <Text
+                        className="text-gray-00"
+                        style={{ fontFamily: "HelveticaNeue-Light" }}>
+                        Code: FLAT15
+                      </Text>
+                    </View>
                   </AccordionContentText>
                 </AccordionContent>
               </AccordionItem>
