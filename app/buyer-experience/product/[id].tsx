@@ -6,18 +6,14 @@ import {
   TouchableOpacity,
   Image,
   Text,
-  ImageBackground, // Added import
-  FlatList,
+  ImageBackground,
   Dimensions,
-  BackHandler,
   StatusBar,
   TextInput,
 } from "react-native";
-import { ResizeMode, Video } from "expo-av";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { router, useLocalSearchParams } from "expo-router";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   Select,
   SelectPortal,
@@ -37,9 +33,9 @@ import {
 } from "@/components/ui/accordion";
 import { RemoveIcon, AddIcon } from "@/components/ui/icon";
 import { Box } from "@/components/ui/box";
-import { backState, useProduct } from "@/store/productStore";
+import { useProduct } from "@/store/productStore";
 import { fetchProductById } from "@/api/products";
-import { dataTagErrorSymbol, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { AntDesign } from "@expo/vector-icons";
 import { Input } from "@/components/ui/input";
 
@@ -78,7 +74,7 @@ export default function ProductDetailsScreen() {
 
       <ImageBackground
         source={require("../../../assets/bg-image.jpg")}
-        style={{ flex: 1, paddingTop: 50 }} // Add padding to avoid overlap with the header
+        style={{ flex: 1, paddingTop: 50 }}
         resizeMode="cover">
         <ScrollView className="px-4 py-6">
           <View className="relative">
@@ -206,7 +202,10 @@ export default function ProductDetailsScreen() {
                   }}>
                   <AccordionTrigger>
                     {({ isExpanded }: { isExpanded: boolean }) => {
-                      setDetailsExpanded(isExpanded);
+                      useEffect(() => {
+                        setDetailsExpanded(isExpanded);
+                      }, [isExpanded]);
+
                       return (
                         <>
                           <Text
@@ -333,7 +332,10 @@ export default function ProductDetailsScreen() {
                   }}>
                   <AccordionTrigger>
                     {({ isExpanded }: { isExpanded: boolean }) => {
-                      offersSetIsExpanded(isExpanded);
+                      useEffect(() => {
+                        offersSetIsExpanded(isExpanded);
+                      }, [isExpanded]);
+
                       return (
                         <>
                           <Text
@@ -425,8 +427,17 @@ export default function ProductDetailsScreen() {
                           <TextInput
                             placeholder="Enter PIN"
                             placeholderTextColor="#888"
-                            className="text-white px-3"
+                            className="text-white px-2"
                             style={{ fontSize: 18 }}
+                            ref={(ref) => {
+                              if (ref) {
+                                ref.setNativeProps({
+                                  style: {
+                                    fontFamily: "HelveticaNeue-Bold",
+                                  },
+                                });
+                              }
+                            }}
                           />
                         </Input>
                         <TouchableOpacity className=" rounded-sm">
