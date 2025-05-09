@@ -155,7 +155,7 @@ const Warehouse = () => {
     );
 
     return (
-      <View className="flex-row justify-center items-center p-1 rounded-full my-2">
+      <View className="flex-row justify-center items-center p-2 rounded-full my-2">
         {props.navigationState.routes.map((route: any, i: number) => {
           const isActive = index === i;
 
@@ -181,7 +181,7 @@ const Warehouse = () => {
 
   return (
     <SafeAreaView className="flex-1">
-      <StatusBar barStyle="light-content" />
+      <StatusBar backgroundColor={"#3b2c2d"} barStyle="light-content" />
 
       <ImageBackground
         source={require("../../../../assets/bg-image.jpg")}

@@ -23,7 +23,7 @@ const SocialMedia = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar backgroundColor={"#3b2c2d"} barStyle="light-content" />
 
       <View className="flex-1 bg-[#161616] px-6 py-2">
         <ScrollView className="flex-grow">

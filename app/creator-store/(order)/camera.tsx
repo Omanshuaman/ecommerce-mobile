@@ -70,7 +70,7 @@ export default function Camera() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar backgroundColor={"#3b2c2d"} barStyle="light-content" />
 
       <CameraView
         style={styles.camera}

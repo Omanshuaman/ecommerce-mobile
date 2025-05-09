@@ -26,7 +26,7 @@ const FeedReels = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "black" }}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar backgroundColor={"#3b2c2d"} barStyle="light-content" />
 
       <FlatList
         ref={flatListRef}

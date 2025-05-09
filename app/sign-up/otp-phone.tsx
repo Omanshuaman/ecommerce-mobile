@@ -27,7 +27,7 @@ export default function OtpPhoneScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar backgroundColor={"#3b2c2d"} barStyle="light-content" />
       <ImageBackground
         source={require("../../assets/bg-image.jpg")}
         style={{ flex: 1, paddingTop: 50 }} // Add padding to avoid overlap with the header

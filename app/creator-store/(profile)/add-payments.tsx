@@ -57,7 +57,7 @@ const AddPayments = () => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar backgroundColor={"#3b2c2d"} barStyle="light-content" />
 
       <View className="flex-1 bg-[#161616] px-2 pt-6 pb-4">
         <ScrollView className="flex-grow" showsVerticalScrollIndicator={false}>

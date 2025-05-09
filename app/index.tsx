@@ -17,7 +17,7 @@ const OnboardingScreen = () => {
 
   return (
     <View className="flex-1 bg-black">
-      <StatusBar barStyle="light-content" />
+      <StatusBar backgroundColor={"#3b2c2d"} barStyle="light-content" />
 
       {/* Top image with content */}
       <View className="justify-center items-center" style={{ flex: 1 }}>

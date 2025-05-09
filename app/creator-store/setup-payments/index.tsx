@@ -59,7 +59,7 @@ const SetupPayments = () => {
   };
   return (
     <SafeAreaView className="flex-1">
-      <StatusBar barStyle="light-content" />
+      <StatusBar backgroundColor={"#3b2c2d"} barStyle="light-content" />
 
       <ImageBackground
         source={require("../../../assets/bg-image.jpg")}

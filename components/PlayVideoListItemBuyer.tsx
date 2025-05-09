@@ -29,7 +29,7 @@ const PlayVideoListItemBuyer = ({ video, index, activeIndex }: any) => {
   const reel = useProduct((state: any) => state.addReel);
   const setBack = backState((state: any) => state.setBack); // ✅ HOOK CALL HERE
   const bottomTabHeight = useBottomTabBarHeight();
-  const screenHeight = Dimensions.get("window").height - bottomTabHeight - 10;
+  const screenHeight = Dimensions.get("window").height - bottomTabHeight - 12;
   const addReel = () => {
     reel(video);
   };

@@ -27,7 +27,7 @@ export default function OtpPhoneScreen() {
 
   return (
     <SafeAreaProvider className="flex-1" style={{}}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar backgroundColor={"#3b2c2d"} barStyle="light-content" />
 
       <ImageBackground
         source={require("../../assets/bg-image.jpg")}
