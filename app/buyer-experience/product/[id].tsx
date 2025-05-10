@@ -34,10 +34,12 @@ import {
 import { RemoveIcon, AddIcon } from "@/components/ui/icon";
 import { Box } from "@/components/ui/box";
 import { useProduct } from "@/store/productStore";
-import { fetchProductById } from "@/api/products";
+import { fetchProductById, listProducts } from "@/api/products";
 import { useQuery } from "@tanstack/react-query";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, FontAwesome } from "@expo/vector-icons";
 import { Input } from "@/components/ui/input";
+import { useBreakpointValue } from "@/components/ui/utils/use-break-point-value";
+import ProductCard from "@/components/ProductCard";
 
 export default function ProductDetailsScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -53,7 +55,15 @@ export default function ProductDetailsScreen() {
     queryKey: ["products", id],
     queryFn: () => fetchProductById(Number(id)),
   });
-  const products = useProduct((state: any) => state.addProduct);
+  const {
+    data: products,
+    isLoading: isLoadingProducts,
+    isError: isErrorProducts,
+    error: errorProducts,
+  } = useQuery({
+    queryKey: ["products"],
+    queryFn: listProducts,
+  });
   if (isLoading) {
     return (
       <Box className="flex-1 items-center justify-center bg-black">
@@ -64,9 +74,6 @@ export default function ProductDetailsScreen() {
   if (error) {
     return <Text>Product not found!</Text>;
   }
-  const addProduct = () => {
-    products(product);
-  };
 
   return (
     <SafeAreaView className="flex-1">
@@ -146,7 +153,7 @@ export default function ProductDetailsScreen() {
             </TouchableOpacity>
           </Box>
 
-          <View className="border border-white rounded-sm mt-1 mb-16">
+          <View className="border border-white rounded-sm mt-1">
             <View
               className="flex-row justify-between items-center px-4 py-5"
               style={{
@@ -457,19 +464,83 @@ export default function ProductDetailsScreen() {
               </AccordionItem>
             </Accordion>
           </View>
+          <View className="mb-10">
+            <Text
+              className="text-white py-4"
+              style={{ fontFamily: "HelveticaNeue-Medium", fontSize: 16 }}>
+              You may also like it
+            </Text>
+            <View className="flex flex-row flex-wrap gap-2 max-w-[960px] mx-auto w-full">
+              {products.slice(0, 4).map((item: any, index: number) => (
+                <TouchableOpacity key={index.toString()} className="w-[48%]">
+                  <View className="overflow-hidden">
+                    <View className="relative">
+                      <Image
+                        source={{ uri: item.images[0] }}
+                        className="w-full h-48"
+                        resizeMode="cover"
+                      />
+                      <View className="absolute bottom-1 left-1 flex-row items-center space-x-1 px-2 py-1 rounded-md gap-1">
+                        <Text
+                          className="bg-[#E5FF03] text-black px-2 pt-0.5 border border-gray-800 shadow-lg shadow-gray-950"
+                          style={{
+                            fontFamily: "PPFormulaCondensed-Bold",
+                            fontSize: 15,
+                          }}>
+                          OBSESSED
+                        </Text>
+                        <Text
+                          className=" bg-white text-black font-normal px-1 py-1 border border-gray-800"
+                          style={{
+                            fontFamily: "HelveticaNeue-Medium",
+                            fontSize: 12,
+                          }}>
+                          Like new
+                        </Text>
+                      </View>
+                    </View>
+
+                    {/* Product Info */}
+                    <View className="px-3 pt-2 pb-3">
+                      <Text
+                        className="text-white w-full"
+                        numberOfLines={1}
+                        style={{
+                          fontFamily: "HelveticaNeue-Bold",
+                          fontSize: 15,
+                        }}>
+                        {item.title}
+                      </Text>
+                      <Text
+                        className="text-white mt-1"
+                        style={{
+                          fontFamily: "HelveticaNeue-Light",
+                          fontSize: 13,
+                        }}>
+                        ₹{item.price}
+                      </Text>
+                      <Text
+                        className="text-white mt-1"
+                        style={{
+                          fontFamily: "HelveticaNeue-Light",
+                          fontSize: 13,
+                        }}>
+                        {item.brand}
+                      </Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
         </ScrollView>
         <Box className="flex-row gap-3 p-2">
-          <TouchableOpacity
-            onPress={() => {
-              router.push(`/creator-store/edit-product`);
-              addProduct();
-            }}
-            className="flex-1 bg-[#E5FF03] justify-center items-center py-2 rounded-sm shadow-lg shadow-white ">
+          <TouchableOpacity className="flex-1 bg-[#E5FF03] justify-center items-center py-2 rounded-sm shadow-lg shadow-white ">
             <Text
               className="text-black uppercase"
               style={{
                 fontFamily: "PPFormulaCondensed-Bold",
-                fontSize: 38,
+                fontSize: 36,
               }}>
               Add to bag
             </Text>
