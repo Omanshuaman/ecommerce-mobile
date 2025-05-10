@@ -27,9 +27,7 @@ const TabsLayout = () => {
   };
   return (
     <>
-      <Tabs
-        backBehavior="history"
-        tabBar={(props: any) => <TabBar {...props} tabIcons={tabIcons} />}>
+      <Tabs tabBar={(props: any) => <TabBar {...props} tabIcons={tabIcons} />}>
         <Tabs.Screen
           name="index"
           options={{
