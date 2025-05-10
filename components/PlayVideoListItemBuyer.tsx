@@ -9,7 +9,7 @@ import {
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { ResizeMode, Video } from "expo-av";
-import { router } from "expo-router";
+import { router, usePathname } from "expo-router";
 import { Box } from "./ui/box";
 import Carousal from "./Carousal";
 import {
@@ -30,23 +30,8 @@ const PlayVideoListItemBuyer = ({ video, index, activeIndex }: any) => {
   const setBack = backState((state: any) => state.setBack); // ✅ HOOK CALL HERE
   const bottomTabHeight = useBottomTabBarHeight();
   const screenHeight = Dimensions.get("window").height - bottomTabHeight - 12;
-  const addReel = () => {
-    reel(video);
-  };
-  useEffect(() => {
-    const backAction = () => {
-      setBack(1); // ✅ called inside handler, no issue now
-      router.back();
-      return true;
-    };
-
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      backAction
-    );
-
-    return () => backHandler.remove();
-  }, []);
+  const pathname = usePathname();
+  console.log(pathname);
   return (
     <View>
       <View className="flex-row absolute top-0 z-10 w-full justify-between items-center px-4 py-4">
@@ -138,7 +123,9 @@ const PlayVideoListItemBuyer = ({ video, index, activeIndex }: any) => {
         useNativeControls={false}
         resizeMode={ResizeMode.COVER}
         isLooping
-        shouldPlay={activeIndex === index}
+        shouldPlay={
+          activeIndex === index && pathname === "/buyer-experience/homepage"
+        }
         onPlaybackStatusUpdate={(status) => setStatus(() => status)}
       />
     </View>

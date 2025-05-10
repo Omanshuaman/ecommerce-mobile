@@ -1,5 +1,5 @@
 import { View, Text, Pressable, StyleSheet, Image } from "react-native";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -9,6 +9,12 @@ import { SvgUri } from "react-native-svg";
 
 const TabBarButton = (props) => {
   const { isFocused, label, routeName, color, tabIcons } = props;
+  const [currentRoute, setCurrentRoute] = useState(routeName);
+
+  useEffect(() => {
+    setCurrentRoute(routeName);
+  }, [routeName]);
+
   const icons = {
     index: (props) => (
       <Image
@@ -64,7 +70,7 @@ const TabBarButton = (props) => {
   return (
     <Pressable {...props} style={styles.container}>
       <Animated.View style={[styles.iconContainer, animatedIconStyle]}>
-        {icons[routeName]({
+        {icons[currentRoute]({
           color,
         })}
       </Animated.View>

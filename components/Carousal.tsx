@@ -42,7 +42,7 @@ const Carousal = () => {
   }
   return (
     <FlatList
-      data={products}
+      data={products.slice(0, 4)}
       renderItem={({ item }) => <Cards item={item} />}
       keyExtractor={(item) => item.id}
       horizontal
