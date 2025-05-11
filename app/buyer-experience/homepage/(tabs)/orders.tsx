@@ -4,6 +4,5 @@ import { Text } from "react-native";
 
 export default function OrdersScreen() {
   const pathname = usePathname();
-  console.log("object", pathname);
   return <Text>dvd</Text>;
 }

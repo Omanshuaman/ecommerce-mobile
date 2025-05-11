@@ -6,7 +6,6 @@ const ProductCard = ({ product }: any) => {
   const router = useRouter();
 
   const handlePress = () => {
-    console.log(product);
     router.push({
       pathname: `/product/${product.id}`,
     });

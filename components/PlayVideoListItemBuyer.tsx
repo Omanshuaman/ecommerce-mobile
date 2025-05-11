@@ -31,7 +31,6 @@ const PlayVideoListItemBuyer = ({ video, index, activeIndex }: any) => {
   const bottomTabHeight = useBottomTabBarHeight();
   const screenHeight = Dimensions.get("window").height - bottomTabHeight - 12;
   const pathname = usePathname();
-  console.log(pathname);
   return (
     <View>
       <View className="flex-row absolute top-0 z-10 w-full justify-between items-center px-4 py-4">

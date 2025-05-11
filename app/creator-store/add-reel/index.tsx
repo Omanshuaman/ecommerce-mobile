@@ -78,9 +78,6 @@ const TagProductsScreen = () => {
         : [...prev, productId]
     );
   };
-  useEffect(() => {
-    console.log(reelData);
-  }, [reelData]);
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({

@@ -88,7 +88,6 @@ export default function ProductDetailsScreen() {
       </Box>
     );
   }
-  console.log(filteredProduct.image);
   return (
     <SafeAreaView className="flex-1">
       <StatusBar backgroundColor={"#3b2c2d"} barStyle="light-content" />
