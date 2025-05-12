@@ -1,39 +1,58 @@
-import React from "react";
+import { Ionicons } from "@expo/vector-icons";
+import React, { useState, useEffect, useRef } from "react";
 import {
   SafeAreaView,
   ScrollView,
   View,
-  StatusBar,
+  Text,
+  TextInput,
   Image,
-  Platform,
+  TouchableOpacity,
+  FlatList,
+  StatusBar,
+  ImageBackground,
+  Dimensions,
+  Animated,
 } from "react-native";
 
-import { Search } from "../../../../components/Search/Search";
-
-const extraProps = Platform.select({
-  android: {},
-  ios: { zIndex: 5, elevation: 5 },
-});
 const AddProduct = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [products, setProducts] = useState([]);
+
+  const scrollX = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch("https://fakestoreapi.com/products");
+        const data = await response.json();
+        setProducts(data.slice(0, 5));
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
   return (
     <>
-      <SafeAreaView style={{ flex: 1 }}>
-        <View style={{ height: 100, ...extraProps }}>
-          <View style={{ height: "100%" }}>
-            <Search />
-          </View>
-        </View>
+      <SafeAreaView className="flex-1">
+        <StatusBar backgroundColor={"#3b2c2d"} barStyle="light-content" />
 
-        <ScrollView
-          alwaysBounceVertical={false}
-          contentInsetAdjustmentBehavior="automatic"
-          contentContainerStyle={{ alignItems: "center" }}
-          style={{ flex: 1, marginHorizontal: 16 }}>
-          <Image
-            style={{ width: "100%", height: 500, borderRadius: 16 }}
-            source={require("../../../../assets/coffee.jpg")}
-          />
-        </ScrollView>
+        <ImageBackground
+          source={require("../../../../assets/bg-image.jpg")}
+          style={{ flex: 1 }}
+          resizeMode="cover">
+          <View className="bg-black border border-white rounded-sm mx-auto my-6 p-2 flex-row items-center justify-center w-5/6">
+            <Ionicons name="search" size={17} color="white" className="mr-2" />
+            <Text
+              className=" text-white"
+              style={{ fontFamily: "HelveticaNeue-Medium", fontSize: 14 }}>
+              Search by brand, color, etc
+            </Text>
+          </View>
+        </ImageBackground>
       </SafeAreaView>
     </>
   );
